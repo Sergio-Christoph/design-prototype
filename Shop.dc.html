@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/tokens/colors.css">
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/tokens/typography.css">
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/tokens/effects.css">
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/tokens/base.css">
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/components/components.css">
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/styles.css">
+<script src="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/_ds_bundle.js"></script>
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#FFFFFF}
+html{scrollbar-width:thin;scrollbar-color:#CFC8BA #FFFFFF}
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-track{background:#FFFFFF}
+::-webkit-scrollbar-thumb{background:#CFC8BA;border:2px solid #FFFFFF}
+::-webkit-scrollbar-thumb:hover{background:#A6803C}
+@keyframes scFadeIn{from{opacity:0}to{opacity:1}}
+@keyframes scFadeOut{from{opacity:1}to{opacity:0}}
+@keyframes scRiseIn{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+@media (max-width:960px){#sh-navlinks{display:none !important}}
+@media (max-width:1100px){#sh-grid{grid-template-columns:repeat(3,1fr) !important}}
+@media (max-width:840px){#sh-grid{grid-template-columns:repeat(2,1fr) !important}}
+@media (max-width:520px){#sh-grid{grid-template-columns:1fr !important}}
+@media (max-width:840px){#sh-filterbar{flex-direction:column;align-items:flex-start !important}}
+
+/* sc-mobile-search — search icon in the LEFT cell on phones only (logo stays centered) */
+@media (max-width:960px){
+  .sc-search-mobile{display:grid !important;justify-self:start}
+  .sc-search-desktop{display:none !important}
+}
+</style>
+</helmet>
+<div style="background:var(--surface-page)">
+<!-- ======  HEADER  ====== -->
+<header data-screen-label="Header" style="
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:var(--z-nav);
+  height:82px;
+  transform:{{ headerY }};
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  padding:0 var(--container-pad);
+  background:{{ headerBg }};
+  backdrop-filter:{{ headerBlur }};
+  -webkit-backdrop-filter:{{ headerBlur }};
+  border-bottom:1px solid {{ headerBorder }};
+  transition:transform 480ms var(--ease-luxe),background var(--dur-base) var(--ease-luxe),border-color var(--dur-base) var(--ease-luxe),backdrop-filter var(--dur-base) var(--ease-luxe);
+">
+  <nav id="sh-navlinks" aria-label="Primary" style="
+    grid-column:1;
+    display:flex;
+    gap:36px;
+    color:var(--ink-900);
+  ">
+    <a href="Collections.dc.html" aria-current="page" style="
+      font-size:var(--fs-label);
+      font-weight:var(--fw-medium);
+      letter-spacing:var(--ls-caps-tight);
+      text-transform:uppercase;
+      color:var(--gold-600);
+      text-decoration:none;
+    ">Collections</a>
+    <a href="Bespoke Studio.dc.html" style="
+      font-size:var(--fs-label);
+      font-weight:var(--fw-medium);
+      letter-spacing:var(--ls-caps-tight);
+      text-transform:uppercase;
+      color:inherit;
+      text-decoration:none;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-500)">Build Your Own Ring</a>
+    <a href="The Lab.dc.html" style="
+      font-size:var(--fs-label);
+      font-weight:var(--fw-medium);
+      letter-spacing:var(--ls-caps-tight);
+      text-transform:uppercase;
+      color:inherit;
+      text-decoration:none;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-500)">The Lab</a>
+  </nav>
+  <!-- mobile-only search icon (left cell) — the centered logo is untouched -->
+  <button type="button" aria-label="Search" class="sc-search-mobile" style="
+    grid-column:1;
+    display:none;
+    place-items:center;
+    width:44px;
+    height:44px;
+    background:none;
+    border:0;
+    padding:0;
+    color:var(--ink-900);
+    cursor:pointer;
+    transition:color var(--dur-fast) var(--ease-luxe);
+  " style-hover="color:var(--gold-500)">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+  </button>
+  <a href="Homepage.dc.html" aria-label="Sergio Christoph — home" style="
+    grid-column:2;
+    display:inline-flex;
+    text-decoration:none;
+  ">
+    <img src="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/assets/logo-black.png" alt="SERGIO CHRISTOPH Lab Diamond" style="
+      height:40px;
+      width:auto;
+    ">
+  </a>
+  <div style="
+    grid-column:3;
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    gap:8px;
+    color:var(--ink-900);
+  ">
+    <button type="button" aria-label="Search" class="sc-search-desktop" style="
+      display:grid;
+      place-items:center;
+      width:44px;
+      height:44px;
+      background:none;
+      border:0;
+      padding:0;
+      color:inherit;
+      cursor:pointer;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-500)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+    </button>
+    <button type="button" aria-label="Open menu" onClick="{{ openMenu }}" style="
+      display:grid;
+      place-items:center;
+      width:44px;
+      height:44px;
+      background:none;
+      border:0;
+      padding:0;
+      color:inherit;
+      cursor:pointer;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-500)">
+      <span style="
+        display:flex;
+        flex-direction:column;
+        gap:8px;
+        width:24px;
+      "><span style="
+        display:block;
+        height:1px;
+        background:currentColor;
+      "></span><span style="
+        display:block;
+        height:1px;
+        background:currentColor;
+      "></span></span>
+    </button>
+  </div>
+</header>
+<sc-if value="{{ menuMounted }}" hint-placeholder-val="{{ false }}">
+<!-- ======  MENU OVERLAY  ====== -->
+<div data-screen-label="Menu overlay" role="dialog" aria-label="Menu" style="
+  position:fixed;
+  inset:0;
+  z-index:var(--z-dialog);
+  background:var(--ivory-0);
+  display:flex;
+  flex-direction:column;
+  animation:{{ menuAnim }};
+">
+  <div style="
+    height:82px;
+    flex:none;
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+    padding:0 var(--container-pad);
+  ">
+    <span style="
+      font-size:var(--fs-micro);
+      font-weight:var(--fw-medium);
+      letter-spacing:var(--ls-caps);
+      text-transform:uppercase;
+      color:var(--text-faint);
+    ">Menu</span>
+    <a href="Homepage.dc.html" aria-label="Sergio Christoph — home" style="
+      display:inline-flex;
+      text-decoration:none;
+    "><img src="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/assets/logo-black.png" alt="SERGIO CHRISTOPH Lab Diamond" style="
+      height:40px;
+      width:auto;
+    "></a>
+    <div style="
+      display:flex;
+      justify-content:flex-end;
+    ">
+      <button type="button" aria-label="Close menu" onClick="{{ closeMenu }}" style="
+        display:grid;
+        place-items:center;
+        width:44px;
+        height:44px;
+        background:none;
+        border:0;
+        padding:0;
+        color:var(--ink-900);
+        cursor:pointer;
+        transition:color var(--dur-fast) var(--ease-luxe);
+      " style-hover="color:var(--gold-600)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"><path d="M5 5l14 14"></path><path d="M19 5L5 19"></path></svg>
+      </button>
+    </div>
+  </div>
+  <nav aria-label="Menu" style="
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:clamp(20px,4.5vh,40px);
+    text-align:center;
+    padding:0 var(--container-pad);
+  ">
+    <a href="Collections.dc.html" style="
+      font-family:var(--font-display);
+      font-size:clamp(44px,8vw,92px);
+      line-height:1.05;
+      color:var(--gold-600);
+      text-decoration:none;
+      animation:scRiseIn 760ms var(--ease-luxe) 120ms both;
+    ">Collections</a>
+    <a href="Bespoke Studio.dc.html" style="
+      font-family:var(--font-display);
+      font-size:clamp(44px,8vw,92px);
+      line-height:1.05;
+      color:var(--ink-900);
+      text-decoration:none;
+      animation:scRiseIn 760ms var(--ease-luxe) 220ms both;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-600)">Build Your Own Ring</a>
+    <a href="The Lab.dc.html" style="
+      font-family:var(--font-display);
+      font-size:clamp(44px,8vw,92px);
+      line-height:1.05;
+      color:var(--ink-900);
+      text-decoration:none;
+      animation:scRiseIn 760ms var(--ease-luxe) 320ms both;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-600)">The Lab</a>
+  </nav>
+  <div style="
+    flex:none;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+    flex-wrap:wrap;
+    padding:26px var(--container-pad) 34px;
+    border-top:1px solid var(--border-hairline);
+    font-size:13px;
+    color:var(--text-muted);
+    animation:scRiseIn 760ms var(--ease-luxe) 420ms both;
+  ">
+    <span>Prama Sanur Beach Hotel · Jalan Cemara Sanur · Denpasar, Bali 80228</span>
+    <a href="mailto:Sergiochristoph@gmail.com" style="
+      color:var(--text-body);
+      text-decoration:none;
+      letter-spacing:.02em;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-600)">Sergiochristoph@gmail.com</a>
+  </div>
+</div>
+</sc-if>
+<!-- ======  SHOP  ====== -->
+<main data-screen-label="Shop" style="
+  padding:126px var(--container-pad) var(--space-3xl);
+  max-width:var(--container-max);
+  margin:0 auto;
+">
+  <div style="margin-bottom:var(--space-lg)">
+    <x-import component-from-global-scope="SergioChristophDesignSystem_53d2bb.Breadcrumbs" items="{{ crumbs }}" hint-size="300px,20px"></x-import>
+  </div>
+  <div style="
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    max-width:720px;
+    margin-bottom:var(--space-xl);
+  ">
+    <span class="sc-eyebrow">The Collections</span>
+    <h1 style="
+      font-size:clamp(2.2rem,4vw,3.4rem);
+      line-height:var(--lh-display);
+      margin:0;
+      color:var(--text-heading);
+    ">{{ pageTitle }}</h1>
+    <span style="
+      font-size:var(--fs-body-sm);
+      color:var(--text-muted);
+    ">{{ countLine }}</span>
+  </div>
+  <div style="
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    padding:18px 0;
+    border-top:1px solid var(--border-hairline);
+  ">
+    <sc-for list="{{ catChips }}" as="ch" hint-placeholder-count="5">
+      <button type="button" onClick="{{ ch.pick }}" style="{{ ch.style }}">{{ ch.label }}</button>
+    </sc-for>
+  </div>
+  <div id="sh-filterbar" style="
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:18px;
+    flex-wrap:wrap;
+    padding:14px 0 18px;
+    border-top:1px solid var(--border-hairline);
+    border-bottom:1px solid var(--border-hairline);
+    margin-bottom:var(--space-xl);
+  ">
+    <div style="
+      display:flex;
+      align-items:baseline;
+      gap:10px 22px;
+      flex-wrap:wrap;
+    ">
+      <span style="
+        font-size:var(--fs-micro);
+        font-weight:var(--fw-medium);
+        letter-spacing:var(--ls-caps);
+        text-transform:uppercase;
+        color:var(--text-faint);
+      ">Metal</span>
+      <sc-for list="{{ metalOpts }}" as="m" hint-placeholder-count="5">
+        <button type="button" onClick="{{ m.pick }}" style="{{ m.style }}">{{ m.label }}</button>
+      </sc-for>
+    </div>
+    <div style="
+      display:flex;
+      align-items:baseline;
+      gap:10px 22px;
+      flex-wrap:wrap;
+    ">
+      <span style="
+        font-size:var(--fs-micro);
+        font-weight:var(--fw-medium);
+        letter-spacing:var(--ls-caps);
+        text-transform:uppercase;
+        color:var(--text-faint);
+      ">Sort</span>
+      <sc-for list="{{ sortOpts }}" as="s" hint-placeholder-count="3">
+        <button type="button" onClick="{{ s.pick }}" style="{{ s.style }}">{{ s.label }}</button>
+      </sc-for>
+    </div>
+  </div>
+  <sc-if value="{{ hasResults }}" hint-placeholder-val="{{ true }}">
+  <div id="sh-grid" style="
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:var(--gap-grid);
+  ">
+    <sc-for list="{{ products }}" as="p" hint-placeholder-count="8">
+      <a href="Viewing Room.dc.html" class="sc-product-card" style="
+        gap:14px;
+        text-decoration:none;
+      ">
+        <div class="sc-product-card__media" style="width:100%">
+          <div style="
+            position:absolute;
+            inset:0;
+            background:radial-gradient(120% 130% at 50% 18%,#FFFFFF 34%,var(--ivory-100) 100%);
+          "></div>
+          <span class="sc-product-card__placeholder" style="pointer-events:none"><span class="sc-mark-sparkle"></span></span>
+          <sc-if value="{{ p.img }}" hint-placeholder-val="{{ false }}"><div role="img" aria-label="{{ p.name }}" style="
+            position:absolute;
+            inset:0;
+            background-size:cover;
+            background-position:center;
+            background-image:{{ p.bg }};
+            transition:transform 900ms var(--ease-luxe);
+          " style-hover="transform:scale(1.045)"></div></sc-if>
+        </div>
+        <div style="
+          display:flex;
+          flex-direction:column;
+          gap:6px;
+        ">
+          <span class="sc-product-card__name" style="transition:color var(--dur-fast) var(--ease-luxe)" style-hover="color:var(--gold-600)">{{ p.name }}</span>
+          <span style="
+            font-size:12px;
+            color:var(--text-muted);
+            letter-spacing:.02em;
+          ">{{ p.spec }}</span>
+          <span style="
+            font-size:14px;
+            color:var(--text-body);
+            margin-top:2px;
+          ">{{ p.priceStr }}</span>
+        </div>
+      </a>
+    </sc-for>
+  </div>
+  </sc-if>
+  <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+  <div style="
+    padding:var(--space-2xl) 0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:18px;
+    text-align:center;
+  ">
+    <img src="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/assets/mark-sparkle-gold.png" alt="" style="
+      width:24px;
+      opacity:.5;
+    ">
+    <p style="
+      margin:0;
+      font-family:var(--font-display);
+      font-size:22px;
+      color:var(--text-heading);
+    ">No pieces match your selection</p>
+    <button type="button" onClick="{{ clearFilters }}" class="sc-btn sc-btn--ghost sc-btn--sm">Clear filters</button>
+  </div>
+  </sc-if>
+  <div style="
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:16px;
+    text-align:center;
+    margin-top:var(--space-2xl);
+    padding-top:var(--space-xl);
+    border-top:1px solid var(--border-hairline);
+  ">
+    <p style="
+      margin:0;
+      font-size:var(--fs-body-sm);
+      color:var(--text-muted);
+    ">Didn't find the one? Carat, setting and model are fully customizable.</p>
+    <a class="sc-btn sc-btn--ghost sc-btn--sm" href="Bespoke Studio.dc.html">Build Your Own Ring</a>
+  </div>
+</main>
+<!-- ======  FOOTER  ====== -->
+<footer id="contact" data-screen-label="Footer" style="
+  background:var(--surface-dark);
+  color:var(--text-inverse-muted);
+  padding:var(--space-3xl) var(--container-pad) var(--space-lg);
+">
+  <div style="
+    max-width:var(--container-max);
+    margin:0 auto;
+  ">
+    <div style="
+      display:flex;
+      flex-wrap:wrap;
+      gap:var(--space-2xl);
+      padding-bottom:var(--space-2xl);
+    ">
+      <div style="
+        flex:1.6 1 280px;
+        display:flex;
+        flex-direction:column;
+        gap:20px;
+      ">
+        <img src="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/assets/logo-white.png" alt="SERGIO CHRISTOPH Lab Diamond" style="width:210px">
+        <p style="
+          margin:0;
+          font-size:13px;
+          line-height:1.7;
+          max-width:320px;
+        ">Discover limitless beauty with Sergio Christoph Lab Diamond.</p>
+      </div>
+      <div style="flex:1 1 190px">
+        <div style="
+          font-size:11px;
+          font-weight:var(--fw-medium);
+          letter-spacing:var(--ls-caps);
+          text-transform:uppercase;
+          color:var(--ivory-50);
+          margin-bottom:16px;
+        ">Visit</div>
+        <span style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+        ">Prama Sanur Beach Hotel</span>
+        <span style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+        ">Jalan Cemara Sanur</span>
+        <span style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+        ">Denpasar, Bali 80228</span>
+      </div>
+      <div style="flex:1 1 190px">
+        <div style="
+          font-size:11px;
+          font-weight:var(--fw-medium);
+          letter-spacing:var(--ls-caps);
+          text-transform:uppercase;
+          color:var(--ivory-50);
+          margin-bottom:16px;
+        ">Contact</div>
+        <a href="tel:+6281617871898" style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+          color:var(--text-inverse-muted);
+          text-decoration:none;
+          transition:color var(--dur-fast) var(--ease-luxe);
+        " style-hover="color:var(--gold-300)">0816-1787-1898</a>
+        <a href="mailto:Sergiochristoph@gmail.com" style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+          color:var(--text-inverse-muted);
+          text-decoration:none;
+          transition:color var(--dur-fast) var(--ease-luxe);
+        " style-hover="color:var(--gold-300)">Sergiochristoph@gmail.com</a>
+      </div>
+      <div style="flex:1 1 160px">
+        <div style="
+          font-size:11px;
+          font-weight:var(--fw-medium);
+          letter-spacing:var(--ls-caps);
+          text-transform:uppercase;
+          color:var(--ivory-50);
+          margin-bottom:16px;
+        ">Follow</div>
+        <a href="https://instagram.com/sergio_christoph" target="_blank" rel="noreferrer" style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+          color:var(--text-inverse-muted);
+          text-decoration:none;
+          transition:color var(--dur-fast) var(--ease-luxe);
+        " style-hover="color:var(--gold-300)">Instagram · @sergio_christoph</a>
+        <a href="https://www.facebook.com" target="_blank" rel="noreferrer" style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+          color:var(--text-inverse-muted);
+          text-decoration:none;
+          transition:color var(--dur-fast) var(--ease-luxe);
+        " style-hover="color:var(--gold-300)">Facebook</a>
+        <a href="https://www.tiktok.com" target="_blank" rel="noreferrer" style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+          color:var(--text-inverse-muted);
+          text-decoration:none;
+          transition:color var(--dur-fast) var(--ease-luxe);
+        " style-hover="color:var(--gold-300)">TikTok</a>
+      </div>
+      <div style="flex:1 1 160px">
+        <div style="
+          font-size:11px;
+          font-weight:var(--fw-medium);
+          letter-spacing:var(--ls-caps);
+          text-transform:uppercase;
+          color:var(--ivory-50);
+          margin-bottom:16px;
+        ">Shop online</div>
+        <a href="https://www.tokopedia.com" target="_blank" rel="noreferrer" style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+          color:var(--text-inverse-muted);
+          text-decoration:none;
+          transition:color var(--dur-fast) var(--ease-luxe);
+        " style-hover="color:var(--gold-300)">Tokopedia</a>
+        <a href="https://shopee.co.id" target="_blank" rel="noreferrer" style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+          color:var(--text-inverse-muted);
+          text-decoration:none;
+          transition:color var(--dur-fast) var(--ease-luxe);
+        " style-hover="color:var(--gold-300)">Shopee</a>
+      </div>
+    </div>
+    <div style="
+      border-top:1px solid var(--border-inverse);
+      padding-top:22px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      font-size:11px;
+      letter-spacing:.08em;
+    ">
+      <span>© 2026 Sergio Christoph Lab Diamond · Sanur, Bali</span>
+      <span style="
+        text-transform:uppercase;
+        letter-spacing:var(--ls-caps);
+        color:var(--gold-300);
+      ">#EveryoneCanShine</span>
+    </div>
+  </div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: { &quot;width&quot;: 1440, &quot;height&quot;: 900 }
+}">
+class Component extends DCLogic {
+  state = { scrolled: false, hidden: false, menu: "closed", cat: "All", metal: "All", sort: "Featured", badImgs: {} };
+  componentDidMount() {
+    this._readHash = () => {
+      const h = (location.hash || "").replace("#", "").toLowerCase();
+      const map = { rings: "Rings", earrings: "Earrings", necklaces: "Necklaces", bracelets: "Bracelets & Bangles" };
+      if (map[h]) this.setState({ cat: map[h] });
+    };
+    this._readHash();
+    window.addEventListener("hashchange", this._readHash);
+    this._all().forEach((p) => {
+      const im = new Image();
+      im.onerror = () => this.setState((s) => { const b = Object.assign({}, s.badImgs); b[p.img] = true; return { badImgs: b }; });
+      im.src = p.img;
+    });
+    this._ly = window.scrollY;
+    this._sc = () => {
+      const y = window.scrollY;
+      const scrolled = y > 56;
+      let hidden = this.state.hidden;
+      if (this.state.menu === "open") hidden = false;
+      else if (y > this._ly + 6 && y > 170) hidden = true;
+      else if (y < this._ly - 6 || y < 90) hidden = false;
+      this._ly = y;
+      if (scrolled !== this.state.scrolled || hidden !== this.state.hidden) this.setState({ scrolled: scrolled, hidden: hidden });
+    };
+    this._key = (e) => { if (e.key === "Escape" && this.state.menu === "open") this._close(); };
+    window.addEventListener("scroll", this._sc, { passive: true });
+    window.addEventListener("keydown", this._key);
+    this._sc();
+  }
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this._sc);
+    window.removeEventListener("keydown", this._key);
+    window.removeEventListener("hashchange", this._readHash);
+    clearTimeout(this._t);
+    document.body.style.overflow = "";
+  }
+  _close() {
+    document.body.style.overflow = "";
+    clearTimeout(this._t);
+    this.setState({ menu: "closing" });
+    this._t = setTimeout(() => { if (this.state.menu === "closing") this.setState({ menu: "closed" }); }, 560);
+  }
+  _all() {
+    if (this._ALL) return this._ALL;
+    const U = (id) => "https://images.unsplash.com/photo-" + id + "?q=80&w=900&auto=format&fit=crop";
+    this._ALL = [
+      { name: "The Signature Solitaire", cat: "Rings", metal: "White gold", spec: "1.0ct round brilliant · 18k white gold", price: 68500000, img: U("1605100804763-247f67b3557e") },
+      { name: "The Uluwatu Halo", cat: "Rings", metal: "Rose gold", spec: "1.2ct oval · 18k rose gold", price: 84000000, img: U("1589674781759-c21c37956a44") },
+      { name: "The Sanur Trilogy", cat: "Rings", metal: "Platinum", spec: "1.5ct three-stone · platinum", price: 112500000, img: U("1603561591411-07134e71a2a9") },
+      { name: "The Bingin Band", cat: "Rings", metal: "Yellow gold", spec: "0.6ct pavé eternity · 18k yellow gold", price: 36500000, img: U("1608042314453-ae338d80c427") },
+      { name: "The Amed Studs", cat: "Earrings", metal: "White gold", spec: "0.5ct round brilliant pair · 18k white gold", price: 28500000, img: U("1630019852942-f89202989a59") },
+      { name: "The Sidemen Drops", cat: "Earrings", metal: "Yellow gold", spec: "1.4ct pear drop pair · 18k yellow gold", price: 46500000, img: U("1602173574767-37ac01994b2a") },
+      { name: "The Munduk Hoops", cat: "Earrings", metal: "Rose gold", spec: "0.8ct pavé hoops · 18k rose gold", price: 39000000, img: U("1617038220319-276d3cfab638") },
+      { name: "The Penida Climbers", cat: "Earrings", metal: "Platinum", spec: "0.9ct graduated pair · platinum", price: 52500000, img: U("1611085583191-a3b181a88401") },
+      { name: "The Seminyak Pendant", cat: "Necklaces", metal: "White gold", spec: "0.7ct round brilliant · 18k white gold", price: 42500000, img: U("1599643478518-a784e5dc4c8f") },
+      { name: "The Batur Station", cat: "Necklaces", metal: "Yellow gold", spec: "1.1ct five-stone station · 18k yellow gold", price: 74000000, img: U("1635767798638-3e25273a8236") },
+      { name: "The Karma Lariat", cat: "Necklaces", metal: "Rose gold", spec: "1.6ct lariat · 18k rose gold", price: 96500000, img: U("1611652022419-a9419f74343d") },
+      { name: "The Amed Rivière", cat: "Necklaces", metal: "Platinum", spec: "6.0ct graduated rivière · platinum", price: 188000000, img: U("1610694955371-d4a3e0ce4b52") },
+      { name: "The Canggu Tennis", cat: "Bracelets & Bangles", metal: "White gold", spec: "5.0ct line of round brilliants · 18k white gold", price: 124000000, img: U("1611591437281-460bfbe1220a") },
+      { name: "The Jimbaran Bangle", cat: "Bracelets & Bangles", metal: "Yellow gold", spec: "0.9ct channel bangle · 18k yellow gold", price: 58500000, img: U("1573408301185-9146fe634ad0") },
+      { name: "The Legian Line", cat: "Bracelets & Bangles", metal: "Platinum", spec: "3.2ct baguette line · platinum", price: 88000000, img: U("1598560917505-59a3ad559071") },
+      { name: "The Berawa Cuff", cat: "Bracelets & Bangles", metal: "Rose gold", spec: "1.2ct pavé cuff · 18k rose gold", price: 64500000, img: U("1535632066927-ab7c9ab60908") },
+    ];
+    return this._ALL;
+  }
+  renderVals() {
+    const { scrolled, menu, cat, metal, sort } = this.state;
+    const ALL = this._all();
+    let list = ALL.filter((p) => (cat === "All" || p.cat === cat) && (metal === "All" || p.metal === metal));
+    if (sort === "Price, low to high") list = list.slice().sort((a, b) => a.price - b.price);
+    if (sort === "Price, high to low") list = list.slice().sort((a, b) => b.price - a.price);
+    const fmt = (n) => "IDR " + n.toLocaleString("id-ID").replace(/,/g, ".");
+    const chip = (active) => "padding:9px 20px;border-radius:999px;cursor:pointer;font-family:var(--font-body);font-size:var(--fs-label);font-weight:var(--fw-medium);letter-spacing:var(--ls-caps-tight);text-transform:uppercase;transition:color 180ms var(--ease-luxe),border-color 180ms var(--ease-luxe),background 180ms var(--ease-luxe);" +
+      (active ? "background:var(--ink-900);border:1px solid var(--ink-900);color:var(--ivory-50)" : "background:none;border:1px solid var(--border-mid);color:var(--text-muted)");
+    const txtBtn = (active) => "background:none;border:0;padding:4px 0;cursor:pointer;font-family:var(--font-body);font-size:var(--fs-label);font-weight:var(--fw-medium);letter-spacing:var(--ls-caps-tight);text-transform:uppercase;transition:color 180ms var(--ease-luxe),box-shadow 180ms var(--ease-luxe);" +
+      (active ? "color:var(--ink-900);box-shadow:inset 0 -1px 0 var(--gold-500)" : "color:var(--text-faint);box-shadow:inset 0 -1px 0 transparent");
+    return {
+      headerBg: scrolled ? "rgba(255,255,255,.92)" : "transparent",
+      headerBlur: scrolled ? "saturate(1.05) blur(14px)" : "none",
+      headerBorder: scrolled ? "var(--border-hairline)" : "rgba(255,255,255,0)",
+      headerY: this.state.hidden ? "translateY(-100%)" : "translateY(0)",
+      menuMounted: menu !== "closed",
+      menuAnim: menu === "open" ? "scFadeIn 620ms var(--ease-luxe) both" : "scFadeOut 520ms var(--ease-luxe) both",
+      openMenu: () => { clearTimeout(this._t); document.body.style.overflow = "hidden"; this.setState({ menu: "open", hidden: false }); },
+      closeMenu: () => this._close(),
+      imgHide: (e) => { e.currentTarget.style.display = "none"; },
+      crumbs: [{ label: "Home", href: "Homepage.dc.html" }, { label: "Collections", href: "Collections.dc.html" }, { label: cat === "All" ? "Shop all" : cat }],
+      pageTitle: cat === "All" ? "Shop all" : cat,
+      countLine: list.length + (list.length === 1 ? " piece" : " pieces") + " · every stone GIA or IGI certified",
+      catChips: ["All", "Rings", "Earrings", "Necklaces", "Bracelets & Bangles"].map((c) => ({ label: c, pick: () => this.setState({ cat: c }), style: chip(c === cat) })),
+      metalOpts: ["All", "White gold", "Yellow gold", "Rose gold", "Platinum"].map((m) => ({ label: m, pick: () => this.setState({ metal: m }), style: txtBtn(m === metal) })),
+      sortOpts: ["Featured", "Price, low to high", "Price, high to low"].map((s) => ({ label: s, pick: () => this.setState({ sort: s }), style: txtBtn(s === sort) })),
+      products: list.map((p) => {
+        const ok = !this.state.badImgs[p.img];
+        return { name: p.name, spec: p.spec, img: ok ? p.img : "", bg: ok ? "url('" + p.img + "')" : "none", priceStr: fmt(p.price) };
+      }),
+      hasResults: list.length > 0,
+      noResults: list.length === 0,
+      clearFilters: () => this.setState({ cat: "All", metal: "All", sort: "Featured" }),
+    };
+  }
+}
+</script>
+</body>
+</html>

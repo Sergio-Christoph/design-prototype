@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/tokens/colors.css">
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/tokens/typography.css">
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/tokens/effects.css">
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/tokens/base.css">
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/components/components.css">
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/styles.css">
+<script src="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/_ds_bundle.js"></script>
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#FFFFFF}
+html{scrollbar-width:thin;scrollbar-color:#CFC8BA #FFFFFF}
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-track{background:#FFFFFF}
+::-webkit-scrollbar-thumb{background:#CFC8BA;border:2px solid #FFFFFF}
+::-webkit-scrollbar-thumb:hover{background:#A6803C}
+@keyframes scFadeIn{from{opacity:0}to{opacity:1}}
+@keyframes scFadeOut{from{opacity:1}to{opacity:0}}
+@keyframes scRiseIn{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+@media (max-width:960px){#cl-navlinks{display:none !important}}
+@media (max-width:1100px){.col-grid{grid-template-columns:repeat(3,1fr) !important}}
+@media (max-width:840px){.col-grid{grid-template-columns:repeat(2,1fr) !important}}
+@media (max-width:520px){.col-grid{grid-template-columns:1fr !important}}
+
+/* sc-mobile-search — search icon in the LEFT cell on phones only (logo stays centered) */
+@media (max-width:960px){
+  .sc-search-mobile{display:grid !important;justify-self:start}
+  .sc-search-desktop{display:none !important}
+}
+</style>
+</helmet>
+<div style="background:var(--surface-page)">
+<!-- ======  HEADER  ====== -->
+<header data-screen-label="Header" style="
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:var(--z-nav);
+  height:82px;
+  transform:{{ headerY }};
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  padding:0 var(--container-pad);
+  background:{{ headerBg }};
+  backdrop-filter:{{ headerBlur }};
+  -webkit-backdrop-filter:{{ headerBlur }};
+  border-bottom:1px solid {{ headerBorder }};
+  transition:transform 480ms var(--ease-luxe),background var(--dur-base) var(--ease-luxe),border-color var(--dur-base) var(--ease-luxe),backdrop-filter var(--dur-base) var(--ease-luxe);
+">
+  <nav id="cl-navlinks" aria-label="Primary" style="
+    grid-column:1;
+    display:flex;
+    gap:36px;
+    color:var(--ink-900);
+  ">
+    <a href="#top" aria-current="page" style="
+      font-size:var(--fs-label);
+      font-weight:var(--fw-medium);
+      letter-spacing:var(--ls-caps-tight);
+      text-transform:uppercase;
+      color:var(--gold-600);
+      text-decoration:none;
+    ">Collections</a>
+    <a href="Bespoke Studio.dc.html" style="
+      font-size:var(--fs-label);
+      font-weight:var(--fw-medium);
+      letter-spacing:var(--ls-caps-tight);
+      text-transform:uppercase;
+      color:inherit;
+      text-decoration:none;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-500)">Build Your Own Ring</a>
+    <a href="The Lab.dc.html" style="
+      font-size:var(--fs-label);
+      font-weight:var(--fw-medium);
+      letter-spacing:var(--ls-caps-tight);
+      text-transform:uppercase;
+      color:inherit;
+      text-decoration:none;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-500)">The Lab</a>
+  </nav>
+  <!-- mobile-only search icon (left cell) — the centered logo is untouched -->
+  <button type="button" aria-label="Search" class="sc-search-mobile" style="
+    grid-column:1;
+    display:none;
+    place-items:center;
+    width:44px;
+    height:44px;
+    background:none;
+    border:0;
+    padding:0;
+    color:var(--ink-900);
+    cursor:pointer;
+    transition:color var(--dur-fast) var(--ease-luxe);
+  " style-hover="color:var(--gold-500)">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+  </button>
+  <a href="Homepage.dc.html" aria-label="Sergio Christoph — home" style="
+    grid-column:2;
+    display:inline-flex;
+    text-decoration:none;
+  ">
+    <img src="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/assets/logo-black.png" alt="SERGIO CHRISTOPH Lab Diamond" style="
+      height:40px;
+      width:auto;
+    ">
+  </a>
+  <div style="
+    grid-column:3;
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    gap:8px;
+    color:var(--ink-900);
+  ">
+    <button type="button" aria-label="Search" class="sc-search-desktop" style="
+      display:grid;
+      place-items:center;
+      width:44px;
+      height:44px;
+      background:none;
+      border:0;
+      padding:0;
+      color:inherit;
+      cursor:pointer;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-500)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+    </button>
+    <button type="button" aria-label="Open menu" onClick="{{ openMenu }}" style="
+      display:grid;
+      place-items:center;
+      width:44px;
+      height:44px;
+      background:none;
+      border:0;
+      padding:0;
+      color:inherit;
+      cursor:pointer;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-500)">
+      <span style="
+        display:flex;
+        flex-direction:column;
+        gap:8px;
+        width:24px;
+      "><span style="
+        display:block;
+        height:1px;
+        background:currentColor;
+      "></span><span style="
+        display:block;
+        height:1px;
+        background:currentColor;
+      "></span></span>
+    </button>
+  </div>
+</header>
+<sc-if value="{{ menuMounted }}" hint-placeholder-val="{{ false }}">
+<!-- ======  MENU OVERLAY  ====== -->
+<div data-screen-label="Menu overlay" role="dialog" aria-label="Menu" style="
+  position:fixed;
+  inset:0;
+  z-index:var(--z-dialog);
+  background:var(--ivory-0);
+  display:flex;
+  flex-direction:column;
+  animation:{{ menuAnim }};
+">
+  <div style="
+    height:82px;
+    flex:none;
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+    padding:0 var(--container-pad);
+  ">
+    <span style="
+      font-size:var(--fs-micro);
+      font-weight:var(--fw-medium);
+      letter-spacing:var(--ls-caps);
+      text-transform:uppercase;
+      color:var(--text-faint);
+    ">Menu</span>
+    <a href="Homepage.dc.html" aria-label="Sergio Christoph — home" style="
+      display:inline-flex;
+      text-decoration:none;
+    "><img src="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/assets/logo-black.png" alt="SERGIO CHRISTOPH Lab Diamond" style="
+      height:40px;
+      width:auto;
+    "></a>
+    <div style="
+      display:flex;
+      justify-content:flex-end;
+    ">
+      <button type="button" aria-label="Close menu" onClick="{{ closeMenu }}" style="
+        display:grid;
+        place-items:center;
+        width:44px;
+        height:44px;
+        background:none;
+        border:0;
+        padding:0;
+        color:var(--ink-900);
+        cursor:pointer;
+        transition:color var(--dur-fast) var(--ease-luxe);
+      " style-hover="color:var(--gold-600)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"><path d="M5 5l14 14"></path><path d="M19 5L5 19"></path></svg>
+      </button>
+    </div>
+  </div>
+  <nav aria-label="Menu" style="
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:clamp(20px,4.5vh,40px);
+    text-align:center;
+    padding:0 var(--container-pad);
+  ">
+    <a href="#top" onClick="{{ closeMenu }}" style="
+      font-family:var(--font-display);
+      font-size:clamp(44px,8vw,92px);
+      line-height:1.05;
+      color:var(--gold-600);
+      text-decoration:none;
+      animation:scRiseIn 760ms var(--ease-luxe) 120ms both;
+    ">Collections</a>
+    <a href="Bespoke Studio.dc.html" style="
+      font-family:var(--font-display);
+      font-size:clamp(44px,8vw,92px);
+      line-height:1.05;
+      color:var(--ink-900);
+      text-decoration:none;
+      animation:scRiseIn 760ms var(--ease-luxe) 220ms both;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-600)">Build Your Own Ring</a>
+    <a href="The Lab.dc.html" style="
+      font-family:var(--font-display);
+      font-size:clamp(44px,8vw,92px);
+      line-height:1.05;
+      color:var(--ink-900);
+      text-decoration:none;
+      animation:scRiseIn 760ms var(--ease-luxe) 320ms both;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-600)">The Lab</a>
+  </nav>
+  <div style="
+    flex:none;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+    flex-wrap:wrap;
+    padding:26px var(--container-pad) 34px;
+    border-top:1px solid var(--border-hairline);
+    font-size:13px;
+    color:var(--text-muted);
+    animation:scRiseIn 760ms var(--ease-luxe) 420ms both;
+  ">
+    <span>Prama Sanur Beach Hotel · Jalan Cemara Sanur · Denpasar, Bali 80228</span>
+    <a href="mailto:Sergiochristoph@gmail.com" style="
+      color:var(--text-body);
+      text-decoration:none;
+      letter-spacing:.02em;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-600)">Sergiochristoph@gmail.com</a>
+  </div>
+</div>
+</sc-if>
+<!-- ======  COLLECTIONS HERO  ====== -->
+<section id="top" data-screen-label="Collections hero" style="
+  padding:170px var(--container-pad) var(--space-2xl);
+  text-align:center;
+">
+  <div style="
+    max-width:800px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:20px;
+    animation:scRiseIn 900ms var(--ease-luxe) both;
+  ">
+    <span class="sc-eyebrow">GIA &amp; IGI certified</span>
+    <h1 style="
+      font-size:clamp(2.5rem,5vw,4.2rem);
+      line-height:var(--lh-display);
+      margin:0;
+      color:var(--text-heading);
+    ">The Collections</h1>
+    <p style="
+      margin:0;
+      font-family:var(--font-accent);
+      font-style:italic;
+      font-size:clamp(19px,2.2vw,23px);
+      color:var(--gold-600);
+    ">Grown by light, set by hand — in Sanur, Bali.</p>
+    <p style="
+      margin:0;
+      font-size:var(--fs-body);
+      line-height:var(--lh-body);
+      color:var(--text-muted);
+      max-width:620px;
+    ">Four families of lab-grown brilliance. Choose a finished design, or reimagine any piece in the Bespoke Studio.</p>
+  </div>
+</section>
+<sc-if value="{{ showJumpNav }}" hint-placeholder-val="{{ true }}">
+<!-- ======  JUMP NAV  ====== -->
+<nav aria-label="Collections" data-screen-label="Jump nav" style="
+  display:flex;
+  justify-content:center;
+  gap:clamp(18px,3.5vw,48px);
+  flex-wrap:wrap;
+  padding:18px var(--container-pad);
+  border-top:1px solid var(--border-hairline);
+  border-bottom:1px solid var(--border-hairline);
+">
+  <a href="#rings" style="
+    font-size:var(--fs-label);
+    font-weight:var(--fw-medium);
+    letter-spacing:var(--ls-caps-tight);
+    text-transform:uppercase;
+    color:var(--text-muted);
+    text-decoration:none;
+    transition:color var(--dur-fast) var(--ease-luxe);
+  " style-hover="color:var(--gold-600)">Rings</a>
+  <a href="#earrings" style="
+    font-size:var(--fs-label);
+    font-weight:var(--fw-medium);
+    letter-spacing:var(--ls-caps-tight);
+    text-transform:uppercase;
+    color:var(--text-muted);
+    text-decoration:none;
+    transition:color var(--dur-fast) var(--ease-luxe);
+  " style-hover="color:var(--gold-600)">Earrings</a>
+  <a href="#necklaces" style="
+    font-size:var(--fs-label);
+    font-weight:var(--fw-medium);
+    letter-spacing:var(--ls-caps-tight);
+    text-transform:uppercase;
+    color:var(--text-muted);
+    text-decoration:none;
+    transition:color var(--dur-fast) var(--ease-luxe);
+  " style-hover="color:var(--gold-600)">Necklaces</a>
+  <a href="#bracelets" style="
+    font-size:var(--fs-label);
+    font-weight:var(--fw-medium);
+    letter-spacing:var(--ls-caps-tight);
+    text-transform:uppercase;
+    color:var(--text-muted);
+    text-decoration:none;
+    transition:color var(--dur-fast) var(--ease-luxe);
+  " style-hover="color:var(--gold-600)">Bracelets &amp; Bangles</a>
+</nav>
+</sc-if>
+<!-- ======  RINGS COLLECTION  ====== -->
+<section id="rings" data-screen-label="Rings collection" style="
+  padding:var(--space-2xl) var(--container-pad) var(--space-3xl);
+  max-width:var(--container-max);
+  margin:0 auto;
+  scroll-margin-top:96px;
+">
+  <div style="
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-bottom:var(--space-xl);
+  ">
+    <x-import component-from-global-scope="SergioChristophDesignSystem_53d2bb.SectionHeading" eyebrow="Collection 01" title="Rings" hint-size="380px,90px"></x-import>
+    <a class="sc-btn sc-btn--ghost sc-btn--sm" href="Shop.dc.html#rings">See more rings</a>
+  </div>
+  <div class="col-grid" style="
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:var(--gap-grid);
+  ">
+    <a href="Viewing Room.dc.html" class="sc-product-card" style="
+      gap:14px;
+      text-decoration:none;
+    ">
+      <div class="sc-product-card__media" style="width:100%">
+        <div style="
+          position:absolute;
+          inset:0;
+          background:radial-gradient(120% 130% at 50% 18%,#FFFFFF 34%,var(--ivory-100) 100%);
+        "></div>
+        <span class="sc-product-card__placeholder" style="pointer-events:none"><span class="sc-mark-sparkle"></span></span>
+        <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="The Signature Solitaire" onError="{{ imgHide }}" style="
+          position:absolute;
+          inset:0;
+          width:100%;
+          height:100%;
+          object-fit:cover;
+          transition:transform 900ms var(--ease-luxe);
+        " style-hover="transform:scale(1.045)">
+      </div>
+      <div style="
+        display:flex;
+        flex-direction:column;
+        gap:6px;
+      ">
+        <span class="sc-product-card__name" style="transition:color var(--dur-fast) var(--ease-luxe)" style-hover="color:var(--gold-600)">The Signature Solitaire</span>
+        <span style="
+          font-size:12px;
+          color:var(--text-muted);
+          letter-spacing:.02em;
+        ">1.0ct round brilliant · 18k white gold</span>
+        <span style="
+          font-size:14px;
+          color:var(--text-body);
+          margin-top:2px;
+        ">IDR 68.500.000</span>
+      </div>
+    </a>
+    <a href="Viewing Room.dc.html" class="sc-product-card" style="
+      gap:14px;
+      text-decoration:none;
+    ">
+      <div class="sc-product-card__media" style="width:100%">
+        <div style="
+          position:absolute;
+          inset:0;
+          background:radial-gradient(120% 130% at 50% 18%,#FFFFFF 32%,var(--ivory-100) 100%);
+        "></div>
+        <span class="sc-product-card__placeholder" style="pointer-events:none"><span class="sc-mark-sparkle"></span></span>
+        <img src="https://images.unsplash.com/photo-1589674781759-c21c37956a44?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="The Uluwatu Halo" onError="{{ imgHide }}" style="
+          position:absolute;
+          inset:0;
+          width:100%;
+          height:100%;
+          object-fit:cover;
+          transition:transform 900ms var(--ease-luxe);
+        " style-hover="transform:scale(1.045)">
+      </div>
+      <div style="
+        display:flex;
+        flex-direction:column;
+        gap:6px;
+      ">
+        <span class="sc-product-card__name" style="transition:color var(--dur-fast) var(--ease-luxe)" style-hover="color:var(--gold-600)">The Uluwatu Halo</span>
+        <span style="
+          font-size:12px;
+          color:var(--text-muted);
+          letter-spacing:.02em;
+        ">1.2ct oval · 18k rose gold</span>
+        <span style="
+          font-size:14px;
+          color:var(--text-body);
+          margin-top:2px;
+        ">IDR 84.000.000</span>
+      </div>
+    </a>
+    <a href="Viewing Room.dc.html" class="sc-product-card" style="
+      gap:14px;
+      text-decoration:none;
+    ">
+      <div class="sc-product-card__media" style="width:100%">
+        <div style="
+          position:absolute;
+          inset:0;
+          background:radial-gradient(120% 130% at 50% 18%,#FFFFFF 30%,var(--ivory-200) 100%);
+        "></div>
+        <span class="sc-product-card__placeholder" style="pointer-events:none"><span class="sc-mark-sparkle"></span></span>
+        <img src="https://images.unsplash.com/photo-1603561591411-07134e71a2a9?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="The Sanur Trilogy" onError="{{ imgHide }}" style="
+          position:absolute;
+          inset:0;
+          width:100%;
+          height:100%;
+          object-fit:cover;
+          transition:transform 900ms var(--ease-luxe);
+        " style-hover="transform:scale(1.045)">
+      </div>
+      <div style="
+        display:flex;
+        flex-direction:column;
+        gap:6px;
+      ">
+        <span class="sc-product-card__name" style="transition:color var(--dur-fast) var(--ease-luxe)" style-hover="color:var(--gold-600)">The Sanur Trilogy</span>
+        <span style="
+          font-size:12px;
+          color:var(--text-muted);
+          letter-spacing:.02em;
+        ">1.5ct three-stone · platinum</span>
+        <span style="
+          font-size:14px;
+          color:var(--text-body);
+          margin-top:2px;
+        ">IDR 112.500.000</span>
+      </div>
+    </a>
+    <a href="Viewing Room.dc.html" class="sc-product-card" style="
+      gap:14px;
+      text-decoration:none;
+    ">
+      <div class="sc-product-card__media" style="width:100%">
+        <div style="
+          position:absolute;
+          inset:0;
+          background:radial-gradient(120% 130% at 50% 18%,#FFFFFF 34%,var(--gold-200) 100%);
+        "></div>
+        <span class="sc-product-card__placeholder" style="pointer-events:none"><span class="sc-mark-sparkle"></span></span>
+        <img src="https://images.unsplash.com/photo-1608042314453-ae338d80c427?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="The Bingin Band" onError="{{ imgHide }}" style="
+          position:absolute;
+          inset:0;
+          width:100%;
+          height:100%;
+          object-fit:cover;
+          transition:transform 900ms var(--ease-luxe);
+        " style-hover="transform:scale(1.045)">
+      </div>
+      <div style="
+        display:flex;
+        flex-direction:column;
+        gap:6px;
+      ">
+        <span class="sc-product-card__name" style="transition:color var(--dur-fast) var(--ease-luxe)" style-hover="color:var(--gold-600)">The Bingin Band</span>
+        <span style="
+          font-size:12px;
+          color:var(--text-muted);
+          letter-spacing:.02em;
+        ">0.6ct pavé eternity · 18k yellow gold</span>
+        <span style="
+          font-size:14px;
+          color:var(--text-body);
+          margin-top:2px;
+        ">IDR 36.500.000</span>
+      </div>
+    </a>
+  </div>
+</section>
+<!-- ======  EARRINGS COLLECTION  ====== -->
+<section id="earrings" data-screen-label="Earrings collection" style="
+  padding:var(--space-2xl) var(--container-pad) var(--space-3xl);
+  max-width:var(--container-max);
+  margin:0 auto;
+  border-top:1px solid var(--border-hairline);
+  scroll-margin-top:96px;
+">
+  <div style="
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-bottom:var(--space-xl);
+  ">
+    <x-import component-from-global-scope="SergioChristophDesignSystem_53d2bb.SectionHeading" eyebrow="Collection 02" title="Earrings" hint-size="380px,90px"></x-import>
+    <a class="sc-btn sc-btn--ghost sc-btn--sm" href="Shop.dc.html#earrings">See more earrings</a>
+  </div>
+  <div class="col-grid" style="
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:var(--gap-grid);
+  ">
+    <a href="Viewing Room.dc.html" class="sc-product-card" style="
+      gap:14px;
+      text-decoration:none;
+    ">
+      <div class="sc-product-card__media" style="width:100%">
+        <div style="
+          position:absolute;
+          inset:0;
+          background:radial-gradient(120% 130% at 50% 18%,#FFFFFF 34%,var(--ivory-100) 100%);
+        "></div>
+        <span class="sc-product-card__placeholder" style="pointer-events:none"><span class="sc-mark-sparkle"></span></span>
+        <img src="https://images.unsplash.com/photo-1630019852942-f89202989a59?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="The Amed Studs" onError="{{ imgHide }}" style="
+          position:absolute;
+          inset:0;
+          width:100%;
+          height:100%;
+          object-fit:cover;
+          transition:transform 900ms var(--ease-luxe);
+        " style-hover="transform:scale(1.045)">
+      </div>
+      <div style="
+        display:flex;
+        flex-direction:column;
+        gap:6px;
+      ">
+        <span class="sc-product-card__name" style="transition:color var(--dur-fast) var(--ease-luxe)" style-hover="color:var(--gold-600)">The Amed Studs</span>
+        <span style="
+          font-size:12px;
+          color:var(--text-muted);
+          letter-spacing:.02em;
+        ">0.5ct round brilliant pair · 18k white gold</span>
+        <span style="
+          font-size:14px;
+          color:var(--text-body);
+          margin-top:2px;
+        ">IDR 28.500.000</span>
+      </div>
+    </a>
+    <a href="Viewing Room.dc.html" class="sc-product-card" style="
+      gap:14px;
+      text-decoration:none;
+    ">
+      <div class="sc-product-card__media" style="width:100%">
+        <div style="
+          position:absolute;
+          inset:0;
+          background:radial-gradient(120% 130% at 50% 18%,#FFFFFF 32%,var(--ivory-200) 100%);
+        "></div>
+        <span class="sc-product-card__placeholder" style="pointer-events:none"><span class="sc-mark-sparkle"></span></span>
+        <img src="https://images.unsplash.com/photo-1602173574767-37ac01994b2a?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="The Sidemen Drops" onError="{{ imgHide }}" style="
+          position:absolute;
+          inset:0;
+          width:100%;
+          height:100%;
+          object-fit:cover;
+          transition:transform 900ms var(--ease-luxe);
+        " style-hover="transform:scale(1.045)">
+      </div>
+      <div style="
+        display:flex;
+        flex-direction:column;
+        gap:6px;
+      ">
+        <span class="sc-product-card__name" style="transition:color var(--dur-fast) var(--ease-luxe)" style-hover="color:var(--gold-600)">The Sidemen Drops</span>
+        <span style="
+          font-size:12px;
+          color:var(--text-muted);
+          letter-spacing:.02em;
+        ">1.4ct pear drop pair · 18k yellow gold</span>
+        <span style="
+          font-size:14px;
+          color:var(--text-body);
+          margin-top:2px;
+        ">IDR 46.500.000</span>
+      </div>
+    </a>
+    <a href="Viewing Room.dc.html" class="sc-product-card" style="
+      gap:14px;
+      text-decoration:none;
+    ">
+      <div class="sc-product-card__media" style="width:100%">
+        <div style="
+          position:absolute;
+          inset:0;
+          background:radial-gradient(120% 130% at 50% 18%,#FFFFFF 30%,var(--gold-200) 100%);
+        "></div>
+        <span class="sc-product-card__placeholder" style="pointer-events:none"><span class="sc-mark-sparkle"></span></span>
+        <img src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="The Munduk Hoops" onError="{{ imgHide }}" style="
+          position:absolute;
+          inset:0;
+          width:100%;
+          height:100%;
+          object-fit:cover;
+          transition:transform 900ms var(--ease-luxe);
+        " style-hover="transform:scale(1.045)">
+      </div>
+      <div style="
+        display:flex;
+        flex-direction:column;
+        gap:6px;
+      ">
+        <span class="sc-product-card__name" style="transition:color var(--dur-fast) var(--ease-luxe)" style-hover="color:var(--gold-600)">The Munduk Hoops</span>
+        <span style="
+          font-size:12px;
+          color:var(--text-muted);
+          letter-spacing:.02em;
+        ">0.8ct pavé hoops · 18k rose gold</span>
+        <span style="
+          font-size:14px;
+          color:var(--text-body);
+          margin-top:2px;
+        ">IDR 39.000.000</span>
+      </div>
+    </a>
+    <a href="Viewing Room.dc.html" class="sc-product-card" style="
+      gap:14px;
+      text-decoration:none;
+    ">
+      <div class="sc-product-card__media" style="width:100%">
+        <div style="
+          position:absolute;
+          inset:0;
+          background:radial-gradient(120% 130% at 50% 18%,#FFFFFF 34%,var(--ivory-100) 100%);
+        "></div>
+        <span class="sc-product-card__placeholder" style="pointer-events:none"><span class="sc-mark-sparkle"></span></span>
+        <img src="https://images.unsplash.com/photo-1611085583191-a3b181a88401?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="The Penida Climbers" onError="{{ imgHide }}" style="
+          position:absolute;
+          inset:0;
+          width:100%;
+          height:100%;
+          object-fit:cover;
+          transition:transform 900ms var(--ease-luxe);
+        " style-hover="transform:scale(1.045)">
+      </div>
+      <div style="
+        display:flex;
+        flex-direction:column;
+        gap:6px;
+      ">
+        <span class="sc-product-card__name" style="transition:color var(--dur-fast) var(--ease-luxe)" style-hover="color:var(--gold-600)">The Penida Climbers</span>
+        <span style="
+          font-size:12px;
+          color:var(--text-muted);
+          letter-spacing:.02em;
+        ">0.9ct graduated pair · platinum</span>
+        <span style="
+          font-size:14px;
+          color:var(--text-body);
+          margin-top:2px;
+        ">IDR 52.500.000</span>
+      </div>
+    </a>
+  </div>
+</section>
+<!-- ======  NECKLACES COLLECTION  ====== -->
+<section id="necklaces" data-screen-label="Necklaces collection" style="
+  padding:var(--space-2xl) var(--container-pad) var(--space-3xl);
+  max-width:var(--container-max);
+  margin:0 auto;
+  border-top:1px solid var(--border-hairline);
+  scroll-margin-top:96px;
+">
+  <div style="
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-bottom:var(--space-xl);
+  ">
+    <x-import component-from-global-scope="SergioChristophDesignSystem_53d2bb.SectionHeading" eyebrow="Collection 03" title="Necklaces" hint-size="380px,90px"></x-import>
+    <a class="sc-btn sc-btn--ghost sc-btn--sm" href="Shop.dc.html#necklaces">See more necklaces</a>
+  </div>
+  <div class="col-grid" style="
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:var(--gap-grid);
+  ">
+    <a href="Viewing Room.dc.html" class="sc-product-card" style="
+      gap:14px;
+      text-decoration:none;
+    ">
+      <div class="sc-product-card__media" style="width:100%">
+        <div style="
+          position:absolute;
+          inset:0;
+          background:radial-gradient(120% 130% at 50% 18%,#FFFFFF 34%,var(--ivory-100) 100%);
+        "></div>
+        <span class="sc-product-card__placeholder" style="pointer-events:none"><span class="sc-mark-sparkle"></span></span>
+        <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="The Seminyak Pendant" onError="{{ imgHide }}" style="
+          position:absolute;
+          inset:0;
+          width:100%;
+          height:100%;
+          object-fit:cover;
+          transition:transform 900ms var(--ease-luxe);
+        " style-hover="transform:scale(1.045)">
+      </div>
+      <div style="
+        display:flex;
+        flex-direction:column;
+        gap:6px;
+      ">
+        <span class="sc-product-card__name" style="transition:color var(--dur-fast) var(--ease-luxe)" style-hover="color:var(--gold-600)">The Seminyak Pendant</span>
+        <span style="
+          font-size:12px;
+          color:var(--text-muted);
+          letter-spacing:.02em;
+        ">0.7ct round brilliant · 18k white gold</span>
+        <span style="
+          font-size:14px;
+          color:var(--text-body);
+          margin-top:2px;
+        ">IDR 42.500.000</span>
+      </div>
+    </a>
+    <a href="Viewing Room.dc.html" class="sc-product-card" style="
+      gap:14px;
+      text-decoration:none;
+    ">
+      <div class="sc-product-card__media" style="width:100%">
+        <div style="
+          position:absolute;
+          inset:0;
+          background:radial-gradient(120% 130% at 50% 18%,#FFFFFF 32%,var(--ivory-200) 100%);
+        "></div>
+        <span class="sc-product-card__placeholder" style="pointer-events:none"><span class="sc-mark-sparkle"></span></span>
+        <img src="https://images.unsplash.com/photo-1635767798638-3e25273a8236?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="The Batur Station" onError="{{ imgHide }}" style="
+          position:absolute;
+          inset:0;
+          width:100%;
+          height:100%;
+          object-fit:cover;
+          transition:transform 900ms var(--ease-luxe);
+        " style-hover="transform:scale(1.045)">
+      </div>
+      <div style="
+        display:flex;
+        flex-direction:column;
+        gap:6px;
+      ">
+        <span class="sc-product-card__name" style="transition:color var(--dur-fast) var(--ease-luxe)" style-hover="color:var(--gold-600)">The Batur Station</span>
+        <span style="
+          font-size:12px;
+          color:var(--text-muted);
+          letter-spacing:.02em;
+        ">1.1ct five-stone station · 18k yellow gold</span>
+        <span style="
+          font-size:14px;
+          color:var(--text-body);
+          margin-top:2px;
+        ">IDR 74.000.000</span>
+      </div>
+    </a>
+    <a href="Viewing Room.dc.html" class="sc-product-card" style="
+      gap:14px;
+      text-decoration:none;
+    ">
+      <div class="sc-product-card__media" style="width:100%">
+        <div style="
+          position:absolute;
+          inset:0;
+          background:radial-gradient(120% 130% at 50% 18%,#FFFFFF 30%,var(--gold-200) 100%);
+        "></div>
+        <span class="sc-product-card__placeholder" style="pointer-events:none"><span class="sc-mark-sparkle"></span></span>
+        <img src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="The Karma Lariat" onError="{{ imgHide }}" style="
+          position:absolute;
+          inset:0;
+          width:100%;
+          height:100%;
+          object-fit:cover;
+          transition:transform 900ms var(--ease-luxe);
+        " style-hover="transform:scale(1.045)">
+      </div>
+      <div style="
+        display:flex;
+        flex-direction:column;
+        gap:6px;
+      ">
+        <span class="sc-product-card__name" style="transition:color var(--dur-fast) var(--ease-luxe)" style-hover="color:var(--gold-600)">The Karma Lariat</span>
+        <span style="
+          font-size:12px;
+          color:var(--text-muted);
+          letter-spacing:.02em;
+        ">1.6ct lariat · 18k rose gold</span>
+        <span style="
+          font-size:14px;
+          color:var(--text-body);
+          margin-top:2px;
+        ">IDR 96.500.000</span>
+      </div>
+    </a>
+    <a href="Viewing Room.dc.html" class="sc-product-card" style="
+      gap:14px;
+      text-decoration:none;
+    ">
+      <div class="sc-product-card__media" style="width:100%">
+        <div style="
+          position:absolute;
+          inset:0;
+          background:radial-gradient(120% 130% at 50% 18%,#FFFFFF 34%,var(--ivory-100) 100%);
+        "></div>
+        <span class="sc-product-card__placeholder" style="pointer-events:none"><span class="sc-mark-sparkle"></span></span>
+        <img src="https://images.unsplash.com/photo-1610694955371-d4a3e0ce4b52?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="The Amed Rivière" onError="{{ imgHide }}" style="
+          position:absolute;
+          inset:0;
+          width:100%;
+          height:100%;
+          object-fit:cover;
+          transition:transform 900ms var(--ease-luxe);
+        " style-hover="transform:scale(1.045)">
+      </div>
+      <div style="
+        display:flex;
+        flex-direction:column;
+        gap:6px;
+      ">
+        <span class="sc-product-card__name" style="transition:color var(--dur-fast) var(--ease-luxe)" style-hover="color:var(--gold-600)">The Amed Rivière</span>
+        <span style="
+          font-size:12px;
+          color:var(--text-muted);
+          letter-spacing:.02em;
+        ">6.0ct graduated rivière · platinum</span>
+        <span style="
+          font-size:14px;
+          color:var(--text-body);
+          margin-top:2px;
+        ">IDR 188.000.000</span>
+      </div>
+    </a>
+  </div>
+</section>
+<!-- ======  BRACELETS COLLECTION  ====== -->
+<section id="bracelets" data-screen-label="Bracelets collection" style="
+  padding:var(--space-2xl) var(--container-pad) var(--space-3xl);
+  max-width:var(--container-max);
+  margin:0 auto;
+  border-top:1px solid var(--border-hairline);
+  scroll-margin-top:96px;
+">
+  <div style="
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-bottom:var(--space-xl);
+  ">
+    <x-import component-from-global-scope="SergioChristophDesignSystem_53d2bb.SectionHeading" eyebrow="Collection 04" title="Bracelets &amp; Bangles" hint-size="380px,90px"></x-import>
+    <a class="sc-btn sc-btn--ghost sc-btn--sm" href="Shop.dc.html#bracelets">See more bracelets</a>
+  </div>
+  <div class="col-grid" style="
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:var(--gap-grid);
+  ">
+    <a href="Viewing Room.dc.html" class="sc-product-card" style="
+      gap:14px;
+      text-decoration:none;
+    ">
+      <div class="sc-product-card__media" style="width:100%">
+        <div style="
+          position:absolute;
+          inset:0;
+          background:radial-gradient(120% 130% at 50% 18%,#FFFFFF 34%,var(--ivory-100) 100%);
+        "></div>
+        <span class="sc-product-card__placeholder" style="pointer-events:none"><span class="sc-mark-sparkle"></span></span>
+        <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="The Canggu Tennis" onError="{{ imgHide }}" style="
+          position:absolute;
+          inset:0;
+          width:100%;
+          height:100%;
+          object-fit:cover;
+          transition:transform 900ms var(--ease-luxe);
+        " style-hover="transform:scale(1.045)">
+      </div>
+      <div style="
+        display:flex;
+        flex-direction:column;
+        gap:6px;
+      ">
+        <span class="sc-product-card__name" style="transition:color var(--dur-fast) var(--ease-luxe)" style-hover="color:var(--gold-600)">The Canggu Tennis</span>
+        <span style="
+          font-size:12px;
+          color:var(--text-muted);
+          letter-spacing:.02em;
+        ">5.0ct line of round brilliants · 18k white gold</span>
+        <span style="
+          font-size:14px;
+          color:var(--text-body);
+          margin-top:2px;
+        ">IDR 124.000.000</span>
+      </div>
+    </a>
+    <a href="Viewing Room.dc.html" class="sc-product-card" style="
+      gap:14px;
+      text-decoration:none;
+    ">
+      <div class="sc-product-card__media" style="width:100%">
+        <div style="
+          position:absolute;
+          inset:0;
+          background:radial-gradient(120% 130% at 50% 18%,#FFFFFF 32%,var(--ivory-200) 100%);
+        "></div>
+        <span class="sc-product-card__placeholder" style="pointer-events:none"><span class="sc-mark-sparkle"></span></span>
+        <img src="https://images.unsplash.com/photo-1573408301185-9146fe634ad0?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="The Jimbaran Bangle" onError="{{ imgHide }}" style="
+          position:absolute;
+          inset:0;
+          width:100%;
+          height:100%;
+          object-fit:cover;
+          transition:transform 900ms var(--ease-luxe);
+        " style-hover="transform:scale(1.045)">
+      </div>
+      <div style="
+        display:flex;
+        flex-direction:column;
+        gap:6px;
+      ">
+        <span class="sc-product-card__name" style="transition:color var(--dur-fast) var(--ease-luxe)" style-hover="color:var(--gold-600)">The Jimbaran Bangle</span>
+        <span style="
+          font-size:12px;
+          color:var(--text-muted);
+          letter-spacing:.02em;
+        ">0.9ct channel bangle · 18k yellow gold</span>
+        <span style="
+          font-size:14px;
+          color:var(--text-body);
+          margin-top:2px;
+        ">IDR 58.500.000</span>
+      </div>
+    </a>
+    <a href="Viewing Room.dc.html" class="sc-product-card" style="
+      gap:14px;
+      text-decoration:none;
+    ">
+      <div class="sc-product-card__media" style="width:100%">
+        <div style="
+          position:absolute;
+          inset:0;
+          background:radial-gradient(120% 130% at 50% 18%,#FFFFFF 30%,var(--gold-200) 100%);
+        "></div>
+        <span class="sc-product-card__placeholder" style="pointer-events:none"><span class="sc-mark-sparkle"></span></span>
+        <img src="https://images.unsplash.com/photo-1598560917505-59a3ad559071?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="The Legian Line" onError="{{ imgHide }}" style="
+          position:absolute;
+          inset:0;
+          width:100%;
+          height:100%;
+          object-fit:cover;
+          transition:transform 900ms var(--ease-luxe);
+        " style-hover="transform:scale(1.045)">
+      </div>
+      <div style="
+        display:flex;
+        flex-direction:column;
+        gap:6px;
+      ">
+        <span class="sc-product-card__name" style="transition:color var(--dur-fast) var(--ease-luxe)" style-hover="color:var(--gold-600)">The Legian Line</span>
+        <span style="
+          font-size:12px;
+          color:var(--text-muted);
+          letter-spacing:.02em;
+        ">3.2ct baguette line · platinum</span>
+        <span style="
+          font-size:14px;
+          color:var(--text-body);
+          margin-top:2px;
+        ">IDR 88.000.000</span>
+      </div>
+    </a>
+    <a href="Viewing Room.dc.html" class="sc-product-card" style="
+      gap:14px;
+      text-decoration:none;
+    ">
+      <div class="sc-product-card__media" style="width:100%">
+        <div style="
+          position:absolute;
+          inset:0;
+          background:radial-gradient(120% 130% at 50% 18%,#FFFFFF 34%,var(--ivory-100) 100%);
+        "></div>
+        <span class="sc-product-card__placeholder" style="pointer-events:none"><span class="sc-mark-sparkle"></span></span>
+        <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="The Berawa Cuff" onError="{{ imgHide }}" style="
+          position:absolute;
+          inset:0;
+          width:100%;
+          height:100%;
+          object-fit:cover;
+          transition:transform 900ms var(--ease-luxe);
+        " style-hover="transform:scale(1.045)">
+      </div>
+      <div style="
+        display:flex;
+        flex-direction:column;
+        gap:6px;
+      ">
+        <span class="sc-product-card__name" style="transition:color var(--dur-fast) var(--ease-luxe)" style-hover="color:var(--gold-600)">The Berawa Cuff</span>
+        <span style="
+          font-size:12px;
+          color:var(--text-muted);
+          letter-spacing:.02em;
+        ">1.2ct pavé cuff · 18k rose gold</span>
+        <span style="
+          font-size:14px;
+          color:var(--text-body);
+          margin-top:2px;
+        ">IDR 64.500.000</span>
+      </div>
+    </a>
+  </div>
+</section>
+<sc-if value="{{ bespokeBand }}" hint-placeholder-val="{{ true }}">
+<!-- ======  BESPOKE CROSS-LINK  ====== -->
+<section data-screen-label="Bespoke cross-link" style="
+  background:var(--surface-cream);
+  padding:var(--space-3xl) var(--container-pad);
+  text-align:center;
+">
+  <div style="
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:20px;
+    max-width:620px;
+    margin:0 auto;
+  ">
+    <img src="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/assets/mark-sparkle-gold.png" alt="" style="
+      width:26px;
+      opacity:.85;
+    ">
+    <h2 style="
+      font-size:clamp(28px,3.2vw,40px);
+      line-height:var(--lh-heading);
+      margin:0;
+      color:var(--text-heading);
+    ">Didn't find the one?</h2>
+    <p style="
+      margin:0;
+      font-size:var(--fs-body-sm);
+      line-height:var(--lh-body);
+      color:var(--text-muted);
+    ">Carat, setting, pavé, prongs and style — engineer your own ring step-by-step in The Bespoke Studio.</p>
+    <a class="sc-btn sc-btn--outline" href="Bespoke Studio.dc.html" style="
+      white-space:nowrap;
+      margin-top:8px;
+    ">Build Your Own Ring</a>
+  </div>
+</section>
+</sc-if>
+<!-- ======  FOOTER  ====== -->
+<footer id="contact" data-screen-label="Footer" style="
+  background:var(--surface-dark);
+  color:var(--text-inverse-muted);
+  padding:var(--space-3xl) var(--container-pad) var(--space-lg);
+">
+  <div style="
+    max-width:var(--container-max);
+    margin:0 auto;
+  ">
+    <div style="
+      display:flex;
+      flex-wrap:wrap;
+      gap:var(--space-2xl);
+      padding-bottom:var(--space-2xl);
+    ">
+      <div style="
+        flex:1.6 1 280px;
+        display:flex;
+        flex-direction:column;
+        gap:20px;
+      ">
+        <img src="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/assets/logo-white.png" alt="SERGIO CHRISTOPH Lab Diamond" style="width:210px">
+        <p style="
+          margin:0;
+          font-size:13px;
+          line-height:1.7;
+          max-width:320px;
+        ">Discover limitless beauty with Sergio Christoph Lab Diamond.</p>
+      </div>
+      <div style="flex:1 1 190px">
+        <div style="
+          font-size:11px;
+          font-weight:var(--fw-medium);
+          letter-spacing:var(--ls-caps);
+          text-transform:uppercase;
+          color:var(--ivory-50);
+          margin-bottom:16px;
+        ">Visit</div>
+        <span style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+        ">Prama Sanur Beach Hotel</span>
+        <span style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+        ">Jalan Cemara Sanur</span>
+        <span style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+        ">Denpasar, Bali 80228</span>
+      </div>
+      <div style="flex:1 1 190px">
+        <div style="
+          font-size:11px;
+          font-weight:var(--fw-medium);
+          letter-spacing:var(--ls-caps);
+          text-transform:uppercase;
+          color:var(--ivory-50);
+          margin-bottom:16px;
+        ">Contact</div>
+        <a href="tel:+6281617871898" style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+          color:var(--text-inverse-muted);
+          text-decoration:none;
+          transition:color var(--dur-fast) var(--ease-luxe);
+        " style-hover="color:var(--gold-300)">0816-1787-1898</a>
+        <a href="mailto:Sergiochristoph@gmail.com" style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+          color:var(--text-inverse-muted);
+          text-decoration:none;
+          transition:color var(--dur-fast) var(--ease-luxe);
+        " style-hover="color:var(--gold-300)">Sergiochristoph@gmail.com</a>
+      </div>
+      <div style="flex:1 1 160px">
+        <div style="
+          font-size:11px;
+          font-weight:var(--fw-medium);
+          letter-spacing:var(--ls-caps);
+          text-transform:uppercase;
+          color:var(--ivory-50);
+          margin-bottom:16px;
+        ">Follow</div>
+        <a href="https://instagram.com/sergio_christoph" target="_blank" rel="noreferrer" style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+          color:var(--text-inverse-muted);
+          text-decoration:none;
+          transition:color var(--dur-fast) var(--ease-luxe);
+        " style-hover="color:var(--gold-300)">Instagram · @sergio_christoph</a>
+        <a href="https://www.facebook.com" target="_blank" rel="noreferrer" style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+          color:var(--text-inverse-muted);
+          text-decoration:none;
+          transition:color var(--dur-fast) var(--ease-luxe);
+        " style-hover="color:var(--gold-300)">Facebook</a>
+        <a href="https://www.tiktok.com" target="_blank" rel="noreferrer" style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+          color:var(--text-inverse-muted);
+          text-decoration:none;
+          transition:color var(--dur-fast) var(--ease-luxe);
+        " style-hover="color:var(--gold-300)">TikTok</a>
+      </div>
+      <div style="flex:1 1 160px">
+        <div style="
+          font-size:11px;
+          font-weight:var(--fw-medium);
+          letter-spacing:var(--ls-caps);
+          text-transform:uppercase;
+          color:var(--ivory-50);
+          margin-bottom:16px;
+        ">Shop online</div>
+        <a href="https://www.tokopedia.com" target="_blank" rel="noreferrer" style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+          color:var(--text-inverse-muted);
+          text-decoration:none;
+          transition:color var(--dur-fast) var(--ease-luxe);
+        " style-hover="color:var(--gold-300)">Tokopedia</a>
+        <a href="https://shopee.co.id" target="_blank" rel="noreferrer" style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+          color:var(--text-inverse-muted);
+          text-decoration:none;
+          transition:color var(--dur-fast) var(--ease-luxe);
+        " style-hover="color:var(--gold-300)">Shopee</a>
+      </div>
+    </div>
+    <div style="
+      border-top:1px solid var(--border-inverse);
+      padding-top:22px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      font-size:11px;
+      letter-spacing:.08em;
+    ">
+      <span>© 2026 Sergio Christoph Lab Diamond · Sanur, Bali</span>
+      <span style="
+        text-transform:uppercase;
+        letter-spacing:var(--ls-caps);
+        color:var(--gold-300);
+      ">#EveryoneCanShine</span>
+    </div>
+  </div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;showJumpNav&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Sections&quot; },
+  &quot;bespokeBand&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Sections&quot; }
+}">
+class Component extends DCLogic {
+  state = { scrolled: false, hidden: false, menu: "closed" };
+  componentDidMount() {
+    this._ly = window.scrollY;
+    this._sc = () => {
+      const y = window.scrollY;
+      const scrolled = y > 56;
+      let hidden = this.state.hidden;
+      if (this.state.menu === "open") hidden = false;
+      else if (y > this._ly + 6 && y > 170) hidden = true;
+      else if (y < this._ly - 6 || y < 90) hidden = false;
+      this._ly = y;
+      if (scrolled !== this.state.scrolled || hidden !== this.state.hidden) this.setState({ scrolled: scrolled, hidden: hidden });
+    };
+    this._key = (e) => { if (e.key === "Escape" && this.state.menu === "open") this._close(); };
+    window.addEventListener("scroll", this._sc, { passive: true });
+    window.addEventListener("keydown", this._key);
+    this._sc();
+  }
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this._sc);
+    window.removeEventListener("keydown", this._key);
+    clearTimeout(this._t);
+    document.body.style.overflow = "";
+  }
+  _close() {
+    document.body.style.overflow = "";
+    clearTimeout(this._t);
+    this.setState({ menu: "closing" });
+    this._t = setTimeout(() => { if (this.state.menu === "closing") this.setState({ menu: "closed" }); }, 560);
+  }
+  renderVals() {
+    const { scrolled, menu } = this.state;
+    return {
+      headerBg: scrolled ? "rgba(255,255,255,.92)" : "transparent",
+      headerBlur: scrolled ? "saturate(1.05) blur(14px)" : "none",
+      headerBorder: scrolled ? "var(--border-hairline)" : "rgba(255,255,255,0)",
+      headerY: this.state.hidden ? "translateY(-100%)" : "translateY(0)",
+      menuMounted: menu !== "closed",
+      menuAnim: menu === "open" ? "scFadeIn 620ms var(--ease-luxe) both" : "scFadeOut 520ms var(--ease-luxe) both",
+      openMenu: () => { clearTimeout(this._t); document.body.style.overflow = "hidden"; this.setState({ menu: "open", hidden: false }); },
+      closeMenu: () => this._close(),
+      imgHide: (e) => { e.currentTarget.style.display = "none"; },
+      showJumpNav: this.props.showJumpNav ?? true,
+      bespokeBand: this.props.bespokeBand ?? true,
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/tokens/colors.css">
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/tokens/typography.css">
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/tokens/effects.css">
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/tokens/base.css">
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/components/components.css">
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/styles.css">
+<script src="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/_ds_bundle.js"></script>
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#FFFFFF}
+html{scrollbar-width:thin;scrollbar-color:#CFC8BA #FFFFFF}
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-track{background:#FFFFFF}
+::-webkit-scrollbar-thumb{background:#CFC8BA;border:2px solid #FFFFFF}
+::-webkit-scrollbar-thumb:hover{background:#A6803C}
+@keyframes scFadeIn{from{opacity:0}to{opacity:1}}
+@keyframes scFadeOut{from{opacity:1}to{opacity:0}}
+@keyframes scRiseIn{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scGlowPulse{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.07)}}
+@keyframes scTwinkle{0%,86%,100%{opacity:0;transform:scale(.4) rotate(0deg)}8%{opacity:.9;transform:scale(1) rotate(10deg)}16%{opacity:0;transform:scale(.45) rotate(16deg)}}
+@keyframes scCueWipe{0%{transform:scaleY(0);transform-origin:top}42%{transform:scaleY(1);transform-origin:top}58%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@media (max-width:960px){#sc-navlinks{display:none !important}}
+@media (max-width:900px){#sc-split{grid-template-columns:1fr !important}}
+@media (max-width:960px){#sc-cat-grid{grid-template-columns:1fr 1fr !important;height:auto !important}#sc-cat-grid a{height:52svh}}
+@media (max-width:600px){#sc-cat-grid{grid-template-columns:1fr !important}}
+
+/* sc-mobile-search — search icon in the LEFT cell on phones only (logo stays centered) */
+@media (max-width:960px){
+  .sc-search-mobile{display:grid !important;justify-self:start}
+  .sc-search-desktop{display:none !important}
+}
+</style>
+</helmet>
+<div style="background:var(--surface-page)">
+<!-- ======  HEADER  ====== -->
+<header data-screen-label="Header" style="
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:var(--z-nav);
+  height:82px;
+  transform:{{ headerY }};
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  padding:0 var(--container-pad);
+  color:var(--ivory-50);
+  background:{{ headerBg }};
+  backdrop-filter:{{ headerBlur }};
+  -webkit-backdrop-filter:{{ headerBlur }};
+  border-bottom:1px solid {{ headerBorder }};
+  transition:transform 480ms var(--ease-luxe),background var(--dur-base) var(--ease-luxe),border-color var(--dur-base) var(--ease-luxe),backdrop-filter var(--dur-base) var(--ease-luxe);
+">
+  <nav id="sc-navlinks" aria-label="Primary" style="
+    grid-column:1;
+    display:flex;
+    gap:36px;
+    color:{{ navColor }};
+    transition:color var(--dur-base) var(--ease-luxe);
+  ">
+    <a href="Collections.dc.html" style="
+      font-size:var(--fs-label);
+      font-weight:var(--fw-medium);
+      letter-spacing:var(--ls-caps-tight);
+      text-transform:uppercase;
+      color:inherit;
+      text-decoration:none;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-500)">Collections</a>
+    <a href="Bespoke Studio.dc.html" style="
+      font-size:var(--fs-label);
+      font-weight:var(--fw-medium);
+      letter-spacing:var(--ls-caps-tight);
+      text-transform:uppercase;
+      color:inherit;
+      text-decoration:none;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-500)">Build Your Own Ring</a>
+    <a href="The Lab.dc.html" style="
+      font-size:var(--fs-label);
+      font-weight:var(--fw-medium);
+      letter-spacing:var(--ls-caps-tight);
+      text-transform:uppercase;
+      color:inherit;
+      text-decoration:none;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-500)">The Lab</a>
+  </nav>
+  <!-- mobile-only search icon (left cell) — the centered logo is untouched -->
+  <button type="button" aria-label="Search" class="sc-search-mobile" style="
+    grid-column:1;
+    display:none;
+    place-items:center;
+    width:44px;
+    height:44px;
+    background:none;
+    border:0;
+    padding:0;
+    color:{{ navColor }};
+    cursor:pointer;
+    transition:color var(--dur-fast) var(--ease-luxe);
+  " style-hover="color:var(--gold-500)">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+  </button>
+  <a href="#top" aria-label="Sergio Christoph — home" style="
+    grid-column:2;
+    display:inline-flex;
+    text-decoration:none;
+  ">
+    <sc-if value="{{ scrolled }}" hint-placeholder-val="{{ false }}"><img src="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/assets/logo-black.png" alt="SERGIO CHRISTOPH Lab Diamond" style="
+      height:40px;
+      width:auto;
+    "></sc-if>
+    <sc-if value="{{ notScrolled }}" hint-placeholder-val="{{ true }}"><img src="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/assets/logo-white.png" alt="SERGIO CHRISTOPH Lab Diamond" style="
+      height:40px;
+      width:auto;
+    "></sc-if>
+  </a>
+  <div style="
+    grid-column:3;
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    gap:8px;
+    color:{{ navColor }};
+    transition:color var(--dur-base) var(--ease-luxe);
+  ">
+    <button type="button" aria-label="Search" class="sc-search-desktop" style="
+      display:grid;
+      place-items:center;
+      width:44px;
+      height:44px;
+      background:none;
+      border:0;
+      padding:0;
+      color:inherit;
+      cursor:pointer;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-500)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+    </button>
+    <button type="button" aria-label="Open menu" onClick="{{ openMenu }}" style="
+      display:grid;
+      place-items:center;
+      width:44px;
+      height:44px;
+      background:none;
+      border:0;
+      padding:0;
+      color:inherit;
+      cursor:pointer;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-500)">
+      <span style="
+        display:flex;
+        flex-direction:column;
+        gap:8px;
+        width:24px;
+      "><span style="
+        display:block;
+        height:1px;
+        background:currentColor;
+      "></span><span style="
+        display:block;
+        height:1px;
+        background:currentColor;
+      "></span></span>
+    </button>
+  </div>
+</header>
+<sc-if value="{{ menuMounted }}" hint-placeholder-val="{{ false }}">
+<!-- ======  MENU OVERLAY  ====== -->
+<div data-screen-label="Menu overlay" role="dialog" aria-label="Menu" style="
+  position:fixed;
+  inset:0;
+  z-index:var(--z-dialog);
+  background:var(--ivory-0);
+  display:flex;
+  flex-direction:column;
+  animation:{{ menuAnim }};
+">
+  <div style="
+    height:82px;
+    flex:none;
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+    padding:0 var(--container-pad);
+  ">
+    <span style="
+      font-size:var(--fs-micro);
+      font-weight:var(--fw-medium);
+      letter-spacing:var(--ls-caps);
+      text-transform:uppercase;
+      color:var(--text-faint);
+    ">Menu</span>
+    <a href="#top" onClick="{{ closeMenu }}" aria-label="Sergio Christoph — home" style="
+      display:inline-flex;
+      text-decoration:none;
+    "><img src="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/assets/logo-black.png" alt="SERGIO CHRISTOPH Lab Diamond" style="
+      height:40px;
+      width:auto;
+    "></a>
+    <div style="
+      display:flex;
+      justify-content:flex-end;
+    ">
+      <button type="button" aria-label="Close menu" onClick="{{ closeMenu }}" style="
+        display:grid;
+        place-items:center;
+        width:44px;
+        height:44px;
+        background:none;
+        border:0;
+        padding:0;
+        color:var(--ink-900);
+        cursor:pointer;
+        transition:color var(--dur-fast) var(--ease-luxe);
+      " style-hover="color:var(--gold-600)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"><path d="M5 5l14 14"></path><path d="M19 5L5 19"></path></svg>
+      </button>
+    </div>
+  </div>
+  <nav aria-label="Menu" style="
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:clamp(20px,4.5vh,40px);
+    text-align:center;
+    padding:0 var(--container-pad);
+  ">
+    <a href="Collections.dc.html" style="
+      font-family:var(--font-display);
+      font-size:clamp(44px,8vw,92px);
+      line-height:1.05;
+      color:var(--ink-900);
+      text-decoration:none;
+      animation:scRiseIn 760ms var(--ease-luxe) 120ms both;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-600)">Collections</a>
+    <a href="Bespoke Studio.dc.html" style="
+      font-family:var(--font-display);
+      font-size:clamp(44px,8vw,92px);
+      line-height:1.05;
+      color:var(--ink-900);
+      text-decoration:none;
+      animation:scRiseIn 760ms var(--ease-luxe) 220ms both;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-600)">Build Your Own Ring</a>
+    <a href="The Lab.dc.html" style="
+      font-family:var(--font-display);
+      font-size:clamp(44px,8vw,92px);
+      line-height:1.05;
+      color:var(--ink-900);
+      text-decoration:none;
+      animation:scRiseIn 760ms var(--ease-luxe) 320ms both;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-600)">The Lab</a>
+  </nav>
+  <div style="
+    flex:none;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+    flex-wrap:wrap;
+    padding:26px var(--container-pad) 34px;
+    border-top:1px solid var(--border-hairline);
+    font-size:13px;
+    color:var(--text-muted);
+    animation:scRiseIn 760ms var(--ease-luxe) 420ms both;
+  ">
+    <span>Prama Sanur Beach Hotel · Jalan Cemara Sanur · Denpasar, Bali 80228</span>
+    <a href="mailto:Sergiochristoph@gmail.com" style="
+      color:var(--text-body);
+      text-decoration:none;
+      letter-spacing:.02em;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-600)">Sergiochristoph@gmail.com</a>
+  </div>
+</div>
+</sc-if>
+<!-- ======  HERO  ====== -->
+<section id="top" data-screen-label="Hero" style="
+  position:relative;
+  min-height:100svh;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  overflow:hidden;
+  padding:120px var(--container-pad) 100px;
+  background:#191813;
+">
+  <sc-if value="{{ isDusk }}" hint-placeholder-val="{{ true }}"><div style="
+    position:absolute;
+    inset:0;
+    background:linear-gradient(160deg,#33301F 0%,#23211B 45%,#191813 100%);
+  "></div></sc-if>
+  <sc-if value="{{ isNoir }}" hint-placeholder-val="{{ false }}"><div style="
+    position:absolute;
+    inset:0;
+    background:linear-gradient(160deg,#26231C 0%,#17150F 52%,#0D0C09 100%);
+  "></div></sc-if>
+  <img src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?q=80&amp;w=2400&amp;auto=format&amp;fit=crop" alt="A lab diamond solitaire catching the light" onError="{{ imgHide }}" style="
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  ">
+  <div style="
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg,rgba(23,21,15,.5) 0%,rgba(23,21,15,.44) 55%,rgba(23,21,15,.64) 100%);
+  "></div>
+  <div style="
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:26px;
+    max-width:1000px;
+    animation:scRiseIn 900ms var(--ease-luxe) both;
+  ">
+    <span class="sc-eyebrow" style="color:var(--gold-300)">The first lab diamond store in Bali</span>
+    
+    
+    <h1 style="
+      font-size:clamp(2.6rem,5.4vw,4.6rem);
+      line-height:var(--lh-display);
+      color:var(--ivory-50);
+      max-width:980px;
+      margin:0;
+    ">Discover limitless beauty with Sergio Christoph Lab Diamond</h1><div style="margin-top:12px">
+      <sc-if value="{{ ctaOutline }}" hint-placeholder-val="{{ true }}"><a class="sc-btn sc-btn--outline sc-btn--inverse" href="Collections.dc.html" style="white-space:nowrap">Explore The Collections</a></sc-if>
+      <sc-if value="{{ ctaGold }}" hint-placeholder-val="{{ false }}"><a class="sc-btn sc-btn--gold" href="Collections.dc.html" style="white-space:nowrap">Explore The Collections</a></sc-if>
+    </div>
+  </div>
+  <span aria-hidden="true" style="
+    position:absolute;
+    bottom:34px;
+    left:50%;
+    width:1px;
+    height:68px;
+    background:linear-gradient(180deg,rgba(250,247,241,.7),rgba(250,247,241,0));
+    animation:scCueWipe 2.8s var(--ease-luxe) infinite;
+  "></span>
+</section>
+<!-- ======  FEATURED CATEGORIES  ====== -->
+<section id="collections" data-screen-label="Featured categories">
+  <div style="padding:var(--space-3xl) var(--container-pad) var(--space-2xl)">
+    <x-import component-from-global-scope="SergioChristophDesignSystem_53d2bb.SectionHeading" center="{{ true }}" eyebrow="The Collections" title="Four ways to shine" hint-size="100%,110px"></x-import>
+  </div>
+  <div id="sc-cat-grid" style="
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:2px;
+    height:100svh;
+    min-height:560px;
+    background:var(--ivory-0);
+  ">
+    <a href="Collections.dc.html#rings" style="
+      position:relative;
+      display:block;
+      overflow:hidden;
+      text-decoration:none;
+      background:radial-gradient(120% 130% at 50% 18%,#FFFFFF 34%,var(--ivory-100) 100%);
+    ">
+      <span style="
+        position:absolute;
+        inset:0;
+        display:grid;
+        place-items:center;
+        pointer-events:none;
+      "><img src="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/assets/mark-sparkle-gold.png" alt="" style="
+        width:26px;
+        opacity:.3;
+      "></span>
+      <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&amp;w=1400&amp;auto=format&amp;fit=crop" alt="Rings — lab diamond engagement ring" onError="{{ imgHide }}" style="
+        position:absolute;
+        inset:0;
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        transition:transform 900ms var(--ease-luxe);
+      " style-hover="transform:scale(1.045)">
+      <span style="
+        position:absolute;
+        inset:0;
+        background:linear-gradient(180deg,rgba(23,21,15,0) 55%,rgba(23,21,15,.55) 100%);
+        pointer-events:none;
+      "></span>
+      <span style="
+        position:absolute;
+        left:0;
+        right:0;
+        bottom:38px;
+        text-align:center;
+        pointer-events:none;
+        font-family:var(--font-display);
+        font-size:clamp(24px,1.9vw,32px);
+        color:var(--ivory-50);
+      ">Rings</span>
+    </a>
+    <a href="Collections.dc.html#earrings" style="
+      position:relative;
+      display:block;
+      overflow:hidden;
+      text-decoration:none;
+      background:radial-gradient(120% 130% at 50% 18%,#FFFFFF 30%,var(--ivory-200) 100%);
+    ">
+      <span style="
+        position:absolute;
+        inset:0;
+        display:grid;
+        place-items:center;
+        pointer-events:none;
+      "><img src="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/assets/mark-sparkle-gold.png" alt="" style="
+        width:26px;
+        opacity:.3;
+      "></span>
+      <img src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?q=80&amp;w=1400&amp;auto=format&amp;fit=crop" alt="Earrings — gold diamond earrings" onError="{{ imgHide }}" style="
+        position:absolute;
+        inset:0;
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        transition:transform 900ms var(--ease-luxe);
+      " style-hover="transform:scale(1.045)">
+      <span style="
+        position:absolute;
+        inset:0;
+        background:linear-gradient(180deg,rgba(23,21,15,0) 55%,rgba(23,21,15,.55) 100%);
+        pointer-events:none;
+      "></span>
+      <span style="
+        position:absolute;
+        left:0;
+        right:0;
+        bottom:38px;
+        text-align:center;
+        pointer-events:none;
+        font-family:var(--font-display);
+        font-size:clamp(24px,1.9vw,32px);
+        color:var(--ivory-50);
+      ">Earrings</span>
+    </a>
+    <a href="Collections.dc.html#necklaces" style="
+      position:relative;
+      display:block;
+      overflow:hidden;
+      text-decoration:none;
+      background:radial-gradient(120% 130% at 50% 18%,#FFFFFF 30%,var(--gold-200) 100%);
+    ">
+      <span style="
+        position:absolute;
+        inset:0;
+        display:grid;
+        place-items:center;
+        pointer-events:none;
+      "><img src="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/assets/mark-sparkle-gold.png" alt="" style="
+        width:26px;
+        opacity:.3;
+      "></span>
+      <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&amp;w=1400&amp;auto=format&amp;fit=crop" alt="Necklaces — diamond pendant" onError="{{ imgHide }}" style="
+        position:absolute;
+        inset:0;
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        transition:transform 900ms var(--ease-luxe);
+      " style-hover="transform:scale(1.045)">
+      <span style="
+        position:absolute;
+        inset:0;
+        background:linear-gradient(180deg,rgba(23,21,15,0) 55%,rgba(23,21,15,.55) 100%);
+        pointer-events:none;
+      "></span>
+      <span style="
+        position:absolute;
+        left:0;
+        right:0;
+        bottom:38px;
+        text-align:center;
+        pointer-events:none;
+        font-family:var(--font-display);
+        font-size:clamp(24px,1.9vw,32px);
+        color:var(--ivory-50);
+      ">Necklaces</span>
+    </a>
+    <a href="Collections.dc.html#bracelets" style="
+      position:relative;
+      display:block;
+      overflow:hidden;
+      text-decoration:none;
+      background:radial-gradient(120% 130% at 50% 18%,#FFFFFF 32%,var(--ivory-100) 100%);
+    ">
+      <span style="
+        position:absolute;
+        inset:0;
+        display:grid;
+        place-items:center;
+        pointer-events:none;
+      "><img src="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/assets/mark-sparkle-gold.png" alt="" style="
+        width:26px;
+        opacity:.3;
+      "></span>
+      <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&amp;w=1400&amp;auto=format&amp;fit=crop" alt="Bracelets and bangles — gold jewelry" onError="{{ imgHide }}" style="
+        position:absolute;
+        inset:0;
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        transition:transform 900ms var(--ease-luxe);
+      " style-hover="transform:scale(1.045)">
+      <span style="
+        position:absolute;
+        inset:0;
+        background:linear-gradient(180deg,rgba(23,21,15,0) 55%,rgba(23,21,15,.55) 100%);
+        pointer-events:none;
+      "></span>
+      <span style="
+        position:absolute;
+        left:0;
+        right:0;
+        bottom:38px;
+        text-align:center;
+        pointer-events:none;
+        font-family:var(--font-display);
+        font-size:clamp(24px,1.9vw,32px);
+        color:var(--ivory-50);
+      ">Bracelets &amp; Bangles</span>
+    </a>
+  </div>
+</section>
+<!-- ======  BUILD YOUR OWN RING  ====== -->
+<section id="byo" data-screen-label="Build your own ring" style="
+  scroll-margin-top:82px;
+  margin-top:var(--space-4xl);
+">
+  <div id="sc-split" style="
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    min-height:640px;
+  ">
+    <div style="
+      background:var(--surface-dark);
+      position:relative;
+      overflow:hidden;
+      min-height:420px;
+    ">
+      <img src="https://images.unsplash.com/photo-1603561591411-07134e71a2a9?q=80&amp;w=1600&amp;auto=format&amp;fit=crop" alt="Hands wearing lab diamond rings" onError="{{ imgHide }}" style="
+        position:absolute;
+        inset:0;
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        transition:transform 900ms var(--ease-luxe);
+      " style-hover="transform:scale(1.045)">
+      <div style="
+        position:absolute;
+        inset:0;
+        background:linear-gradient(180deg,rgba(23,21,15,.04) 45%,rgba(23,21,15,.6) 100%);
+        pointer-events:none;
+      "></div>
+      <span style="
+        position:absolute;
+        left:24px;
+        right:24px;
+        bottom:34px;
+        text-align:center;
+        font-family:var(--font-accent);
+        font-style:italic;
+        font-size:21px;
+        color:var(--ivory-50);
+        pointer-events:none;
+      ">Every ring begins as light.</span>
+    </div>
+    <div style="
+      background:var(--surface-page);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:var(--space-lg);
+      padding:var(--space-3xl) clamp(28px,6vw,96px);
+    ">
+      <x-import component-from-global-scope="SergioChristophDesignSystem_53d2bb.SectionHeading" eyebrow="Build Your Own Ring" title="One ring, entirely yours" lede="Carat size, setting and model are fully customizable — engineer your dream ring step-by-step in The Bespoke Studio." hint-size="100%,170px"></x-import>
+      <div style="border-top:1px solid var(--border-hairline)">
+        <div style="
+          display:grid;
+          grid-template-columns:40px 96px 1fr;
+          align-items:baseline;
+          gap:16px;
+          padding:18px 0;
+          border-bottom:1px solid var(--border-hairline);
+        ">
+          <span style="
+            font-size:var(--fs-micro);
+            letter-spacing:var(--ls-caps);
+            color:var(--gold-600);
+          ">01</span>
+          <span style="
+            font-size:var(--fs-label);
+            font-weight:var(--fw-medium);
+            letter-spacing:var(--ls-caps-tight);
+            text-transform:uppercase;
+            color:var(--text-heading);
+          ">Carat</span>
+          <span style="
+            font-size:var(--fs-body-sm);
+            color:var(--text-muted);
+          ">Choose the exact weight of your stone</span>
+        </div>
+        <div style="
+          display:grid;
+          grid-template-columns:40px 96px 1fr;
+          align-items:baseline;
+          gap:16px;
+          padding:18px 0;
+          border-bottom:1px solid var(--border-hairline);
+        ">
+          <span style="
+            font-size:var(--fs-micro);
+            letter-spacing:var(--ls-caps);
+            color:var(--gold-600);
+          ">02</span>
+          <span style="
+            font-size:var(--fs-label);
+            font-weight:var(--fw-medium);
+            letter-spacing:var(--ls-caps-tight);
+            text-transform:uppercase;
+            color:var(--text-heading);
+          ">Setting</span>
+          <span style="
+            font-size:var(--fs-body-sm);
+            color:var(--text-muted);
+          ">Solitaire, halo, pavé or bezel</span>
+        </div>
+        <div style="
+          display:grid;
+          grid-template-columns:40px 96px 1fr;
+          align-items:baseline;
+          gap:16px;
+          padding:18px 0;
+          border-bottom:1px solid var(--border-hairline);
+        ">
+          <span style="
+            font-size:var(--fs-micro);
+            letter-spacing:var(--ls-caps);
+            color:var(--gold-600);
+          ">03</span>
+          <span style="
+            font-size:var(--fs-label);
+            font-weight:var(--fw-medium);
+            letter-spacing:var(--ls-caps-tight);
+            text-transform:uppercase;
+            color:var(--text-heading);
+          ">Model</span>
+          <span style="
+            font-size:var(--fs-body-sm);
+            color:var(--text-muted);
+          ">The band profile, in gold or platinum</span>
+        </div>
+      </div>
+      <div style="
+        width:max-content;
+        white-space:nowrap;
+      "><a class="sc-btn sc-btn--primary" href="Bespoke Studio.dc.html">Start Designing</a></div>
+    </div>
+  </div>
+</section>
+<!-- ======  CERTIFICATION BANNER  ====== -->
+<section id="lab" data-screen-label="Certification banner" style="
+  background:var(--surface-cream);
+  padding:var(--space-2xl) var(--container-pad);
+  scroll-margin-top:82px;
+">
+  <div style="
+    max-width:820px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:18px;
+    text-align:center;
+  ">
+    <span class="sc-eyebrow">The Lab</span>
+    <h2 style="
+      font-size:var(--fs-heading);
+      margin:0;
+    ">Certified by GIA &amp; IGI</h2>
+    <p style="
+      margin:0;
+      font-size:var(--fs-body-sm);
+      color:var(--text-muted);
+      max-width:600px;
+    ">Grown in the laboratory with the same chemical composition, crystal structure and physical properties as a natural diamond — and independently graded, stone by stone.</p>
+    <div style="
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:clamp(30px,6vw,64px);
+      margin-top:14px;
+    ">
+      <img src="assets/cert-gia.png" alt="GIA — Gemological Institute of America" style="
+        height:48px;
+        width:auto;
+      ">
+      <img src="assets/cert-igi.png" alt="IGI — International Gemological Institute" style="
+        height:48px;
+        width:auto;
+      ">
+    </div>
+    <div class="sc-divider-mark" style="
+      width:min(260px,60%);
+      margin-top:10px;
+    "><span class="sc-mark-sparkle"></span></div>
+    <a class="sc-btn sc-btn--ghost sc-btn--sm" href="The Lab.dc.html" style="margin-top:6px">Inside The Lab</a>
+  </div>
+</section>
+<!-- ======  FOOTER  ====== -->
+<footer id="contact" data-screen-label="Footer" style="
+  background:var(--surface-dark);
+  color:var(--text-inverse-muted);
+  padding:var(--space-3xl) var(--container-pad) var(--space-lg);
+">
+  <div style="
+    max-width:var(--container-max);
+    margin:0 auto;
+  ">
+    <div style="
+      display:flex;
+      flex-wrap:wrap;
+      gap:var(--space-2xl);
+      padding-bottom:var(--space-2xl);
+    ">
+      <div style="
+        flex:1.6 1 280px;
+        display:flex;
+        flex-direction:column;
+        gap:20px;
+      ">
+        <img src="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/assets/logo-white.png" alt="SERGIO CHRISTOPH Lab Diamond" style="width:210px">
+        <p style="
+          margin:0;
+          font-size:13px;
+          line-height:1.7;
+          max-width:320px;
+        ">Discover limitless beauty with Sergio Christoph Lab Diamond.</p>
+      </div>
+      <div style="flex:1 1 190px">
+        <div style="
+          font-size:11px;
+          font-weight:var(--fw-medium);
+          letter-spacing:var(--ls-caps);
+          text-transform:uppercase;
+          color:var(--ivory-50);
+          margin-bottom:16px;
+        ">Visit</div>
+        <span style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+        ">Prama Sanur Beach Hotel</span>
+        <span style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+        ">Jalan Cemara Sanur</span>
+        <span style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+        ">Denpasar, Bali 80228</span>
+      </div>
+      <div style="flex:1 1 190px">
+        <div style="
+          font-size:11px;
+          font-weight:var(--fw-medium);
+          letter-spacing:var(--ls-caps);
+          text-transform:uppercase;
+          color:var(--ivory-50);
+          margin-bottom:16px;
+        ">Contact</div>
+        <a href="tel:+6281617871898" style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+          color:var(--text-inverse-muted);
+          text-decoration:none;
+          transition:color var(--dur-fast) var(--ease-luxe);
+        " style-hover="color:var(--gold-300)">0816-1787-1898</a>
+        <a href="mailto:Sergiochristoph@gmail.com" style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+          color:var(--text-inverse-muted);
+          text-decoration:none;
+          transition:color var(--dur-fast) var(--ease-luxe);
+        " style-hover="color:var(--gold-300)">Sergiochristoph@gmail.com</a>
+      </div>
+      <div style="flex:1 1 160px">
+        <div style="
+          font-size:11px;
+          font-weight:var(--fw-medium);
+          letter-spacing:var(--ls-caps);
+          text-transform:uppercase;
+          color:var(--ivory-50);
+          margin-bottom:16px;
+        ">Follow</div>
+        <a href="https://instagram.com/sergio_christoph" target="_blank" rel="noreferrer" style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+          color:var(--text-inverse-muted);
+          text-decoration:none;
+          transition:color var(--dur-fast) var(--ease-luxe);
+        " style-hover="color:var(--gold-300)">Instagram · @sergio_christoph</a>
+        <a href="https://www.facebook.com" target="_blank" rel="noreferrer" style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+          color:var(--text-inverse-muted);
+          text-decoration:none;
+          transition:color var(--dur-fast) var(--ease-luxe);
+        " style-hover="color:var(--gold-300)">Facebook</a>
+        <a href="https://www.tiktok.com" target="_blank" rel="noreferrer" style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+          color:var(--text-inverse-muted);
+          text-decoration:none;
+          transition:color var(--dur-fast) var(--ease-luxe);
+        " style-hover="color:var(--gold-300)">TikTok</a>
+      </div>
+      <div style="flex:1 1 160px">
+        <div style="
+          font-size:11px;
+          font-weight:var(--fw-medium);
+          letter-spacing:var(--ls-caps);
+          text-transform:uppercase;
+          color:var(--ivory-50);
+          margin-bottom:16px;
+        ">Shop online</div>
+        <a href="https://www.tokopedia.com" target="_blank" rel="noreferrer" style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+          color:var(--text-inverse-muted);
+          text-decoration:none;
+          transition:color var(--dur-fast) var(--ease-luxe);
+        " style-hover="color:var(--gold-300)">Tokopedia</a>
+        <a href="https://shopee.co.id" target="_blank" rel="noreferrer" style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+          color:var(--text-inverse-muted);
+          text-decoration:none;
+          transition:color var(--dur-fast) var(--ease-luxe);
+        " style-hover="color:var(--gold-300)">Shopee</a>
+      </div>
+    </div>
+    <div style="
+      border-top:1px solid var(--border-inverse);
+      padding-top:22px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      font-size:11px;
+      letter-spacing:.08em;
+    ">
+      <span>© 2026 Sergio Christoph Lab Diamond · Sanur, Bali</span>
+      <span style="
+        text-transform:uppercase;
+        letter-spacing:var(--ls-caps);
+        color:var(--gold-300);
+      ">#EveryoneCanShine</span>
+    </div>
+  </div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;heroTone&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;Dusk&quot;, &quot;Noir&quot;], &quot;default&quot;: &quot;Dusk&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Hero&quot; },
+  &quot;heroCta&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;Outline&quot;, &quot;Gold&quot;], &quot;default&quot;: &quot;Outline&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Hero&quot; }
+}">
+class Component extends DCLogic {
+  state = { scrolled: false, hidden: false, menu: "closed" };
+  componentDidMount() {
+    this._ly = window.scrollY;
+    this._sc = () => {
+      const y = window.scrollY;
+      const scrolled = y > 56;
+      let hidden = this.state.hidden;
+      if (this.state.menu === "open") hidden = false;
+      else if (y > this._ly + 6 && y > 170) hidden = true;
+      else if (y < this._ly - 6 || y < 90) hidden = false;
+      this._ly = y;
+      if (scrolled !== this.state.scrolled || hidden !== this.state.hidden) this.setState({ scrolled: scrolled, hidden: hidden });
+    };
+    this._key = (e) => { if (e.key === "Escape" && this.state.menu === "open") this._close(); };
+    window.addEventListener("scroll", this._sc, { passive: true });
+    window.addEventListener("keydown", this._key);
+    this._sc();
+  }
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this._sc);
+    window.removeEventListener("keydown", this._key);
+    clearTimeout(this._t);
+    document.body.style.overflow = "";
+  }
+  _close() {
+    document.body.style.overflow = "";
+    clearTimeout(this._t);
+    this.setState({ menu: "closing" });
+    this._t = setTimeout(() => { if (this.state.menu === "closing") this.setState({ menu: "closed" }); }, 560);
+  }
+  renderVals() {
+    const { scrolled, menu } = this.state;
+    const tone = this.props.heroTone ?? "Dusk";
+    const cta = this.props.heroCta ?? "Outline";
+    return {
+      scrolled: scrolled,
+      notScrolled: !scrolled,
+      headerBg: scrolled ? "rgba(255,255,255,.92)" : "transparent",
+      headerBlur: scrolled ? "saturate(1.05) blur(14px)" : "none",
+      headerBorder: scrolled ? "var(--border-hairline)" : "rgba(255,255,255,0)",
+      headerY: this.state.hidden ? "translateY(-100%)" : "translateY(0)",
+      imgHide: (e) => { e.currentTarget.style.display = "none"; },
+      navColor: scrolled ? "var(--ink-900)" : "var(--ivory-50)",
+      menuMounted: menu !== "closed",
+      menuAnim: menu === "open" ? "scFadeIn 620ms var(--ease-luxe) both" : "scFadeOut 520ms var(--ease-luxe) both",
+      openMenu: () => { clearTimeout(this._t); document.body.style.overflow = "hidden"; this.setState({ menu: "open", hidden: false }); },
+      closeMenu: () => this._close(),
+      isDusk: tone !== "Noir",
+      isNoir: tone === "Noir",
+      ctaOutline: cta !== "Gold",
+      ctaGold: cta === "Gold",
+    };
+  }
+}
+</script>
+</body>
+</html>

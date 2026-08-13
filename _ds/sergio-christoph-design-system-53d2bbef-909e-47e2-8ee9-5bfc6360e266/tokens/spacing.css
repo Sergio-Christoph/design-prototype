@@ -1,0 +1,5 @@
+:root{
+--space-3xs:4px;--space-2xs:8px;--space-xs:12px;--space-sm:16px;--space-md:24px;--space-lg:32px;--space-xl:48px;--space-2xl:64px;--space-3xl:96px;--space-4xl:128px;--space-5xl:176px;
+--container-max:1360px;--container-pad:clamp(24px,5vw,72px);--measure-text:640px;
+--gap-grid:clamp(16px,2.5vw,32px);
+}

@@ -1,0 +1,6 @@
+:root{
+--radius-none:0;--radius-xs:2px;--radius-pill:999px;
+--shadow-soft:0 10px 30px -14px rgba(27,26,22,.12);--shadow-overlay:0 28px 70px -18px rgba(27,26,22,.22);
+--ease-luxe:cubic-bezier(.22,.61,.36,1);/* @kind other */--dur-fast:180ms;/* @kind other */--dur-base:420ms;/* @kind other */--dur-slow:900ms;/* @kind other */
+--z-nav:100;/* @kind other */--z-drawer:200;/* @kind other */--z-dialog:300;/* @kind other */
+}

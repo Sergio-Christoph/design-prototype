@@ -1,0 +1,21 @@
+:root{
+/* White leads; cream punctuates */
+--ivory-0:#FFFFFF;--ivory-50:#FCFBF7;--ivory-100:#F6F1E6;--ivory-200:#EEE6D4;--ivory-300:#E0D6BF;
+/* Ink — warm near-black */
+--ink-900:#1B1A16;--ink-700:#38362E;--ink-500:#6C675A;--ink-400:#908A7B;--ink-300:#B5AFA0;
+/* Gold — the single accent */
+--gold-200:#E9DDC1;--gold-300:#D6C295;--gold-400:#C0A265;--gold-500:#A6803C;--gold-600:#8A6830;--gold-700:#6E5226;
+/* Semantic bases */
+--sage-600:#5A7157;--oxide-600:#93402F;
+/* Surfaces */
+--surface-page:var(--ivory-0);--surface-card:var(--ivory-0);--surface-cream:var(--ivory-100);--surface-dark:var(--ink-900);
+/* Text */
+--text-heading:var(--ink-900);--text-body:var(--ink-700);--text-muted:var(--ink-500);--text-faint:var(--ink-400);--text-inverse:var(--ivory-50);--text-inverse-muted:rgba(250,247,241,.62);--text-gold:var(--gold-600);
+/* Accent + borders */
+--accent:var(--gold-500);--accent-strong:var(--gold-600);
+--border-hairline:#E4DDCB;--border-mid:#CFC6B0;--border-strong:var(--ink-900);--border-inverse:rgba(250,247,241,.22);
+/* States */
+--success:var(--sage-600);--error:var(--oxide-600);
+--overlay-scrim:rgba(27,26,22,.44);
+--focus-ring:0 0 0 2px #FFFFFF,0 0 0 4px var(--gold-500);
+}

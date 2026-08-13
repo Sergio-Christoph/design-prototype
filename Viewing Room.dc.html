@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/tokens/colors.css">
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/tokens/typography.css">
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/tokens/effects.css">
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/tokens/base.css">
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/components/components.css">
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/styles.css">
+<script src="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/_ds_bundle.js"></script>
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#FFFFFF}
+html{scrollbar-width:thin;scrollbar-color:#CFC8BA #FFFFFF}
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-track{background:#FFFFFF}
+::-webkit-scrollbar-thumb{background:#CFC8BA;border:2px solid #FFFFFF}
+::-webkit-scrollbar-thumb:hover{background:#A6803C}
+@keyframes scFadeIn{from{opacity:0}to{opacity:1}}
+@keyframes scFadeOut{from{opacity:1}to{opacity:0}}
+@keyframes scRiseIn{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+@media (max-width:960px){#vr-navlinks{display:none !important}}
+@media (max-width:980px){#vr-grid{grid-template-columns:1fr !important}#vr-visual{position:static !important}}
+
+/* sc-mobile-search — search icon in the LEFT cell on phones only (logo stays centered) */
+@media (max-width:960px){
+  .sc-search-mobile{display:grid !important;justify-self:start}
+  .sc-search-desktop{display:none !important}
+}
+</style>
+</helmet>
+<div style="background:var(--surface-page)">
+<!-- ======  HEADER  ====== -->
+<header data-screen-label="Header" style="
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:var(--z-nav);
+  height:82px;
+  transform:{{ headerY }};
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  padding:0 var(--container-pad);
+  background:{{ headerBg }};
+  backdrop-filter:{{ headerBlur }};
+  -webkit-backdrop-filter:{{ headerBlur }};
+  border-bottom:1px solid {{ headerBorder }};
+  transition:transform 480ms var(--ease-luxe),background var(--dur-base) var(--ease-luxe),border-color var(--dur-base) var(--ease-luxe),backdrop-filter var(--dur-base) var(--ease-luxe);
+">
+  <nav id="vr-navlinks" aria-label="Primary" style="
+    grid-column:1;
+    display:flex;
+    gap:36px;
+    color:var(--ink-900);
+  ">
+    <a href="Collections.dc.html" style="
+      font-size:var(--fs-label);
+      font-weight:var(--fw-medium);
+      letter-spacing:var(--ls-caps-tight);
+      text-transform:uppercase;
+      color:inherit;
+      text-decoration:none;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-500)">Collections</a>
+    <a href="Bespoke Studio.dc.html" style="
+      font-size:var(--fs-label);
+      font-weight:var(--fw-medium);
+      letter-spacing:var(--ls-caps-tight);
+      text-transform:uppercase;
+      color:inherit;
+      text-decoration:none;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-500)">Build Your Own Ring</a>
+    <a href="The Lab.dc.html" style="
+      font-size:var(--fs-label);
+      font-weight:var(--fw-medium);
+      letter-spacing:var(--ls-caps-tight);
+      text-transform:uppercase;
+      color:inherit;
+      text-decoration:none;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-500)">The Lab</a>
+  </nav>
+  <!-- mobile-only search icon (left cell) — the centered logo is untouched -->
+  <button type="button" aria-label="Search" class="sc-search-mobile" style="
+    grid-column:1;
+    display:none;
+    place-items:center;
+    width:44px;
+    height:44px;
+    background:none;
+    border:0;
+    padding:0;
+    color:var(--ink-900);
+    cursor:pointer;
+    transition:color var(--dur-fast) var(--ease-luxe);
+  " style-hover="color:var(--gold-500)">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+  </button>
+  <a href="Homepage.dc.html" aria-label="Sergio Christoph — home" style="
+    grid-column:2;
+    display:inline-flex;
+    text-decoration:none;
+  ">
+    <img src="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/assets/logo-black.png" alt="SERGIO CHRISTOPH Lab Diamond" style="
+      height:40px;
+      width:auto;
+    ">
+  </a>
+  <div style="
+    grid-column:3;
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    gap:8px;
+    color:var(--ink-900);
+  ">
+    <button type="button" aria-label="Search" class="sc-search-desktop" style="
+      display:grid;
+      place-items:center;
+      width:44px;
+      height:44px;
+      background:none;
+      border:0;
+      padding:0;
+      color:inherit;
+      cursor:pointer;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-500)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+    </button>
+    <button type="button" aria-label="Open menu" onClick="{{ openMenu }}" style="
+      display:grid;
+      place-items:center;
+      width:44px;
+      height:44px;
+      background:none;
+      border:0;
+      padding:0;
+      color:inherit;
+      cursor:pointer;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-500)">
+      <span style="
+        display:flex;
+        flex-direction:column;
+        gap:8px;
+        width:24px;
+      "><span style="
+        display:block;
+        height:1px;
+        background:currentColor;
+      "></span><span style="
+        display:block;
+        height:1px;
+        background:currentColor;
+      "></span></span>
+    </button>
+  </div>
+</header>
+<sc-if value="{{ menuMounted }}" hint-placeholder-val="{{ false }}">
+<!-- ======  MENU OVERLAY  ====== -->
+<div data-screen-label="Menu overlay" role="dialog" aria-label="Menu" style="
+  position:fixed;
+  inset:0;
+  z-index:var(--z-dialog);
+  background:var(--ivory-0);
+  display:flex;
+  flex-direction:column;
+  animation:{{ menuAnim }};
+">
+  <div style="
+    height:82px;
+    flex:none;
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+    padding:0 var(--container-pad);
+  ">
+    <span style="
+      font-size:var(--fs-micro);
+      font-weight:var(--fw-medium);
+      letter-spacing:var(--ls-caps);
+      text-transform:uppercase;
+      color:var(--text-faint);
+    ">Menu</span>
+    <a href="Homepage.dc.html" aria-label="Sergio Christoph — home" style="
+      display:inline-flex;
+      text-decoration:none;
+    "><img src="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/assets/logo-black.png" alt="SERGIO CHRISTOPH Lab Diamond" style="
+      height:40px;
+      width:auto;
+    "></a>
+    <div style="
+      display:flex;
+      justify-content:flex-end;
+    ">
+      <button type="button" aria-label="Close menu" onClick="{{ closeMenu }}" style="
+        display:grid;
+        place-items:center;
+        width:44px;
+        height:44px;
+        background:none;
+        border:0;
+        padding:0;
+        color:var(--ink-900);
+        cursor:pointer;
+        transition:color var(--dur-fast) var(--ease-luxe);
+      " style-hover="color:var(--gold-600)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"><path d="M5 5l14 14"></path><path d="M19 5L5 19"></path></svg>
+      </button>
+    </div>
+  </div>
+  <nav aria-label="Menu" style="
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:clamp(20px,4.5vh,40px);
+    text-align:center;
+    padding:0 var(--container-pad);
+  ">
+    <a href="Collections.dc.html" style="
+      font-family:var(--font-display);
+      font-size:clamp(44px,8vw,92px);
+      line-height:1.05;
+      color:var(--ink-900);
+      text-decoration:none;
+      animation:scRiseIn 760ms var(--ease-luxe) 120ms both;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-600)">Collections</a>
+    <a href="Bespoke Studio.dc.html" style="
+      font-family:var(--font-display);
+      font-size:clamp(44px,8vw,92px);
+      line-height:1.05;
+      color:var(--ink-900);
+      text-decoration:none;
+      animation:scRiseIn 760ms var(--ease-luxe) 220ms both;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-600)">Build Your Own Ring</a>
+    <a href="The Lab.dc.html" style="
+      font-family:var(--font-display);
+      font-size:clamp(44px,8vw,92px);
+      line-height:1.05;
+      color:var(--ink-900);
+      text-decoration:none;
+      animation:scRiseIn 760ms var(--ease-luxe) 320ms both;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-600)">The Lab</a>
+  </nav>
+  <div style="
+    flex:none;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+    flex-wrap:wrap;
+    padding:26px var(--container-pad) 34px;
+    border-top:1px solid var(--border-hairline);
+    font-size:13px;
+    color:var(--text-muted);
+    animation:scRiseIn 760ms var(--ease-luxe) 420ms both;
+  ">
+    <span>Prama Sanur Beach Hotel · Jalan Cemara Sanur · Denpasar, Bali 80228</span>
+    <a href="mailto:Sergiochristoph@gmail.com" style="
+      color:var(--text-body);
+      text-decoration:none;
+      letter-spacing:.02em;
+      transition:color var(--dur-fast) var(--ease-luxe);
+    " style-hover="color:var(--gold-600)">Sergiochristoph@gmail.com</a>
+  </div>
+</div>
+</sc-if>
+<!-- ======  THE VIEWING ROOM  ====== -->
+<main data-screen-label="The Viewing Room" style="
+  padding:126px var(--container-pad) var(--space-3xl);
+  max-width:var(--container-max);
+  margin:0 auto;
+">
+  <div style="margin-bottom:var(--space-lg)">
+    <x-import component-from-global-scope="SergioChristophDesignSystem_53d2bb.Breadcrumbs" items="{{ crumbs }}" hint-size="360px,20px" style="position: relative"><div style="
+      font-size: 16px;
+      line-height: 1;
+      font-family: 'Hanken Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      position: absolute;
+      left: 494px;
+      top: 132px;
+    ">Your text here</div></x-import>
+  </div>
+  <div id="vr-grid" style="
+    display:grid;
+    grid-template-columns:60fr 40fr;
+    gap:clamp(36px,5vw,88px);
+    align-items:start;
+  ">
+    <div id="vr-visual" style="
+      display:flex;
+      flex-direction:column;
+      gap:clamp(20px,2.4vw,34px);
+    ">
+      <div style="
+        position:relative;
+        aspect-ratio:5/4;
+        background:{{ galleryBg }};
+        overflow:hidden;
+      ">
+        <span style="
+          position:absolute;
+          inset:0;
+          display:grid;
+          place-items:center;
+        "><img src="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/assets/mark-sparkle-gold.png" alt="" style="
+          width:44px;
+          opacity:.3;
+        "></span>
+        <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&amp;w=1600&amp;auto=format&amp;fit=crop" alt="The Signature Solitaire" onError="{{ imgHide }}" style="
+          position:absolute;
+          inset:0;
+          width:100%;
+          height:100%;
+          object-fit:cover;
+          transition:transform 900ms var(--ease-luxe);
+        " style-hover="transform:scale(1.045)">
+      </div>
+      <div style="
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:clamp(20px,2.4vw,34px);
+        align-items:start;
+      ">
+        <div style="
+          position:relative;
+          aspect-ratio:4/5;
+          overflow:hidden;
+          background:{{ galleryBg }};
+          margin-top:clamp(28px,4vw,60px);
+        ">
+          <span style="
+            position:absolute;
+            inset:0;
+            display:grid;
+            place-items:center;
+          "><img src="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/assets/mark-sparkle-gold.png" alt="" style="
+            width:26px;
+            opacity:.3;
+          "></span>
+          <img src="https://images.unsplash.com/photo-1608042314453-ae338d80c427?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="The Signature Solitaire — profile" onError="{{ imgHide }}" style="
+            position:absolute;
+            inset:0;
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            transition:transform 900ms var(--ease-luxe);
+          " style-hover="transform:scale(1.045)">
+        </div>
+        <div style="
+          position:relative;
+          aspect-ratio:3/4;
+          overflow:hidden;
+          background:{{ galleryBg }};
+        ">
+          <span style="
+            position:absolute;
+            inset:0;
+            display:grid;
+            place-items:center;
+          "><img src="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/assets/mark-sparkle-gold.png" alt="" style="
+            width:26px;
+            opacity:.3;
+          "></span>
+          <img src="https://images.unsplash.com/photo-1512163143273-bde0e3cc7407?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="The Signature Solitaire — worn" onError="{{ imgHide }}" style="
+            position:absolute;
+            inset:0;
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            transition:transform 900ms var(--ease-luxe);
+          " style-hover="transform:scale(1.045)">
+        </div>
+        <div style="
+          position:relative;
+          aspect-ratio:3/4;
+          overflow:hidden;
+          background:{{ galleryBg }};
+          margin-top:clamp(28px,4vw,60px);
+        ">
+          <span style="
+            position:absolute;
+            inset:0;
+            display:grid;
+            place-items:center;
+          "><img src="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/assets/mark-sparkle-gold.png" alt="" style="
+            width:26px;
+            opacity:.3;
+          "></span>
+          <img src="https://images.unsplash.com/photo-1589674781759-c21c37956a44?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="The Signature Solitaire — band detail" onError="{{ imgHide }}" style="
+            position:absolute;
+            inset:0;
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            transition:transform 900ms var(--ease-luxe);
+          " style-hover="transform:scale(1.045)">
+        </div>
+        <div style="
+          position:relative;
+          aspect-ratio:4/5;
+          overflow:hidden;
+          background:{{ galleryBg }};
+        ">
+          <span style="
+            position:absolute;
+            inset:0;
+            display:grid;
+            place-items:center;
+          "><img src="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/assets/mark-sparkle-gold.png" alt="" style="
+            width:26px;
+            opacity:.3;
+          "></span>
+          <img src="https://images.unsplash.com/photo-1610694955371-d4a3e0ce4b52?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="The Signature Solitaire — in its case" onError="{{ imgHide }}" style="
+            position:absolute;
+            inset:0;
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            transition:transform 900ms var(--ease-luxe);
+          " style-hover="transform:scale(1.045)">
+        </div>
+      </div>
+    </div>
+    <div style="
+      display:flex;
+      flex-direction:column;
+      gap:22px;
+      max-width:520px;
+    ">
+      <div style="
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+      ">
+        <span class="sc-eyebrow">The Viewing Room</span>
+        <h1 style="
+          font-size:clamp(2.1rem,3.4vw,3rem);
+          line-height:var(--lh-display);
+          margin:0;
+          color:var(--text-heading);
+        ">The Signature Solitaire</h1>
+        <span style="
+          font-size:var(--fs-body-sm);
+          color:var(--text-muted);
+        ">{{ specLine }}</span>
+      </div>
+      <div style="
+        display:flex;
+        flex-direction:column;
+        gap:6px;
+      ">
+        <span style="
+          font-family:var(--font-display);
+          font-size:26px;
+          color:var(--text-heading);
+        "><x-import component-from-global-scope="SergioChristophDesignSystem_53d2bb.Price" amount="{{ price }}" hint-size="180px,32px"></x-import></span>
+        <span style="
+          font-size:var(--fs-micro);
+          font-weight:var(--fw-medium);
+          letter-spacing:var(--ls-caps);
+          text-transform:uppercase;
+          color:var(--text-faint);
+        ">Duties included</span>
+      </div>
+      <p style="
+        margin:0;
+        font-size:var(--fs-body-sm);
+        line-height:var(--lh-body);
+        color:var(--text-muted);
+      ">Grown by light in ninety days and cut to Excellent proportions, the Signature Solitaire carries a certified Type IIa lab diamond — with the exact brilliance, clarity and durability of the finest mined stones — set by hand in Sanur, Bali.</p>
+      <div style="
+        display:flex;
+        flex-direction:column;
+        gap:12px;
+        border-top:1px solid var(--border-hairline);
+        padding-top:20px;
+      ">
+        <span style="
+          font-size:var(--fs-micro);
+          font-weight:var(--fw-medium);
+          letter-spacing:var(--ls-caps);
+          text-transform:uppercase;
+          color:var(--text-faint);
+        ">Metal — {{ metal }}</span>
+        <div style="
+          display:flex;
+          flex-wrap:wrap;
+          gap:10px 22px;
+        ">
+          <sc-for list="{{ metalOpts }}" as="m" hint-placeholder-count="4">
+            <button type="button" onClick="{{ m.pick }}" style="{{ m.style }}">{{ m.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+      <div style="
+        display:flex;
+        flex-direction:column;
+        gap:12px;
+        border-top:1px solid var(--border-hairline);
+        padding-top:20px;
+      ">
+        <span style="
+          font-size:var(--fs-micro);
+          font-weight:var(--fw-medium);
+          letter-spacing:var(--ls-caps);
+          text-transform:uppercase;
+          color:var(--text-faint);
+        ">Carat size — {{ carat }}</span>
+        <div style="
+          display:flex;
+          flex-wrap:wrap;
+          gap:10px 22px;
+        ">
+          <sc-for list="{{ caratOpts }}" as="c" hint-placeholder-count="4">
+            <button type="button" onClick="{{ c.pick }}" style="{{ c.style }}">{{ c.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+      <div style="
+        display:flex;
+        flex-direction:column;
+        gap:14px;
+        margin-top:6px;
+      ">
+        <sc-if value="{{ ctaInk }}" hint-placeholder-val="{{ true }}"><a class="sc-btn sc-btn--primary" href="mailto:Sergiochristoph@gmail.com?subject=The%20Signature%20Solitaire" style="width:100%">Contact to Purchase</a></sc-if>
+        <sc-if value="{{ ctaOutline }}" hint-placeholder-val="{{ false }}"><a class="sc-btn sc-btn--outline" href="mailto:Sergiochristoph@gmail.com?subject=The%20Signature%20Solitaire" style="width:100%">Contact to Purchase</a></sc-if>
+        <a class="sc-btn sc-btn--ghost sc-btn--sm" href="mailto:Sergiochristoph@gmail.com?subject=Private%20viewing%20—%20The%20Signature%20Solitaire" style="align-self:center">Book a Private Viewing</a>
+      </div>
+      <div style="margin-top:10px">
+        <x-import component-from-global-scope="SergioChristophDesignSystem_53d2bb.Accordion" items="{{ specItems }}" default-open="{{ 0 }}" hint-size="100%,220px"></x-import>
+      </div>
+    </div>
+  </div>
+</main>
+<!-- ======  FOOTER  ====== -->
+<footer id="contact" data-screen-label="Footer" style="
+  background:var(--surface-dark);
+  color:var(--text-inverse-muted);
+  padding:var(--space-3xl) var(--container-pad) var(--space-lg);
+">
+  <div style="
+    max-width:var(--container-max);
+    margin:0 auto;
+  ">
+    <div style="
+      display:flex;
+      flex-wrap:wrap;
+      gap:var(--space-2xl);
+      padding-bottom:var(--space-2xl);
+    ">
+      <div style="
+        flex:1.6 1 280px;
+        display:flex;
+        flex-direction:column;
+        gap:20px;
+      ">
+        <img src="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/assets/logo-white.png" alt="SERGIO CHRISTOPH Lab Diamond" style="width:210px">
+        <p style="
+          margin:0;
+          font-size:13px;
+          line-height:1.7;
+          max-width:320px;
+        ">Discover limitless beauty with Sergio Christoph Lab Diamond.</p>
+      </div>
+      <div style="flex:1 1 190px">
+        <div style="
+          font-size:11px;
+          font-weight:var(--fw-medium);
+          letter-spacing:var(--ls-caps);
+          text-transform:uppercase;
+          color:var(--ivory-50);
+          margin-bottom:16px;
+        ">Visit</div>
+        <span style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+        ">Prama Sanur Beach Hotel</span>
+        <span style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+        ">Jalan Cemara Sanur</span>
+        <span style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+        ">Denpasar, Bali 80228</span>
+      </div>
+      <div style="flex:1 1 190px">
+        <div style="
+          font-size:11px;
+          font-weight:var(--fw-medium);
+          letter-spacing:var(--ls-caps);
+          text-transform:uppercase;
+          color:var(--ivory-50);
+          margin-bottom:16px;
+        ">Contact</div>
+        <a href="tel:+6281617871898" style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+          color:var(--text-inverse-muted);
+          text-decoration:none;
+          transition:color var(--dur-fast) var(--ease-luxe);
+        " style-hover="color:var(--gold-300)">0816-1787-1898</a>
+        <a href="mailto:Sergiochristoph@gmail.com" style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+          color:var(--text-inverse-muted);
+          text-decoration:none;
+          transition:color var(--dur-fast) var(--ease-luxe);
+        " style-hover="color:var(--gold-300)">Sergiochristoph@gmail.com</a>
+      </div>
+      <div style="flex:1 1 160px">
+        <div style="
+          font-size:11px;
+          font-weight:var(--fw-medium);
+          letter-spacing:var(--ls-caps);
+          text-transform:uppercase;
+          color:var(--ivory-50);
+          margin-bottom:16px;
+        ">Follow</div>
+        <a href="https://instagram.com/sergio_christoph" target="_blank" rel="noreferrer" style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+          color:var(--text-inverse-muted);
+          text-decoration:none;
+          transition:color var(--dur-fast) var(--ease-luxe);
+        " style-hover="color:var(--gold-300)">Instagram · @sergio_christoph</a>
+        <a href="https://www.facebook.com" target="_blank" rel="noreferrer" style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+          color:var(--text-inverse-muted);
+          text-decoration:none;
+          transition:color var(--dur-fast) var(--ease-luxe);
+        " style-hover="color:var(--gold-300)">Facebook</a>
+        <a href="https://www.tiktok.com" target="_blank" rel="noreferrer" style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+          color:var(--text-inverse-muted);
+          text-decoration:none;
+          transition:color var(--dur-fast) var(--ease-luxe);
+        " style-hover="color:var(--gold-300)">TikTok</a>
+      </div>
+      <div style="flex:1 1 160px">
+        <div style="
+          font-size:11px;
+          font-weight:var(--fw-medium);
+          letter-spacing:var(--ls-caps);
+          text-transform:uppercase;
+          color:var(--ivory-50);
+          margin-bottom:16px;
+        ">Shop online</div>
+        <a href="https://www.tokopedia.com" target="_blank" rel="noreferrer" style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+          color:var(--text-inverse-muted);
+          text-decoration:none;
+          transition:color var(--dur-fast) var(--ease-luxe);
+        " style-hover="color:var(--gold-300)">Tokopedia</a>
+        <a href="https://shopee.co.id" target="_blank" rel="noreferrer" style="
+          display:block;
+          font-size:13px;
+          line-height:1.9;
+          color:var(--text-inverse-muted);
+          text-decoration:none;
+          transition:color var(--dur-fast) var(--ease-luxe);
+        " style-hover="color:var(--gold-300)">Shopee</a>
+      </div>
+    </div>
+    <div style="
+      border-top:1px solid var(--border-inverse);
+      padding-top:22px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      font-size:11px;
+      letter-spacing:.08em;
+    ">
+      <span>© 2026 Sergio Christoph Lab Diamond · Sanur, Bali</span>
+      <span style="
+        text-transform:uppercase;
+        letter-spacing:var(--ls-caps);
+        color:var(--gold-300);
+      ">#EveryoneCanShine</span>
+    </div>
+  </div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;galleryTone&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;White&quot;,&quot;Light grey&quot;],&quot;default&quot;:&quot;White&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Gallery&quot;},&quot;ctaStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Ink&quot;,&quot;Outline&quot;],&quot;default&quot;:&quot;Ink&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;CTA&quot;},&quot;heroCta&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Outline&quot;,&quot;Gold&quot;],&quot;default&quot;:&quot;Outline&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Hero&quot;},&quot;sparkles&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Hero&quot;}}">
+class Component extends DCLogic {
+  state = { scrolled: false, hidden: false, menu: "closed", metal: "18k White Gold", carat: "1.0 ct" };
+  componentDidMount() {
+    this._ly = window.scrollY;
+    this._sc = () => {
+      const y = window.scrollY;
+      const scrolled = y > 56;
+      let hidden = this.state.hidden;
+      if (this.state.menu === "open") hidden = false;
+      else if (y > this._ly + 6 && y > 170) hidden = true;
+      else if (y < this._ly - 6 || y < 90) hidden = false;
+      this._ly = y;
+      if (scrolled !== this.state.scrolled || hidden !== this.state.hidden) this.setState({ scrolled: scrolled, hidden: hidden });
+    };
+    this._key = (e) => { if (e.key === "Escape" && this.state.menu === "open") this._close(); };
+    window.addEventListener("scroll", this._sc, { passive: true });
+    window.addEventListener("keydown", this._key);
+    this._sc();
+  }
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this._sc);
+    window.removeEventListener("keydown", this._key);
+    clearTimeout(this._t);
+    document.body.style.overflow = "";
+  }
+  _close() {
+    document.body.style.overflow = "";
+    clearTimeout(this._t);
+    this.setState({ menu: "closing" });
+    this._t = setTimeout(() => { if (this.state.menu === "closing") this.setState({ menu: "closed" }); }, 560);
+  }
+  renderVals() {
+    const { scrolled, menu, metal, carat } = this.state;
+    const e = React.createElement;
+    const PRICES = { "0.5 ct": 38500000, "1.0 ct": 68500000, "1.5 ct": 96500000, "2.0 ct": 128500000 };
+    const optBtn = (active) => "background:none;border:0;padding:6px 0;cursor:pointer;font-family:var(--font-body);font-size:var(--fs-label);font-weight:var(--fw-medium);letter-spacing:var(--ls-caps-tight);text-transform:uppercase;transition:color 180ms var(--ease-luxe),box-shadow 180ms var(--ease-luxe);" +
+      (active ? "color:var(--ink-900);box-shadow:inset 0 -1px 0 var(--gold-500)" : "color:var(--text-faint);box-shadow:inset 0 -1px 0 transparent");
+    const specRow = (k, v) => e("div", { style: { display: "flex", justifyContent: "space-between", gap: 16, padding: "9px 0", borderBottom: "1px solid var(--border-hairline)", fontSize: 13 } },
+      e("span", { style: { color: "var(--text-faint)", textTransform: "uppercase", letterSpacing: "var(--ls-caps-tight)", fontSize: 11, fontWeight: 500 } }, k),
+      e("span", { style: { color: "var(--text-body)" } }, v));
+    const gallery = this.props.galleryTone ?? "White";
+    const cta = this.props.ctaStyle ?? "Ink";
+    return {
+      headerBg: scrolled ? "rgba(255,255,255,.92)" : "transparent",
+      headerBlur: scrolled ? "saturate(1.05) blur(14px)" : "none",
+      headerBorder: scrolled ? "var(--border-hairline)" : "rgba(255,255,255,0)",
+      headerY: this.state.hidden ? "translateY(-100%)" : "translateY(0)",
+      imgHide: (e) => { e.currentTarget.style.display = "none"; },
+      menuMounted: menu !== "closed",
+      menuAnim: menu === "open" ? "scFadeIn 620ms var(--ease-luxe) both" : "scFadeOut 520ms var(--ease-luxe) both",
+      openMenu: () => { clearTimeout(this._t); document.body.style.overflow = "hidden"; this.setState({ menu: "open", hidden: false }); },
+      closeMenu: () => this._close(),
+      crumbs: [
+        { label: "Home", href: "Homepage.dc.html" },
+        { label: "Collections", href: "Collections.dc.html" },
+        { label: "Rings", href: "Collections.dc.html#rings" },
+        { label: "The Signature Solitaire" },
+      ],
+      galleryBg: gallery === "Light grey" ? "linear-gradient(180deg,#F4F4F3 0%,#ECECEA 100%)" : "radial-gradient(120% 130% at 50% 20%,#FFFFFF 40%,var(--ivory-100) 100%)",
+
+      specLine: carat.replace(" ct", "ct") + " round brilliant · " + metal.toLowerCase() + " · IGI certified",
+      price: PRICES[carat],
+      metal: metal,
+      carat: carat,
+      metalOpts: ["18k White Gold", "18k Yellow Gold", "Rose Gold", "Platinum"].map((m) => ({ label: m, pick: () => this.setState({ metal: m }), style: optBtn(m === metal) })),
+      caratOpts: Object.keys(PRICES).map((c) => ({ label: c, pick: () => this.setState({ carat: c }), style: optBtn(c === carat) })),
+      ctaInk: cta !== "Outline",
+      ctaOutline: cta === "Outline",
+      specItems: [
+        { title: "Diamond details", content: e("div", null, specRow("Clarity", "VVS1"), specRow("Color", "D — colorless"), specRow("Cut", "Excellent · round brilliant"), specRow("Type", "IIa lab-grown carbon"), specRow("Certification", "GIA or IGI, stone by stone")) },
+        { title: "Setting & model information", content: e("p", { style: { margin: 0 } }, "Four-prong basket setting on a knife-edge band in your chosen metal. Setting, prongs, pavé and model are fully customizable — ", e("a", { href: "Bespoke Studio.dc.html", style: { color: "var(--gold-600)", textDecoration: "none" } }, "design your own in The Bespoke Studio"), ".") },
+        { title: "Shipping & returns", content: "Complimentary insured worldwide shipping within five working days, in signature Sergio Christoph packaging. Returns accepted within 30 days; bespoke commissions are final." },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>
