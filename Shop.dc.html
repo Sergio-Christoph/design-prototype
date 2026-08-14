@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/tokens/base.css">
 <link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/components/components.css">
 <link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/styles.css">
-<script src="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/_ds_bundle.js"></script>
+<script src="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/_ds_bundle.js?v=2"></script>
 <style>
 html{scroll-behavior:smooth}
 body{margin:0;background:#FFFFFF}
@@ -712,7 +712,7 @@ class Component extends DCLogic {
       openMenu: () => { clearTimeout(this._t); document.body.style.overflow = "hidden"; this.setState({ menu: "open", hidden: false }); },
       closeMenu: () => this._close(),
       imgHide: (e) => { e.currentTarget.style.display = "none"; },
-      crumbs: [{ label: "Home", href: "Homepage.dc.html" }, { label: "Collections", href: "Collections.dc.html" }, { label: cat === "All" ? "Shop all" : cat }],
+      crumbs: [{ label: cat === "All" ? "Shop all" : cat }],
       pageTitle: cat === "All" ? "Shop all" : cat,
       countLine: list.length + (list.length === 1 ? " piece" : " pieces") + " · every stone GIA or IGI certified",
       catChips: ["All", "Rings", "Earrings", "Necklaces", "Bracelets & Bangles"].map((c) => ({ label: c, pick: () => this.setState({ cat: c }), style: chip(c === cat) })),

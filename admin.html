@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sergio Christoph · Admin</title>
+<!-- The full design system (tokens + components) — the same one the storefront uses. -->
+<link rel="stylesheet" href="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/styles.css">
+<style>
+  /* ─────────────────────────────────────────────────────────────
+     Admin shell — built on the design-system tokens (brand-matched)
+     Layout: sidebar (desktop) / topbar tabs (mobile) + one view at a time
+     ───────────────────────────────────────────────────────────── */
+  body{background:var(--surface-page)}
+
+  .shell{display:grid;grid-template-columns:230px minmax(0,1fr);min-height:100vh}
+  @media (max-width:820px){.shell{grid-template-columns:1fr}}
+
+  /* ── sidebar ── */
+  .side{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;
+    background:var(--ivory-50);border-right:1px solid var(--border-hairline);padding:26px 0}
+  @media (max-width:820px){.side{position:static;height:auto;border-right:0;border-bottom:1px solid var(--border-hairline);padding:0}}
+  .side__brand{display:flex;align-items:center;gap:10px;padding:0 24px 22px;text-decoration:none;color:inherit}
+  .side__brand img{height:26px;width:auto}
+  .side__brand span{font-size:var(--fs-micro);font-weight:var(--fw-medium);letter-spacing:var(--ls-caps);
+    text-transform:uppercase;color:var(--gold-600);border-left:1px solid var(--border-mid);padding-left:10px}
+  @media (max-width:820px){.side__brand{padding:18px 20px 10px}}
+  .side nav{display:flex;flex-direction:column;gap:2px;padding:0 12px}
+  @media (max-width:820px){.side nav{flex-direction:row;overflow-x:auto;padding:0 12px 12px;gap:6px}}
+  .side__link{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 12px;
+    font-size:var(--fs-body-sm);letter-spacing:.01em;color:var(--text-muted);text-decoration:none;
+    border-left:2px solid transparent;transition:color var(--dur-fast) var(--ease-luxe),border-color var(--dur-fast) var(--ease-luxe)}
+  .side__link:hover{color:var(--text-heading)}
+  .side__link.is-on{color:var(--text-heading);border-left-color:var(--gold-500);background:var(--ivory-100)}
+  @media (max-width:820px){
+    .side__link{border-left:0;border-bottom:2px solid transparent;white-space:nowrap;padding:10px 12px}
+    .side__link.is-on{border-bottom-color:var(--gold-500);background:none}
+  }
+  .side__count{font-size:var(--fs-micro);letter-spacing:.06em;color:var(--text-faint)}
+  .side__foot{margin-top:auto;padding:18px 24px 0;display:flex;flex-direction:column;gap:12px;border-top:1px solid var(--border-hairline)}
+  @media (max-width:820px){.side__foot{display:none}}
+  .side__foot .sc-btn{width:100%}
+  .side__site{font-size:var(--fs-label);letter-spacing:var(--ls-caps-tight);text-transform:uppercase;
+    color:var(--text-muted);text-decoration:none;transition:color var(--dur-fast) var(--ease-luxe)}
+  .side__site:hover{color:var(--gold-600)}
+
+  /* ── main / views ── */
+  .main{padding:var(--space-2xl) var(--container-pad) var(--space-4xl);max-width:1080px;width:100%;margin-inline:auto}
+  .view-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:var(--space-xl)}
+  .view-head h1{font-size:var(--fs-heading);margin:0}
+  .view-head .sc-eyebrow{display:block;margin-bottom:8px}
+
+  /* stat cards */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border-hairline);
+    border:1px solid var(--border-hairline);margin-bottom:var(--space-2xl)}
+  @media (max-width:820px){.stats{grid-template-columns:1fr 1fr}}
+  .stat{background:var(--surface-card);padding:22px 22px 18px}
+  .stat__num{font-family:var(--font-display);font-size:var(--fs-subheading);color:var(--text-heading);line-height:1}
+  .stat__lbl{display:block;margin-top:8px;font-size:var(--fs-micro);font-weight:var(--fw-medium);
+    letter-spacing:var(--ls-caps);text-transform:uppercase;color:var(--text-muted)}
+
+  /* toolbar (search / filter / sort) */
+  .toolbar{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end;margin-bottom:var(--space-lg)}
+  .toolbar .sc-field{min-width:0}
+  .toolbar__search{flex:1 1 220px}
+  .toolbar__select{flex:0 1 190px}
+  .toolbar__actions{margin-left:auto}
+
+  /* rows */
+  .rows{border-top:1px solid var(--border-hairline)}
+  .row{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:16px;align-items:center;
+    padding:16px 0;border-bottom:1px solid var(--border-hairline)}
+  .row--cat{grid-template-columns:minmax(0,1fr) auto auto;gap:16px}
+  .thumb{width:56px;height:70px;background:linear-gradient(165deg,var(--ivory-0) 30%,var(--ivory-100));
+    background-size:cover;background-position:center;position:relative;overflow:hidden}
+  .thumb--empty::after{content:"";position:absolute;inset:0;display:grid;place-items:center;
+    background:url('_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/assets/mark-sparkle-gold.png') center/16px no-repeat;opacity:.4}
+  .row__name{font-family:var(--font-display);font-size:var(--fs-body);color:var(--text-heading);line-height:1.3}
+  .row__sub{font-size:var(--fs-body-sm);color:var(--text-muted);margin-top:2px}
+  .row__meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;align-items:center}
+  .row__price{font-size:var(--fs-body-sm);letter-spacing:.05em;color:var(--text-heading)}
+  .row__acts{display:flex;gap:14px;align-items:center}
+  .linkbtn{background:none;border:0;padding:0;cursor:pointer;font-size:var(--fs-micro);font-weight:var(--fw-medium);
+    letter-spacing:var(--ls-caps-tight);text-transform:uppercase;color:var(--text-muted);
+    transition:color var(--dur-fast) var(--ease-luxe)}
+  .linkbtn:hover{color:var(--gold-600)}
+  .linkbtn--danger:hover{color:var(--error)}
+  .empty{padding:40px 0;font-size:var(--fs-body-sm);color:var(--text-faint)}
+  .empty a,.empty button{color:var(--gold-600)}
+
+  /* forms (add / edit pages) */
+  .form-page{max-width:640px}
+  .form-grid{display:grid;gap:var(--space-md);margin:var(--space-xl) 0}
+  .form-grid__row{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-md)}
+  @media (max-width:560px){.form-grid__row{grid-template-columns:1fr}}
+  .form-foot{display:flex;gap:12px;align-items:center;padding-top:var(--space-md);border-top:1px solid var(--border-hairline)}
+  .img-preview{width:56px;height:70px;border:1px solid var(--border-hairline)}
+  .img-preview--empty{background:linear-gradient(165deg,var(--ivory-0) 30%,var(--ivory-100));
+    display:grid;place-items:center;font-size:10px;color:var(--text-faint)}
+
+  /* modal (design-system dialog + small admin overrides) */
+  .sc-dialog.admin-dialog{max-width:460px;padding:40px;max-height:86vh;overflow:auto}
+  .admin-dialog h2{font-size:var(--fs-subheading);margin:0 0 6px}
+  .admin-dialog p{font-size:var(--fs-body-sm);color:var(--text-muted);margin:0 0 20px}
+
+  /* toast (with undo) */
+  .sc-toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);opacity:0;
+    background:var(--ink-900);color:var(--ivory-50);font-size:var(--fs-body-sm);letter-spacing:.02em;
+    padding:12px 22px;z-index:120;display:flex;gap:18px;align-items:center;
+    transition:opacity var(--dur-base) var(--ease-luxe),transform var(--dur-base) var(--ease-luxe);pointer-events:none}
+  .sc-toast.is-on{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
+  .sc-toast__undo{background:none;border:0;color:var(--gold-300);cursor:pointer;font:inherit;
+    letter-spacing:var(--ls-caps-tight);text-transform:uppercase;font-size:var(--fs-micro);padding:0}
+  .sc-toast__undo:hover{color:var(--gold-200)}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- ══════════ Sidebar (top tabs on mobile) ══════════ -->
+  <aside class="side">
+    <a class="side__brand" href="#/dashboard">
+      <img src="_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/assets/logo-black.png" alt="SERGIO CHRISTOPH">
+      <span>Admin</span>
+    </a>
+    <nav aria-label="Admin">
+      <a class="side__link" href="#/dashboard" data-nav="dashboard">Dashboard</a>
+      <a class="side__link" href="#/categories" data-nav="categories">Categories <span class="side__count" id="count-cat"></span></a>
+      <a class="side__link" href="#/items" data-nav="items">Pieces <span class="side__count" id="count-item"></span></a>
+    </nav>
+    <div class="side__foot">
+      <button class="sc-btn sc-btn--outline sc-btn--sm" id="btn-export" type="button">Export JSON</button>
+      <button class="sc-btn sc-btn--ghost sc-btn--sm" id="btn-reset" type="button">Reset demo data</button>
+      <a class="side__site" href="Homepage.dc.html">View site ↗</a>
+    </div>
+  </aside>
+
+  <!-- ══════════ One view at a time, rendered by the router ══════════ -->
+  <main class="main" id="view" aria-live="polite"></main>
+</div>
+
+<div id="modal-root"></div>
+<div class="sc-toast" id="toast" role="status"></div>
+
+<script>
+/* ══════════════════════════ Store (localStorage only — no backend, no real data) ══════════════════════════ */
+const STORE = "sc_admin_catalog_v1";
+const uid = () => Math.random().toString(36).slice(2, 9);
+const seed = () => ({
+  categories: ["Rings", "Earrings", "Necklaces", "Bracelets & Bangles"],
+  items: [
+    { id: uid(), name: "The Ubud Solitaire", category: "Rings", price: 24500000, metal: "Platinum", carat: "1.2ct round brilliant", caption: "Solitaire engagement ring", image: "", badge: "Bestseller", createdAt: Date.now() - 864e5 * 3 },
+    { id: uid(), name: "Canggu Tennis Bracelet", category: "Bracelets & Bangles", price: 18500000, metal: "White gold", carat: "3.6ct total", caption: "Line bracelet, pavé-set", image: "", badge: "", createdAt: Date.now() - 864e5 * 2 },
+    { id: uid(), name: "Amed Rivière Necklace", category: "Necklaces", price: 32500000, metal: "Yellow gold", carat: "2.4ct", caption: "Graduated rivière", image: "", badge: "New", createdAt: Date.now() - 864e5 },
+  ],
+});
+function load() {
+  let s = null;
+  try { s = JSON.parse(localStorage.getItem(STORE)); } catch (e) {}
+  if (!s || !Array.isArray(s.categories) || !Array.isArray(s.items)) { s = seed(); }
+  s.items.forEach((it, i) => { if (!it.createdAt) it.createdAt = Date.now() - 864e5 * (s.items.length - i); });
+  return s;
+}
+const state = load();
+const save = () => localStorage.setItem(STORE, JSON.stringify(state));
+save();
+
+/* ══════════════════════════ Helpers ══════════════════════════ */
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const idr = (n) => "IDR " + Number(n || 0).toLocaleString("id-ID");
+const findItem = (id) => state.items.find((it) => it.id === id);
+const catCount = (c) => state.items.filter((it) => it.category === c).length;
+const thumb = (it, cls) => it.image
+  ? `<div class="thumb ${cls || ""}" style="background-image:url('${esc(it.image)}')"></div>`
+  : `<div class="thumb thumb--empty ${cls || ""}"></div>`;
+const badgeHTML = (b) => b ? `<span class="sc-badge sc-badge--outline">${esc(b)}</span>` : "";
+
+/* ══════════════════════════ Toast (with optional Undo) ══════════════════════════ */
+let toastT, undoFn = null;
+function toast(msg, onUndo) {
+  const t = $("toast");
+  undoFn = onUndo || null;
+  t.innerHTML = `<span>${esc(msg)}</span>` + (onUndo ? `<button class="sc-toast__undo" id="toast-undo" type="button">Undo</button>` : "");
+  t.classList.add("is-on");
+  clearTimeout(toastT);
+  toastT = setTimeout(() => t.classList.remove("is-on"), onUndo ? 6000 : 2400);
+}
+document.addEventListener("click", (e) => {
+  if (e.target.id === "toast-undo" && undoFn) { undoFn(); undoFn = null; $("toast").classList.remove("is-on"); }
+});
+
+/* ══════════════════════════ Router: #/dashboard · #/categories · #/items · #/items/new · #/items/edit/<id> ══════════════════════════ */
+function route() {
+  const hash = location.hash || "#/dashboard";
+  const parts = hash.replace(/^#\//, "").split("/");
+
+  let nav = parts[0] || "dashboard";
+  if (nav === "items") nav = "items";
+  document.querySelectorAll(".side__link").forEach((a) =>
+    a.classList.toggle("is-on", a.dataset.nav === nav));
+
+  $("count-cat").textContent = state.categories.length;
+  $("count-item").textContent = state.items.length;
+
+  const view = $("view");
+  if (parts[0] === "categories") view.innerHTML = viewCategories();
+  else if (parts[0] === "items" && parts[1] === "new") view.innerHTML = viewItemForm(null, false);
+  else if (parts[0] === "items" && parts[1] === "edit") view.innerHTML = viewItemForm(findItem(parts[2] || ""), true);
+  else if (parts[0] === "items") view.innerHTML = viewItems();
+  else view.innerHTML = viewDashboard();
+
+  bindView();
+  window.scrollTo(0, 0);
+}
+window.addEventListener("hashchange", route);
+
+/* ══════════════════════════ View: Dashboard ══════════════════════════ */
+function viewDashboard() {
+  const total = state.items.reduce((s, it) => s + Number(it.price || 0), 0);
+  const avg = state.items.length ? Math.round(total / state.items.length) : 0;
+  const recent = [...state.items].sort((a, b) => b.createdAt - a.createdAt).slice(0, 5);
+  return `
+  <div class="view-head">
+    <div><span class="sc-eyebrow">Overview</span><h1>Dashboard</h1></div>
+    <div style="display:flex;gap:10px">
+      <a class="sc-btn sc-btn--outline sc-btn--sm" href="#/categories">Manage categories</a>
+      <a class="sc-btn sc-btn--primary sc-btn--sm" href="#/items/new">Add piece</a>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="stat__num">${state.categories.length}</div><span class="stat__lbl">Categories</span></div>
+    <div class="stat"><div class="stat__num">${state.items.length}</div><span class="stat__lbl">Pieces</span></div>
+    <div class="stat"><div class="stat__num">${idr(total)}</div><span class="stat__lbl">Catalog value</span></div>
+    <div class="stat"><div class="stat__num">${idr(avg)}</div><span class="stat__lbl">Avg piece</span></div>
+  </div>
+  <div class="view-head" style="margin-top:8px"><h1 style="font-size:var(--fs-subheading)">Recently added</h1></div>
+  ${recent.length ? `<div class="rows">${recent.map((it) => `
+    <div class="row">
+      ${thumb(it)}
+      <div>
+        <div class="row__name">${esc(it.name)}</div>
+        <div class="row__sub">${esc(it.caption || it.carat || "")}</div>
+        <div class="row__meta"><span class="sc-badge sc-badge--cream">${esc(it.category || "No category")}</span>${badgeHTML(it.badge)}
+          <span class="row__price">${idr(it.price)}</span></div>
+      </div>
+      <div class="row__acts"><a class="linkbtn" href="#/items/edit/${it.id}">Edit</a></div>
+    </div>`).join("")}</div>`
+  : `<div class="empty">No pieces yet — <a href="#/items/new">add the first one</a>.</div>`}`;
+}
+
+/* ══════════════════════════ View: Categories ══════════════════════════ */
+function viewCategories() {
+  return `
+  <div class="view-head">
+    <div><span class="sc-eyebrow">Catalog</span><h1>Categories</h1></div>
+    <button class="sc-btn sc-btn--primary sc-btn--sm" data-action="new-cat" type="button">Add category</button>
+  </div>
+  ${state.categories.length ? `<div class="rows">${state.categories.map((c) => `
+    <div class="row row--cat">
+      <div>
+        <div class="row__name">${esc(c)}</div>
+        <div class="row__sub">${catCount(c)} piece${catCount(c) === 1 ? "" : "s"}</div>
+      </div>
+      <span class="sc-badge sc-badge--cream">${catCount(c)}</span>
+      <div class="row__acts">
+        <button class="linkbtn" data-action="rename-cat" data-cat="${esc(c)}" type="button">Rename</button>
+        <button class="linkbtn linkbtn--danger" data-action="del-cat" data-cat="${esc(c)}" type="button">Delete</button>
+      </div>
+    </div>`).join("")}</div>`
+  : `<div class="empty">No categories yet — <button class="linkbtn" data-action="new-cat" type="button">create one</button>.</div>`}`;
+}
+
+/* ══════════════════════════ View: Pieces (list + toolbar) ══════════════════════════ */
+const ui = { q: "", cat: "All", sort: "Newest" };
+function viewItems() {
+  let list = state.items.filter((it) =>
+    (ui.cat === "All" || it.category === ui.cat) &&
+    (!ui.q || it.name.toLowerCase().includes(ui.q.toLowerCase()) || String(it.caption || "").toLowerCase().includes(ui.q.toLowerCase())));
+  if (ui.sort === "Name A–Z") list = [...list].sort((a, b) => a.name.localeCompare(b.name));
+  else if (ui.sort === "Price ↑") list = [...list].sort((a, b) => a.price - b.price);
+  else if (ui.sort === "Price ↓") list = [...list].sort((a, b) => b.price - a.price);
+  else list = [...list].sort((a, b) => b.createdAt - a.createdAt);
+
+  const catOpts = ['<option value="All">All categories</option>']
+    .concat(state.categories.map((c) => `<option${ui.cat === c ? " selected" : ""}>${esc(c)}</option>`)).join("");
+
+  return `
+  <div class="view-head">
+    <div><span class="sc-eyebrow">Catalog</span><h1>Pieces</h1></div>
+    <a class="sc-btn sc-btn--primary sc-btn--sm" href="#/items/new">Add piece</a>
+  </div>
+  <div class="toolbar">
+    <div class="sc-field toolbar__search">
+      <label class="sc-field__label" for="f-q">Search</label>
+      <input class="sc-input" id="f-q" placeholder="Search name or caption…" value="${esc(ui.q)}">
+    </div>
+    <div class="sc-field toolbar__select">
+      <label class="sc-field__label" for="f-cat">Category</label>
+      <select class="sc-input sc-select" id="f-cat">${catOpts}</select>
+    </div>
+    <div class="sc-field toolbar__select">
+      <label class="sc-field__label" for="f-sort">Sort</label>
+      <select class="sc-input sc-select" id="f-sort">
+        ${["Newest", "Name A–Z", "Price ↑", "Price ↓"].map((s) => `<option${ui.sort === s ? " selected" : ""}>${s}</option>`).join("")}
+      </select>
+    </div>
+  </div>
+  ${list.length ? `<div class="rows">${list.map((it) => `
+    <div class="row">
+      ${thumb(it)}
+      <div>
+        <div class="row__name">${esc(it.name)}</div>
+        <div class="row__sub">${esc(it.caption || it.carat || "")}</div>
+        <div class="row__meta">
+          <span class="sc-badge sc-badge--cream">${esc(it.category || "No category")}</span>
+          ${it.metal ? `<span class="sc-badge sc-badge--cream">${esc(it.metal)}</span>` : ""}${badgeHTML(it.badge)}
+          <span class="row__price">${idr(it.price)}</span>
+        </div>
+      </div>
+      <div class="row__acts">
+        <a class="linkbtn" href="#/items/edit/${it.id}">Edit</a>
+        <button class="linkbtn" data-action="dup-item" data-id="${it.id}" type="button">Duplicate</button>
+        <button class="linkbtn linkbtn--danger" data-action="del-item" data-id="${it.id}" type="button">Delete</button>
+      </div>
+    </div>`).join("")}</div>`
+  : `<div class="empty">${ui.q || ui.cat !== "All" ? "No pieces match — try clearing the search or filter." : `No pieces yet — <a href="#/items/new">add the first one</a>.`}</div>`}`;
+}
+
+/* ══════════════════════════ View: Add / Edit piece (same form) ══════════════════════════ */
+function viewItemForm(it, isEdit) {
+  if (isEdit && !it) {
+    return `<div class="view-head"><div><h1>Edit piece</h1></div></div>
+    <div class="empty">That piece no longer exists. <a href="#/items">Back to pieces</a>.</div>`;
+  }
+  if (!isEdit && !state.categories.length) {
+    return `<div class="view-head"><div><span class="sc-eyebrow">Catalog</span><h1>Add piece</h1></div></div>
+    <div class="empty">You need a category first — <a href="#/categories">create one</a>.</div>`;
+  }
+  const v = (k) => esc(it ? it[k] : "");
+  return `
+  <div class="view-head">
+    <div><span class="sc-eyebrow">Catalog</span><h1>${isEdit ? "Edit piece" : "Add piece"}</h1></div>
+    ${isEdit ? `<button class="linkbtn linkbtn--danger" data-action="del-item" data-id="${it.id}" type="button">Delete this piece</button>` : ""}
+  </div>
+  <form class="form-page" id="item-form" autocomplete="off"${it ? ` data-edit-id="${it.id}"` : ""}>
+    <div class="form-grid">
+      <div class="sc-field">
+        <label class="sc-field__label" for="it-name">Item name</label>
+        <input class="sc-input" id="it-name" name="name" placeholder="e.g. The Ubud Solitaire" value="${v("name")}" required>
+      </div>
+      <div class="form-grid__row">
+        <div class="sc-field">
+          <label class="sc-field__label" for="it-cat">Category</label>
+          <select class="sc-input sc-select" id="it-cat" name="category">
+            ${state.categories.map((c) => `<option${it && it.category === c ? " selected" : ""}>${esc(c)}</option>`).join("")}
+          </select>
+        </div>
+        <div class="sc-field">
+          <label class="sc-field__label" for="it-price">Price (IDR)</label>
+          <input class="sc-input" id="it-price" name="price" type="number" min="0" step="100000" placeholder="24500000" value="${v("price")}" required>
+        </div>
+      </div>
+      <div class="form-grid__row">
+        <div class="sc-field">
+          <label class="sc-field__label" for="it-metal">Metal</label>
+          <select class="sc-input sc-select" id="it-metal" name="metal">
+            ${["White gold", "Yellow gold", "Rose gold", "Platinum"].map((m) => `<option${it && it.metal === m ? " selected" : ""}>${m}</option>`).join("")}
+          </select>
+        </div>
+        <div class="sc-field">
+          <label class="sc-field__label" for="it-badge">Badge</label>
+          <select class="sc-input sc-select" id="it-badge" name="badge">
+            <option value="">— None —</option>
+            ${["New", "Bestseller", "Limited"].map((b) => `<option value="${b}"${it && it.badge === b ? " selected" : ""}>${b}</option>`).join("")}
+          </select>
+        </div>
+      </div>
+      <div class="form-grid__row">
+        <div class="sc-field">
+          <label class="sc-field__label" for="it-carat">Stone / carat</label>
+          <input class="sc-input" id="it-carat" name="carat" placeholder="1.2ct round brilliant" value="${v("carat")}">
+        </div>
+        <div class="sc-field">
+          <label class="sc-field__label" for="it-caption">Caption</label>
+          <input class="sc-input" id="it-caption" name="caption" placeholder="Solitaire engagement ring" value="${v("caption")}">
+        </div>
+      </div>
+      <div class="sc-field">
+        <label class="sc-field__label" for="it-image">Image URL</label>
+        <div style="display:flex;gap:14px;align-items:flex-end">
+          <input class="sc-input" id="it-image" name="image" placeholder="https://… (blank = sparkle placeholder)" value="${v("image")}" style="flex:1">
+          <div class="img-preview ${it && it.image ? "" : "img-preview--empty"}" id="img-preview"
+               ${it && it.image ? `style="background-image:url('${esc(it.image)}');background-size:cover;background-position:center"` : ""}>${it && it.image ? "" : "preview"}</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-foot">
+      <button type="submit" class="sc-btn sc-btn--primary">${isEdit ? "Save changes" : "Add piece"}</button>
+      <a class="sc-btn sc-btn--ghost" href="#/items">Cancel</a>
+    </div>
+  </form>`;
+}
+
+/* ══════════════════════════ Modals (design-system dialog) ══════════════════════════ */
+function openModal(html) { $("modal-root").innerHTML = `
+  <div class="sc-dialog-scrim" id="modal-scrim">
+    <div class="sc-dialog admin-dialog" role="dialog" aria-modal="true">${html}</div>
+  </div>`;
+  const scrim = $("modal-scrim");
+  scrim.addEventListener("click", (e) => { if (e.target === scrim) closeModal(); });
+  const first = scrim.querySelector("input, select, button");
+  if (first) first.focus();
+}
+const closeModal = () => { $("modal-root").innerHTML = ""; };
+
+function promptCategory(title, initial, onSubmit) {
+  openModal(`
+    <h2>${esc(title)}</h2>
+    <p>Categories group pieces in the shop.</p>
+    <form id="modal-form">
+      <div class="sc-field">
+        <label class="sc-field__label" for="modal-input">Category name</label>
+        <input class="sc-input" id="modal-input" value="${esc(initial || "")}" required>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:22px">
+        <button type="submit" class="sc-btn sc-btn--primary sc-btn--sm">Save</button>
+        <button type="button" class="sc-btn sc-btn--ghost sc-btn--sm" id="modal-cancel">Cancel</button>
+      </div>
+    </form>`);
+  $("modal-cancel").addEventListener("click", closeModal);
+  $("modal-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const name = $("modal-input").value.trim();
+    if (name) { onSubmit(name); closeModal(); }
+  });
+}
+
+/* ══════════════════════════ Per-view event binding ══════════════════════════ */
+function bindView() {
+  /* toolbar (pieces list) */
+  const q = $("f-q");
+  if (q) q.addEventListener("input", (e) => { ui.q = e.target.value; refreshListOnly(); });
+  const cat = $("f-cat");
+  if (cat) cat.addEventListener("change", (e) => { ui.cat = e.target.value; route(); });
+  const sort = $("f-sort");
+  if (sort) sort.addEventListener("change", (e) => { ui.sort = e.target.value; route(); });
+
+  /* add / edit piece form */
+  const form = $("item-form");
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const f = new FormData(form);
+      const data = {
+        name: (f.get("name") || "").trim(),
+        category: f.get("category"),
+        price: Number(f.get("price") || 0),
+        metal: f.get("metal"),
+        carat: (f.get("carat") || "").trim(),
+        caption: (f.get("caption") || "").trim(),
+        image: (f.get("image") || "").trim(),
+        badge: f.get("badge") || "",
+      };
+      const editing = form.dataset.editId;
+      if (editing) {
+        const it = findItem(editing);
+        if (it) Object.assign(it, data);
+        toast("Changes saved · " + data.name);
+      } else {
+        state.items.push({ id: uid(), createdAt: Date.now(), ...data });
+        toast("Piece added · " + data.name);
+      }
+      save();
+      location.hash = "#/items";
+    });
+    const img = $("it-image");
+    if (img) img.addEventListener("input", () => {
+      const p = $("img-preview");
+      const url = img.value.trim();
+      p.className = "img-preview" + (url ? "" : " img-preview--empty");
+      p.style.backgroundImage = url ? `url('${url}')` : "";
+      p.textContent = url ? "" : "preview";
+    });
+  }
+}
+
+/* Re-render only the list (keeps focus in the search box while typing) */
+function refreshListOnly() {
+  const scroll = window.scrollY;
+  const active = document.activeElement && document.activeElement.id;
+  $("view").innerHTML = viewItems();
+  bindView();
+  if (active) { const el = $(active); if (el) { el.focus(); try { el.setSelectionRange(el.value.length, el.value.length); } catch (e) {} } }
+  window.scrollTo(0, scroll);
+}
+
+/* ══════════════════════════ Global actions (event delegation) ══════════════════════════ */
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest("[data-action]");
+  if (!btn) return;
+  const act = btn.dataset.action;
+
+  if (act === "new-cat") {
+    promptCategory("Add category", "", (name) => {
+      if (state.categories.some((c) => c.toLowerCase() === name.toLowerCase())) { toast("That category already exists"); return; }
+      state.categories.push(name); save(); route();
+      toast("Category added · " + name);
+    });
+
+  } else if (act === "rename-cat") {
+    const old = btn.dataset.cat;
+    promptCategory("Rename category", old, (name) => {
+      const i = state.categories.indexOf(old);
+      if (i === -1) return;
+      state.categories[i] = name;
+      // renames propagate to the pieces in that category
+      state.items.forEach((it) => { if (it.category === old) it.category = name; });
+      save(); route();
+      toast("Renamed · " + old + " → " + name);
+    });
+
+  } else if (act === "del-cat") {
+    const c = btn.dataset.cat;
+    const idx = state.categories.indexOf(c);
+    const affected = state.items.filter((it) => it.category === c);
+    if (idx === -1) return;
+    state.categories.splice(idx, 1);
+    affected.forEach((it) => { it.category = ""; }); // pieces survive, uncategorised
+    const snapshot = { cat: c, idx, affected: affected.map((it) => it.id) };
+    save(); route();
+    toast(`Deleted “${c}”${affected.length ? " · " + affected.length + " piece(s) uncategorised" : ""}`, () => {
+      state.categories.splice(snapshot.idx, 0, snapshot.cat);
+      snapshot.affected.forEach((id) => { const it = findItem(id); if (it) it.category = snapshot.cat; });
+      save(); route();
+    });
+
+  } else if (act === "dup-item") {
+    const it = findItem(btn.dataset.id);
+    if (!it) return;
+    const copy = { ...it, id: uid(), name: it.name + " (copy)", createdAt: Date.now() };
+    state.items.push(copy); save(); route();
+    toast("Duplicated · " + copy.name);
+
+  } else if (act === "del-item") {
+    const id = btn.dataset.id;
+    const idx = state.items.findIndex((x) => x.id === id);
+    if (idx === -1) return;
+    const removed = state.items[idx];
+    state.items.splice(idx, 1); save();
+    if (location.hash.startsWith("#/items/edit")) location.hash = "#/items"; else route();
+    toast("Deleted · " + removed.name, () => {
+      state.items.splice(idx, 0, removed); save(); route();
+    });
+  }
+});
+
+/* ══════════════════════════ Sidebar footer actions ══════════════════════════ */
+$("btn-export").addEventListener("click", () => {
+  const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "sergio-christoph-catalog.json";
+  a.click();
+  URL.revokeObjectURL(a.href);
+  toast("Catalog exported as JSON");
+});
+$("btn-reset").addEventListener("click", () => {
+  openModal(`
+    <h2>Reset demo data?</h2>
+    <p>This clears every change you made in this browser and restores the sample catalog.</p>
+    <div style="display:flex;gap:12px;margin-top:22px">
+      <button type="button" class="sc-btn sc-btn--primary sc-btn--sm" id="reset-yes">Reset</button>
+      <button type="button" class="sc-btn sc-btn--ghost sc-btn--sm" id="reset-no">Cancel</button>
+    </div>`);
+  $("reset-no").addEventListener("click", closeModal);
+  $("reset-yes").addEventListener("click", () => {
+    const fresh = seed();
+    state.categories = fresh.categories;
+    state.items = fresh.items;
+    save(); closeModal(); route();
+    toast("Demo data restored");
+  });
+});
+
+/* go */
+route();
+</script>
+</body>
+</html>

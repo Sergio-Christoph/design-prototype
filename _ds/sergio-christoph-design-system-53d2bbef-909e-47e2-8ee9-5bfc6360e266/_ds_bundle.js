@@ -287,11 +287,11 @@ function Accordion({
   className = "",
   ...rest
 }) {
-  const [open, setOpen] = React.useState(defaultOpen);
+  const [open, setOpen] = React.useState(function () { return new Set(defaultOpen == null ? [] : [].concat(defaultOpen)); });
   return /*#__PURE__*/React.createElement("div", _extends({
     className: ["sc-accordion", className].filter(Boolean).join(" ")
   }, rest), items.map((it, i) => {
-    const isOpen = open === i;
+    const isOpen = open.has(i);
     return /*#__PURE__*/React.createElement("div", {
       key: i,
       className: "sc-accordion__item" + (isOpen ? " sc-accordion__item--open" : "")
@@ -299,7 +299,7 @@ function Accordion({
       type: "button",
       className: "sc-accordion__trigger",
       "aria-expanded": isOpen,
-      onClick: () => setOpen(isOpen ? null : i)
+      onClick: () => setOpen(function (prev) { var next = new Set(prev); if (next.has(i)) { next.delete(i); } else { next.add(i); } return next; })
     }, it.title, /*#__PURE__*/React.createElement("span", {
       className: "sc-accordion__icon",
       "aria-hidden": "true"
