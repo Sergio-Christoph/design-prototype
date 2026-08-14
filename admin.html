@@ -64,7 +64,6 @@
   .toolbar .sc-field{min-width:0}
   .toolbar__search{flex:1 1 220px}
   .toolbar__select{flex:0 1 190px}
-  .toolbar__actions{margin-left:auto}
 
   /* rows */
   .rows{border-top:1px solid var(--border-hairline)}
@@ -89,19 +88,62 @@
   .empty a,.empty button{color:var(--gold-600)}
 
   /* forms (add / edit pages) */
-  .form-page{max-width:640px}
+  .form-page{max-width:680px}
   .form-grid{display:grid;gap:var(--space-md);margin:var(--space-xl) 0}
   .form-grid__row{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-md)}
   @media (max-width:560px){.form-grid__row{grid-template-columns:1fr}}
   .form-foot{display:flex;gap:12px;align-items:center;padding-top:var(--space-md);border-top:1px solid var(--border-hairline)}
-  .img-preview{width:56px;height:70px;border:1px solid var(--border-hairline)}
-  .img-preview--empty{background:linear-gradient(165deg,var(--ivory-0) 30%,var(--ivory-100));
-    display:grid;place-items:center;font-size:10px;color:var(--text-faint)}
+
+  /* ── image slots (main + 4 complementary, per Viewing Room ratios) ── */
+  .img-slots{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:4px}
+  @media (max-width:640px){.img-slots{grid-template-columns:repeat(3,1fr)}}
+  .img-slot{display:flex;flex-direction:column;gap:6px;min-width:0}
+  .img-slot__frame{position:relative;width:100%;overflow:hidden;border:1px solid var(--border-hairline);
+    background:linear-gradient(165deg,var(--ivory-0) 30%,var(--ivory-100))}
+  .img-slot__frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .img-slot--empty{cursor:pointer}
+  .img-slot--empty::after{content:"";position:absolute;inset:0;display:grid;place-items:center;
+    background:url('_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/assets/mark-sparkle-gold.png') center/14px no-repeat;opacity:.35}
+  .img-slot__hint{position:absolute;left:0;right:0;bottom:0;padding:4px 2px;text-align:center;
+    font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-faint);background:rgba(255,255,255,.75)}
+  .img-slot__req{position:absolute;top:4px;left:4px;padding:2px 6px;font-size:9px;letter-spacing:.08em;
+    text-transform:uppercase;background:var(--gold-500);color:var(--ivory-0)}
+  .img-slot__acts{display:flex;gap:10px;justify-content:center}
+  .img-slot__lbl{display:block;text-align:center;font-size:var(--fs-micro);font-weight:var(--fw-medium);
+    letter-spacing:var(--ls-caps-tight);text-transform:uppercase;color:var(--text-muted)}
 
   /* modal (design-system dialog + small admin overrides) */
   .sc-dialog.admin-dialog{max-width:460px;padding:40px;max-height:86vh;overflow:auto}
   .admin-dialog h2{font-size:var(--fs-subheading);margin:0 0 6px}
   .admin-dialog p{font-size:var(--fs-body-sm);color:var(--text-muted);margin:0 0 20px}
+
+  /* ── cropper ── */
+  .sc-dialog.crop-dialog{max-width:560px}
+  .crop-vp{position:relative;width:100%;overflow:hidden;background:var(--ivory-100);
+    touch-action:none;cursor:grab;user-select:none}
+  .crop-vp:active{cursor:grabbing}
+  .crop-vp img{position:absolute;left:0;top:0;max-width:none;pointer-events:none;transform-origin:0 0}
+  .crop-zoom{width:100%;margin-top:16px;accent-color:var(--gold-600)}
+  .crop-note{font-size:var(--fs-body-sm);color:var(--text-muted);margin:10px 0 0}
+
+  /* ── live product preview (Add / Edit piece) — mirrors the Viewing Room gallery ── */
+  .form-wrap{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:clamp(32px,4vw,64px);align-items:start}
+  @media (max-width:980px){.form-wrap{grid-template-columns:1fr}}
+  .form-preview{position:sticky;top:32px}
+  @media (max-width:980px){.form-preview{position:static}}
+  .img-slot__lbl{font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .pv-frame{position:relative;width:100%;overflow:hidden;border:1px solid var(--border-hairline);
+    background:radial-gradient(120% 130% at 50% 20%,#FFFFFF 40%,var(--ivory-100) 100%)}
+  .pv-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .pv-sparkle{position:absolute;inset:0;
+    background:url('_ds/sergio-christoph-design-system-53d2bbef-909e-47e2-8ee9-5bfc6360e266/assets/mark-sparkle-gold.png') center/22px no-repeat;opacity:.3}
+  .pv-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,1.6vw,20px);margin-top:clamp(12px,1.6vw,20px)}
+  .pv-stagger{margin-top:clamp(18px,3vw,40px)}
+  .pv-info{margin-bottom:18px}
+  .pv-name{font-family:var(--font-display);font-size:var(--fs-lede);line-height:1.3;color:var(--text-heading)}
+  .pv-sub{font-size:var(--fs-body-sm);color:var(--text-muted);margin-top:4px}
+  .pv-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .pv-price{font-size:var(--fs-body-sm);letter-spacing:.05em;color:var(--text-heading);margin-top:10px}
 
   /* toast (with undo) */
   .sc-toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);opacity:0;
@@ -129,7 +171,6 @@
       <a class="side__link" href="#/items" data-nav="items">Pieces <span class="side__count" id="count-item"></span></a>
     </nav>
     <div class="side__foot">
-      <button class="sc-btn sc-btn--outline sc-btn--sm" id="btn-export" type="button">Export JSON</button>
       <button class="sc-btn sc-btn--ghost sc-btn--sm" id="btn-reset" type="button">Reset demo data</button>
       <a class="side__site" href="Homepage.dc.html">View site ↗</a>
     </div>
@@ -149,21 +190,43 @@ const uid = () => Math.random().toString(36).slice(2, 9);
 const seed = () => ({
   categories: ["Rings", "Earrings", "Necklaces", "Bracelets & Bangles"],
   items: [
-    { id: uid(), name: "The Ubud Solitaire", category: "Rings", price: 24500000, metal: "Platinum", carat: "1.2ct round brilliant", caption: "Solitaire engagement ring", image: "", badge: "Bestseller", createdAt: Date.now() - 864e5 * 3 },
-    { id: uid(), name: "Canggu Tennis Bracelet", category: "Bracelets & Bangles", price: 18500000, metal: "White gold", carat: "3.6ct total", caption: "Line bracelet, pavé-set", image: "", badge: "", createdAt: Date.now() - 864e5 * 2 },
-    { id: uid(), name: "Amed Rivière Necklace", category: "Necklaces", price: 32500000, metal: "Yellow gold", carat: "2.4ct", caption: "Graduated rivière", image: "", badge: "New", createdAt: Date.now() - 864e5 },
+    { id: uid(), name: "The Ubud Solitaire", category: "Rings", price: 24500000, metal: "Platinum", carat: "1.2ct round brilliant", caption: "Solitaire engagement ring", badge: "Bestseller", createdAt: Date.now() - 864e5 * 3, images: [null, null, null, null, null] },
+    { id: uid(), name: "Canggu Tennis Bracelet", category: "Bracelets & Bangles", price: 18500000, metal: "White gold", carat: "3.6ct total", caption: "Line bracelet, pavé-set", badge: "", createdAt: Date.now() - 864e5 * 2, images: [null, null, null, null, null] },
+    { id: uid(), name: "Amed Rivière Necklace", category: "Necklaces", price: 32500000, metal: "Yellow gold", carat: "2.4ct", caption: "Graduated rivière", badge: "New", createdAt: Date.now() - 864e5, images: [null, null, null, null, null] },
   ],
 });
 function load() {
   let s = null;
   try { s = JSON.parse(localStorage.getItem(STORE)); } catch (e) {}
   if (!s || !Array.isArray(s.categories) || !Array.isArray(s.items)) { s = seed(); }
-  s.items.forEach((it, i) => { if (!it.createdAt) it.createdAt = Date.now() - 864e5 * (s.items.length - i); });
+  s.items.forEach((it, i) => {
+    if (!it.createdAt) it.createdAt = Date.now() - 864e5 * (s.items.length - i);
+    // migrate the old single `image` field into the 5-slot images array
+    if (!Array.isArray(it.images)) it.images = [it.image || null, null, null, null, null];
+    while (it.images.length < 5) it.images.push(null);
+    delete it.image;
+  });
   return s;
 }
 const state = load();
-const save = () => localStorage.setItem(STORE, JSON.stringify(state));
+function save() {
+  try { localStorage.setItem(STORE, JSON.stringify(state)); }
+  catch (e) { toast("Browser storage is full — try smaller or fewer photos"); }
+}
 save();
+
+/* ══════════════════════════ Image slots — mirror of the Viewing Room gallery ══════════════════════════
+   Slot 0 is the MAIN image (required). Slots 1–4 are the complementary gallery images.
+   Each slot is cropped to the exact ratio the product page uses, so uploads always fit. */
+const SLOTS = [
+  { label: "Main image",      note: "5:4", ratio: 5 / 4, tw: 900, th: 720 },
+  { label: "Complementary 1", note: "4:5", ratio: 4 / 5, tw: 640, th: 800 },
+  { label: "Complementary 2", note: "3:4", ratio: 3 / 4, tw: 600, th: 800 },
+  { label: "Complementary 3", note: "3:4", ratio: 3 / 4, tw: 600, th: 800 },
+  { label: "Complementary 4", note: "4:5", ratio: 4 / 5, tw: 640, th: 800 },
+];
+let formImages = [null, null, null, null, null];
+let cropTargetSlot = 0;
 
 /* ══════════════════════════ Helpers ══════════════════════════ */
 const $ = (id) => document.getElementById(id);
@@ -171,9 +234,11 @@ const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&":
 const idr = (n) => "IDR " + Number(n || 0).toLocaleString("id-ID");
 const findItem = (id) => state.items.find((it) => it.id === id);
 const catCount = (c) => state.items.filter((it) => it.category === c).length;
-const thumb = (it, cls) => it.image
-  ? `<div class="thumb ${cls || ""}" style="background-image:url('${esc(it.image)}')"></div>`
-  : `<div class="thumb thumb--empty ${cls || ""}"></div>`;
+const mainSrc = (it) => (it.images && it.images[0]) || "";
+const thumb = (it) => {
+  const src = mainSrc(it);
+  return src ? `<div class="thumb" style="background-image:url('${src}')"></div>` : `<div class="thumb thumb--empty"></div>`;
+};
 const badgeHTML = (b) => b ? `<span class="sc-badge sc-badge--outline">${esc(b)}</span>` : "";
 
 /* ══════════════════════════ Toast (with optional Undo) ══════════════════════════ */
@@ -190,15 +255,13 @@ document.addEventListener("click", (e) => {
   if (e.target.id === "toast-undo" && undoFn) { undoFn(); undoFn = null; $("toast").classList.remove("is-on"); }
 });
 
-/* ══════════════════════════ Router: #/dashboard · #/categories · #/items · #/items/new · #/items/edit/<id> ══════════════════════════ */
+/* ══════════════════════════ Router ══════════════════════════ */
 function route() {
   const hash = location.hash || "#/dashboard";
   const parts = hash.replace(/^#\//, "").split("/");
 
-  let nav = parts[0] || "dashboard";
-  if (nav === "items") nav = "items";
-  document.querySelectorAll(".side__link").forEach((a) =>
-    a.classList.toggle("is-on", a.dataset.nav === nav));
+  const nav = parts[0] || "dashboard";
+  document.querySelectorAll(".side__link").forEach((a) => a.classList.toggle("is-on", a.dataset.nav === nav));
 
   $("count-cat").textContent = state.categories.length;
   $("count-item").textContent = state.items.length;
@@ -274,6 +337,8 @@ function viewCategories() {
 /* ══════════════════════════ View: Pieces (list + toolbar) ══════════════════════════ */
 const ui = { q: "", cat: "All", sort: "Newest" };
 function viewItems() {
+  // if the filtered category was deleted, fall back to All instead of showing an empty list
+  if (ui.cat !== "All" && !state.categories.includes(ui.cat)) ui.cat = "All";
   let list = state.items.filter((it) =>
     (ui.cat === "All" || it.category === ui.cat) &&
     (!ui.q || it.name.toLowerCase().includes(ui.q.toLowerCase()) || String(it.caption || "").toLowerCase().includes(ui.q.toLowerCase())));
@@ -327,7 +392,53 @@ function viewItems() {
   : `<div class="empty">${ui.q || ui.cat !== "All" ? "No pieces match — try clearing the search or filter." : `No pieces yet — <a href="#/items/new">add the first one</a>.`}</div>`}`;
 }
 
-/* ══════════════════════════ View: Add / Edit piece (same form) ══════════════════════════ */
+/* ══════════════════════════ Image slots UI ══════════════════════════ */
+function slotHTML(i) {
+  const S = SLOTS[i], src = formImages[i];
+  return `
+  <div class="img-slot">
+    <div class="img-slot__frame${src ? "" : " img-slot--empty"}" style="aspect-ratio:${S.ratio}" ${src ? "" : `data-img-add="${i}" title="Upload"`}>
+      ${src ? `<img src="${src}" alt="${S.label}">` : ""}
+      ${i === 0 ? `<span class="img-slot__req">Required</span>` : ""}
+      ${src ? "" : `<span class="img-slot__hint">${S.note}</span>`}
+    </div>
+    <div class="img-slot__acts">
+      <button type="button" class="linkbtn" data-img-add="${i}">${src ? "Replace" : "Upload"}</button>
+      ${src ? `<button type="button" class="linkbtn linkbtn--danger" data-img-remove="${i}">Remove</button>` : ""}
+    </div>
+    <span class="img-slot__lbl">${S.label}</span>
+  </div>`;
+}
+function renderSlots() { const el = $("img-slots"); if (el) el.innerHTML = SLOTS.map((_, i) => slotHTML(i)).join(""); renderPreview(); }
+
+/* live preview of the product gallery (same layout the Viewing Room uses) */
+function renderPreview() {
+  const box = $("piece-preview");
+  if (!box) return;
+  const val = (id) => { const el = $(id); return el ? el.value : ""; };
+  const name = val("it-name").trim() || "Untitled piece";
+  const caption = val("it-caption").trim() || val("it-carat").trim();
+  const badge = val("it-badge"), metal = val("it-metal"), cat = val("it-cat");
+  const frame = (i, extra) => {
+    const src = formImages[i];
+    return `<div class="pv-frame${extra ? " " + extra : ""}" style="aspect-ratio:${SLOTS[i].ratio}">${src ? `<img src="${src}" alt="">` : `<span class="pv-sparkle"></span>`}</div>`;
+  };
+  box.innerHTML = `
+    <div class="pv-info">
+      <div class="pv-name">${esc(name)}</div>
+      ${caption ? `<div class="pv-sub">${esc(caption)}</div>` : ""}
+      <div class="pv-meta">
+        ${cat ? `<span class="sc-badge sc-badge--cream">${esc(cat)}</span>` : ""}
+        ${metal ? `<span class="sc-badge sc-badge--cream">${esc(metal)}</span>` : ""}
+        ${badge ? `<span class="sc-badge sc-badge--outline">${esc(badge)}</span>` : ""}
+      </div>
+      <div class="pv-price">${idr(Number(val("it-price") || 0))}</div>
+    </div>
+    ${frame(0)}
+    <div class="pv-grid">${frame(1, "pv-stagger")}${frame(2)}${frame(3, "pv-stagger")}${frame(4)}</div>`;
+}
+
+/* ══════════════════════════ View: Add / Edit piece ══════════════════════════ */
 function viewItemForm(it, isEdit) {
   if (isEdit && !it) {
     return `<div class="view-head"><div><h1>Edit piece</h1></div></div>
@@ -337,12 +448,16 @@ function viewItemForm(it, isEdit) {
     return `<div class="view-head"><div><span class="sc-eyebrow">Catalog</span><h1>Add piece</h1></div></div>
     <div class="empty">You need a category first — <a href="#/categories">create one</a>.</div>`;
   }
+  formImages = it && Array.isArray(it.images) ? it.images.slice(0, 5) : [];
+  while (formImages.length < 5) formImages.push(null);
+
   const v = (k) => esc(it ? it[k] : "");
   return `
   <div class="view-head">
     <div><span class="sc-eyebrow">Catalog</span><h1>${isEdit ? "Edit piece" : "Add piece"}</h1></div>
     ${isEdit ? `<button class="linkbtn linkbtn--danger" data-action="del-item" data-id="${it.id}" type="button">Delete this piece</button>` : ""}
   </div>
+  <div class="form-wrap">
   <form class="form-page" id="item-form" autocomplete="off"${it ? ` data-edit-id="${it.id}"` : ""}>
     <div class="form-grid">
       <div class="sc-field">
@@ -387,19 +502,22 @@ function viewItemForm(it, isEdit) {
         </div>
       </div>
       <div class="sc-field">
-        <label class="sc-field__label" for="it-image">Image URL</label>
-        <div style="display:flex;gap:14px;align-items:flex-end">
-          <input class="sc-input" id="it-image" name="image" placeholder="https://… (blank = sparkle placeholder)" value="${v("image")}" style="flex:1">
-          <div class="img-preview ${it && it.image ? "" : "img-preview--empty"}" id="img-preview"
-               ${it && it.image ? `style="background-image:url('${esc(it.image)}');background-size:cover;background-position:center"` : ""}>${it && it.image ? "" : "preview"}</div>
-        </div>
+        <label class="sc-field__label">Photos — main + up to 4 complementary</label>
+        <div class="img-slots" id="img-slots">${SLOTS.map((_, i) => slotHTML(i)).join("")}</div>
+        <span class="sc-field__hint">Each photo is cropped to the exact ratio its slot uses on the product page. Stored in this browser only.</span>
       </div>
     </div>
     <div class="form-foot">
       <button type="submit" class="sc-btn sc-btn--primary">${isEdit ? "Save changes" : "Add piece"}</button>
       <a class="sc-btn sc-btn--ghost" href="#/items">Cancel</a>
     </div>
-  </form>`;
+  </form>
+  <aside class="form-preview">
+    <span class="sc-eyebrow" style="display:block;margin-bottom:14px">Preview · product gallery</span>
+    <div id="piece-preview"></div>
+    <span class="sc-field__hint" style="display:block;margin-top:16px">Updates live as you type and upload.</span>
+  </aside>
+  </div>`;
 }
 
 /* ══════════════════════════ Modals (design-system dialog) ══════════════════════════ */
@@ -409,8 +527,6 @@ function openModal(html) { $("modal-root").innerHTML = `
   </div>`;
   const scrim = $("modal-scrim");
   scrim.addEventListener("click", (e) => { if (e.target === scrim) closeModal(); });
-  const first = scrim.querySelector("input, select, button");
-  if (first) first.focus();
 }
 const closeModal = () => { $("modal-root").innerHTML = ""; };
 
@@ -436,9 +552,82 @@ function promptCategory(title, initial, onSubmit) {
   });
 }
 
+/* ══════════════════════════ Cropper — drag to position, slider to zoom, canvas export ══════════════════════════ */
+function openCropper(slot, src) {
+  const S = SLOTS[slot];
+  openModal(`
+    <h2>Crop · ${S.label}</h2>
+    <p>Drag the photo to position it, zoom with the slider. It will be saved at ${slot === 0 ? "the hero" : "a gallery"} ratio of ${S.note}.</p>
+    <div class="crop-vp" id="crop-vp" style="aspect-ratio:${S.ratio}"><img id="crop-img" src="${src}" alt=""></div>
+    <input type="range" id="crop-zoom" class="crop-zoom" min="0" max="100" value="0" aria-label="Zoom">
+    <div style="display:flex;gap:12px;margin-top:18px">
+      <button type="button" class="sc-btn sc-btn--primary sc-btn--sm" id="crop-use">Use photo</button>
+      <button type="button" class="sc-btn sc-btn--ghost sc-btn--sm" id="crop-cancel">Cancel</button>
+    </div>`);
+
+  const vp = $("crop-vp"), img = $("crop-img"), zoom = $("crop-zoom");
+  let c = { s: 1, tx: 0, ty: 0 }, cover = 1;
+
+  const apply = () => { img.style.transform = `translate(${c.tx}px,${c.ty}px) scale(${c.s})`; };
+  const clamp = () => {
+    const vw = vp.clientWidth, vh = vp.clientHeight;
+    const w = img.naturalWidth * c.s, h = img.naturalHeight * c.s;
+    c.tx = Math.min(0, Math.max(vw - w, c.tx));
+    c.ty = Math.min(0, Math.max(vh - h, c.ty));
+  };
+  const init = () => {
+    const vw = vp.clientWidth, vh = vp.clientHeight;
+    cover = Math.max(vw / img.naturalWidth, vh / img.naturalHeight);
+    c.s = cover;
+    c.tx = (vw - img.naturalWidth * c.s) / 2;
+    c.ty = (vh - img.naturalHeight * c.s) / 2;
+    clamp(); apply();
+  };
+
+  zoom.addEventListener("input", () => {
+    const vw = vp.clientWidth, vh = vp.clientHeight;
+    const cx = (vw / 2 - c.tx) / c.s, cy = (vh / 2 - c.ty) / c.s;   // image point under viewport centre
+    c.s = cover * (1 + 2.5 * (zoom.value / 100));                    // cover → 2.5×
+    c.tx = vw / 2 - cx * c.s; c.ty = vh / 2 - cy * c.s;
+    clamp(); apply();
+  });
+
+  let drag = null;
+  vp.addEventListener("pointerdown", (e) => { drag = { x: e.clientX, y: e.clientY, tx: c.tx, ty: c.ty }; vp.setPointerCapture(e.pointerId); });
+  vp.addEventListener("pointermove", (e) => { if (!drag) return; c.tx = drag.tx + (e.clientX - drag.x); c.ty = drag.ty + (e.clientY - drag.y); clamp(); apply(); });
+  vp.addEventListener("pointerup", () => drag = null);
+  vp.addEventListener("pointercancel", () => drag = null);
+
+  if (img.complete && img.naturalWidth) init(); else img.onload = init;
+
+  $("crop-cancel").addEventListener("click", closeModal);
+  $("crop-use").addEventListener("click", () => {
+    const vw = vp.clientWidth, vh = vp.clientHeight;
+    const sx = -c.tx / c.s, sy = -c.ty / c.s, sw = vw / c.s, sh = vh / c.s;
+    const cv = document.createElement("canvas");
+    cv.width = S.tw; cv.height = S.th;
+    cv.getContext("2d").drawImage(img, sx, sy, sw, sh, 0, 0, S.tw, S.th);
+    formImages[slot] = cv.toDataURL("image/jpeg", 0.8);
+    renderSlots();
+    closeModal();
+    toast(S.label + " photo set");
+  });
+}
+
+/* hidden shared file input */
+const fileIn = document.createElement("input");
+fileIn.type = "file"; fileIn.accept = "image/*"; fileIn.style.display = "none";
+document.body.appendChild(fileIn);
+fileIn.addEventListener("change", () => {
+  const f = fileIn.files && fileIn.files[0];
+  if (!f) return;
+  const r = new FileReader();
+  r.onload = () => openCropper(cropTargetSlot, r.result);
+  r.readAsDataURL(f);
+});
+
 /* ══════════════════════════ Per-view event binding ══════════════════════════ */
 function bindView() {
-  /* toolbar (pieces list) */
   const q = $("f-q");
   if (q) q.addEventListener("input", (e) => { ui.q = e.target.value; refreshListOnly(); });
   const cat = $("f-cat");
@@ -446,11 +635,16 @@ function bindView() {
   const sort = $("f-sort");
   if (sort) sort.addEventListener("change", (e) => { ui.sort = e.target.value; route(); });
 
-  /* add / edit piece form */
   const form = $("item-form");
   if (form) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
+      if (!formImages[0]) {
+        toast("A main photo is required");
+        const slots = $("img-slots");
+        if (slots) slots.scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+      }
       const f = new FormData(form);
       const data = {
         name: (f.get("name") || "").trim(),
@@ -459,8 +653,8 @@ function bindView() {
         metal: f.get("metal"),
         carat: (f.get("carat") || "").trim(),
         caption: (f.get("caption") || "").trim(),
-        image: (f.get("image") || "").trim(),
         badge: f.get("badge") || "",
+        images: formImages.slice(),
       };
       const editing = form.dataset.editId;
       if (editing) {
@@ -474,14 +668,10 @@ function bindView() {
       save();
       location.hash = "#/items";
     });
-    const img = $("it-image");
-    if (img) img.addEventListener("input", () => {
-      const p = $("img-preview");
-      const url = img.value.trim();
-      p.className = "img-preview" + (url ? "" : " img-preview--empty");
-      p.style.backgroundImage = url ? `url('${url}')` : "";
-      p.textContent = url ? "" : "preview";
-    });
+    /* live preview — refresh on every field change */
+    ["it-name", "it-caption", "it-price", "it-carat"].forEach((id) => { const el = $(id); if (el) el.addEventListener("input", renderPreview); });
+    ["it-cat", "it-metal", "it-badge"].forEach((id) => { const el = $(id); if (el) el.addEventListener("change", renderPreview); });
+    renderPreview();
   }
 }
 
@@ -497,6 +687,12 @@ function refreshListOnly() {
 
 /* ══════════════════════════ Global actions (event delegation) ══════════════════════════ */
 document.addEventListener("click", (e) => {
+  /* image slots */
+  const add = e.target.closest("[data-img-add]");
+  if (add) { cropTargetSlot = Number(add.dataset.imgAdd); fileIn.value = ""; fileIn.click(); return; }
+  const rm = e.target.closest("[data-img-remove]");
+  if (rm) { formImages[Number(rm.dataset.imgRemove)] = null; renderSlots(); return; }
+
   const btn = e.target.closest("[data-action]");
   if (!btn) return;
   const act = btn.dataset.action;
@@ -514,8 +710,7 @@ document.addEventListener("click", (e) => {
       const i = state.categories.indexOf(old);
       if (i === -1) return;
       state.categories[i] = name;
-      // renames propagate to the pieces in that category
-      state.items.forEach((it) => { if (it.category === old) it.category = name; });
+      state.items.forEach((it) => { if (it.category === old) it.category = name; });  // rename propagates
       save(); route();
       toast("Renamed · " + old + " → " + name);
     });
@@ -526,7 +721,7 @@ document.addEventListener("click", (e) => {
     const affected = state.items.filter((it) => it.category === c);
     if (idx === -1) return;
     state.categories.splice(idx, 1);
-    affected.forEach((it) => { it.category = ""; }); // pieces survive, uncategorised
+    affected.forEach((it) => { it.category = ""; });
     const snapshot = { cat: c, idx, affected: affected.map((it) => it.id) };
     save(); route();
     toast(`Deleted “${c}”${affected.length ? " · " + affected.length + " piece(s) uncategorised" : ""}`, () => {
@@ -538,7 +733,7 @@ document.addEventListener("click", (e) => {
   } else if (act === "dup-item") {
     const it = findItem(btn.dataset.id);
     if (!it) return;
-    const copy = { ...it, id: uid(), name: it.name + " (copy)", createdAt: Date.now() };
+    const copy = { ...it, id: uid(), images: (it.images || []).slice(), name: it.name + " (copy)", createdAt: Date.now() };
     state.items.push(copy); save(); route();
     toast("Duplicated · " + copy.name);
 
@@ -556,15 +751,6 @@ document.addEventListener("click", (e) => {
 });
 
 /* ══════════════════════════ Sidebar footer actions ══════════════════════════ */
-$("btn-export").addEventListener("click", () => {
-  const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "sergio-christoph-catalog.json";
-  a.click();
-  URL.revokeObjectURL(a.href);
-  toast("Catalog exported as JSON");
-});
 $("btn-reset").addEventListener("click", () => {
   openModal(`
     <h2>Reset demo data?</h2>

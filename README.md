@@ -37,7 +37,7 @@ The Lab.dc.html         certification / process
 Bespoke Studio.dc.html  build-your-own-ring
 Viewing Room.dc.html
 
-admin.html              ← CMS prototype (add items & categories) · opens at /admin.html
+admin.html              ← CMS prototype · sidebar dashboard (add/edit/delete items & categories, search, undo, JSON export)
 
 support.js              runtime that powers the page (leave alone)
 
