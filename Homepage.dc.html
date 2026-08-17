@@ -41,6 +41,25 @@ html{scrollbar-width:thin;scrollbar-color:#CFC8BA #FFFFFF}
   .sc-search-mobile{display:grid !important;justify-self:start}
   .sc-search-desktop{display:none !important}
 }
+
+/* ── sc-site-search — overlay opened by the header search icon ── */
+@keyframes scSoFade{from{opacity:0}to{opacity:1}}
+@keyframes scSoRise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+#sc-search{position:fixed;inset:0;z-index:var(--z-dialog);display:none}
+#sc-search.is-open{display:block}
+#sc-search .sc-so__scrim{position:absolute;inset:0;background:var(--overlay-scrim);animation:scSoFade 300ms var(--ease-luxe) both}
+#sc-search .sc-so__panel{position:relative;max-width:720px;margin:14vh auto 0;padding:0 var(--container-pad);animation:scSoRise 420ms var(--ease-luxe) both}
+#sc-search .sc-so__box{background:var(--surface-card);padding:34px 38px 30px;box-shadow:var(--shadow-overlay);position:relative}
+#sc-search .sc-so__close{position:absolute;top:12px;right:12px;width:38px;height:38px;display:grid;place-items:center;background:none;border:0;color:var(--text-faint);cursor:pointer;font-size:15px;transition:color var(--dur-fast) var(--ease-luxe)}
+#sc-search .sc-so__close:hover{color:var(--ink-900)}
+#sc-search .sc-so__form{display:flex;gap:18px;align-items:flex-end}
+#sc-search .sc-so__field{flex:1}
+#sc-search .sc-so__input{font-family:var(--font-display);font-size:var(--fs-lede);color:var(--text-heading)}
+#sc-search .sc-so__hint{margin:20px 0 0;font-size:var(--fs-micro);font-weight:var(--fw-medium);letter-spacing:var(--ls-caps-tight);text-transform:uppercase;color:var(--text-faint)}
+#sc-search .sc-so__links{display:flex;flex-wrap:wrap;gap:10px 24px;margin-top:12px}
+#sc-search .sc-so__links a{font-size:var(--fs-body-sm);color:var(--text-body);text-decoration:none;transition:color var(--dur-fast) var(--ease-luxe)}
+#sc-search .sc-so__links a:hover{color:var(--gold-600)}
+@media (max-width:560px){#sc-search .sc-so__panel{margin-top:9vh}#sc-search .sc-so__box{padding:26px 20px}#sc-search .sc-so__form{flex-direction:column;align-items:stretch}}
 </style>
 </helmet>
 <div style="background:var(--surface-page)">
@@ -956,6 +975,61 @@ class Component extends DCLogic {
     };
   }
 }
+</script>
+
+<script>
+/* sc-site-search — overlay opened by the header search icon. Standalone: no page-runtime changes. */
+(function () {
+  var QUICK = [
+    ["Rings", "Collections.dc.html#rings"],
+    ["Earrings", "Collections.dc.html#earrings"],
+    ["Necklaces", "Collections.dc.html#necklaces"],
+    ["Bracelets & Bangles", "Collections.dc.html#bracelets"],
+    ["Bespoke Studio", "Bespoke Studio.dc.html"],
+    ["The Lab", "The Lab.dc.html"]
+  ];
+  var el = null, input = null;
+  function build() {
+    if (el) return;
+    el = document.createElement("div");
+    el.id = "sc-search";
+    el.innerHTML =
+      '<div class="sc-so__scrim"></div>' +
+      '<div class="sc-so__panel"><div class="sc-so__box">' +
+      '<button type="button" class="sc-so__close" aria-label="Close search">\u2715</button>' +
+      '<form class="sc-so__form">' +
+      '<div class="sc-field sc-so__field"><label class="sc-field__label" for="sc-so-input">Search</label>' +
+      '<input class="sc-input sc-so__input" id="sc-so-input" placeholder="Pieces, collections, metals…" autocomplete="off"></div>' +
+      '<button type="submit" class="sc-btn sc-btn--primary sc-btn--sm">Search</button>' +
+      '</form>' +
+      '<p class="sc-so__hint">Popular</p>' +
+      '<nav class="sc-so__links">' + QUICK.map(function (x) { return '<a href="' + x[1] + '">' + x[0] + "</a>"; }).join("") + "</nav>" +
+      "</div></div>";
+    document.body.appendChild(el);
+    input = el.querySelector("#sc-so-input");
+    el.querySelector(".sc-so__scrim").addEventListener("click", close);
+    el.querySelector(".sc-so__close").addEventListener("click", close);
+    el.querySelector("form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var q = input.value.trim();
+      if (q) location.href = "Shop.dc.html?q=" + encodeURIComponent(q);
+    });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
+  }
+  function open() {
+    build();
+    el.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+    setTimeout(function () { input.focus(); input.select(); }, 60);
+  }
+  function close() {
+    if (el && el.classList.contains("is-open")) { el.classList.remove("is-open"); document.body.style.overflow = ""; }
+  }
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest('header button[aria-label="Search"]');
+    if (b) { e.preventDefault(); e.stopPropagation(); open(); }
+  });
+})();
 </script>
 </body>
 </html>
