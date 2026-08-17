@@ -36,10 +36,16 @@ html{scrollbar-width:thin;scrollbar-color:#CFC8BA #FFFFFF}
 @media (max-width:960px){#sc-cat-grid{grid-template-columns:1fr 1fr !important;height:auto !important}#sc-cat-grid a{height:52svh}}
 @media (max-width:600px){#sc-cat-grid{grid-template-columns:1fr !important}}
 
-/* sc-mobile-search — search icon in the LEFT cell on phones only (logo stays centered) */
+/* sc-mobile-search — one injected search button serves both breakpoints:
+     phones → left grid cell; desktop → fixed top-right (beside the menu button).
+     The runtime's original right-side button is hidden everywhere: its click events
+     never reach the document reliably, so we don't rely on it. */
 @media (max-width:960px){
   .sc-search-mobile{display:grid !important;justify-self:start}
-  .sc-search-desktop{display:none !important}
+}
+.sc-search-desktop{display:none !important}
+@media (min-width:961px){
+  .sc-search-mobile{display:grid !important;position:fixed;top:19px;right:calc(var(--container-pad) + 58px);left:auto;grid-column:auto;z-index:150}
 }
 
 /* ── sc-site-search — overlay opened by the header search icon ── */
@@ -1025,10 +1031,18 @@ class Component extends DCLogic {
   function close() {
     if (el && el.classList.contains("is-open")) { el.classList.remove("is-open"); document.body.style.overflow = ""; }
   }
+  /* pointerdown + capture: fires on the real target before the runtime's
+     async re-render can replace the button mid-click (click-target race) */
+  document.addEventListener("pointerdown", function (e) {
+    var b = e.target.closest && e.target.closest('header button[aria-label="Search"]');
+    if (b) { e.preventDefault(); open(); }
+  }, true);
+  /* click + capture as well: some embedded browsers synthesise clicks without
+     a pointerdown, so we listen to both (open() is idempotent) */
   document.addEventListener("click", function (e) {
     var b = e.target.closest && e.target.closest('header button[aria-label="Search"]');
-    if (b) { e.preventDefault(); e.stopPropagation(); open(); }
-  });
+    if (b) { e.preventDefault(); open(); }
+  }, true);
 })();
 </script>
 </body>
