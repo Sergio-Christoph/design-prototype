@@ -767,7 +767,7 @@ class Component extends DCLogic {
     ["Bespoke Studio", "Bespoke Studio.dc.html"],
     ["The Lab", "The Lab.dc.html"]
   ];
-  var el = null, input = null;
+  var el = null, input = null, openedAt = 0;
   function build() {
     if (el) return;
     el = document.createElement("div");
@@ -786,7 +786,10 @@ class Component extends DCLogic {
       "</div></div>";
     document.body.appendChild(el);
     input = el.querySelector("#sc-so-input");
-    el.querySelector(".sc-so__scrim").addEventListener("click", close);
+    el.querySelector(".sc-so__scrim").addEventListener("click", function () {
+      if (Date.now() - openedAt < 350) return;   // ignore the tap that opened us
+      close();
+    });
     el.querySelector(".sc-so__close").addEventListener("click", close);
     el.querySelector("form").addEventListener("submit", function (e) {
       e.preventDefault();
@@ -796,6 +799,7 @@ class Component extends DCLogic {
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
   }
   function open() {
+    openedAt = Date.now();
     build();
     el.classList.add("is-open");
     document.body.style.overflow = "hidden";
