@@ -15,10 +15,10 @@ serve the folder over HTTP. Pick whichever you already have:
 ```bash
 # Option A — Python (already installed on this machine)
 python -m http.server 8765
-#   then open:  http://127.0.0.1:8765/Homepage.dc.html
+#   then open:  http://127.0.0.1:8765/index.html
 
 # Option B — VS Code
-#   Right-click Homepage.dc.html  →  "Open with Live Server"
+#   Right-click index.html  →  "Open with Live Server"
 ```
 
 Then click through the nav. The filenames keep the `.dc.html` extension on
@@ -30,7 +30,7 @@ so **don't rename the files**.
 ## 📁 What's in here
 
 ```
-Homepage.dc.html        ← start here
+index.html        ← start here
 Collections.dc.html     rings · earrings · necklaces · bracelets
 Shop.dc.html
 The Lab.dc.html         certification / process
